@@ -1,0 +1,31 @@
+---
+- name: Déployment du projet
+  hosts: localhost
+
+- name: Vérifie que git est bien installé
+  yum:
+    name: "git"
+    state: present
+
+- name: Ensure that our repo and work dirs exist
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ gitpush_repo_path }}"
+    - "{{ gitpush_workdir_path }}"
+
+- name: Is our repo created?
+  stat:
+    path: "{{ gitpush_repo_path }}/objects"
+  register: gitpush_repo_stat
+
+- name: Create the bare repo
+  command: "git init --bare \"{{ gitpush_repo_path }}\""
+  when: not gitpush_repo_stat.stat.exists
+
+- name: Creating the post-receive hook
+  template:
+    src: post-receive.j2
+    dest: "{{ gitpush_repo_path }}/hooks/post-receive"
+mode: u=rwx,g=rwx,o=
