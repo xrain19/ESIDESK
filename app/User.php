@@ -28,6 +28,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUsername($value)
  * @mixin \Eloquent
+ * @property-read \App\Equipe $Equipe
+ * @property-read \App\Role $Role
  */
 class User extends Authenticatable
 {
@@ -50,4 +52,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function Role()
+    {
+        return $this->hasOne("app\Role");
+    }
+
+    public function Equipe()
+    {
+        return $this->hasOne("app\Equipe");
+    }
 }
