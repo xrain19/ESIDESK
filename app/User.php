@@ -30,6 +30,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @mixin \Eloquent
  * @property-read \App\Equipe $Equipe
  * @property-read \App\Role $Role
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Demande[] $Demande
  */
 class User extends Authenticatable
 {
@@ -55,11 +56,16 @@ class User extends Authenticatable
 
     public function Role()
     {
-        return $this->hasOne("app\Role");
+        return $this->belongsTo('App\Role');
     }
 
     public function Equipe()
     {
-        return $this->hasOne("app\Equipe");
+        return $this->belongsTo('App\Equipe');
+    }
+
+    public function Demande()
+    {
+        return $this->hasMany('app\Demande');
     }
 }

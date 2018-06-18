@@ -9,6 +9,16 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \App\Equipe $Equipe
  * @mixin \Eloquent
+ * @property int $id
+ * @property string $descriptions
+ * @property string $name
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereDescriptions($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereUpdatedAt($value)
  */
 class Categorie extends Model
 {
@@ -19,5 +29,10 @@ class Categorie extends Model
     public function Equipe()
     {
         return $this->belongsTo('App\Equipe');
+    }
+
+    public function Demande()
+    {
+        return $this->hasMany('app\Demande');
     }
 }

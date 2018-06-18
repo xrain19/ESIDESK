@@ -19,10 +19,22 @@ class CreateDemandesTable extends Migration
             $table->text('descriptions');
             $table->integer('urgency');
             $table->boolean('closed')->default(false);
-            $table->date('desireddate');
-            $table->date('processingdate');
-            $table->integer('processorid');
+            $table->date('desired_date');
+            $table->date('processing_date');
+            $table->integer('processor_id');
             $table->timestamps();
+
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->integer('equipe_id')->unsigned()->index();
+            $table->foreign('equipe_id')->references('id')->on('equipes');
+
+            $table->integer('statut_id')->unsigned()->index();
+            $table->foreign('statut_id')->references('id')->on('statuts');
+
+            $table->integer('categorie_id')->unsigned()->index();
+            $table->foreign('categorie_id')->references('id')->on('categories');
         });
     }
 

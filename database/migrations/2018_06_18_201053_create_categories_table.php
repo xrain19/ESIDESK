@@ -18,6 +18,9 @@ class CreateCategoriesTable extends Migration
             $table->text('descriptions');
             $table->string('name');
             $table->timestamps();
+
+            $table->integer('equipe_id')->unsigned()->index();
+            $table->foreign('equipe_id')->references('id')->on('equipes');
         });
     }
 
