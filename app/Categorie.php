@@ -19,6 +19,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereUpdatedAt($value)
+ * @property int $equipe_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Demande[] $Demande
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Categorie whereEquipeId($value)
  */
 class Categorie extends Model
 {
@@ -33,6 +36,6 @@ class Categorie extends Model
 
     public function Demande()
     {
-        return $this->hasMany('app\Demande');
+        return $this->hasMany('App\Demande');
     }
 }

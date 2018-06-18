@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Demande[] $Demande
+ * @property int|null $manager_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereManagerId($value)
  */
 class Equipe extends Model
 {
@@ -40,7 +42,7 @@ class Equipe extends Model
 
     public function Demande()
     {
-        return $this->hasMany('app\Demande');
+        return $this->hasMany('App\Demande');
     }
 }
 

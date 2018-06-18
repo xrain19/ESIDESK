@@ -31,6 +31,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \App\Equipe $Equipe
  * @property-read \App\Role $Role
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Demande[] $Demande
+ * @property int $role_id
+ * @property int $equipe_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEquipeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
  */
 class User extends Authenticatable
 {
@@ -66,6 +70,6 @@ class User extends Authenticatable
 
     public function Demande()
     {
-        return $this->hasMany('app\Demande');
+        return $this->hasMany('App\Demande');
     }
 }

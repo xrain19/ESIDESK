@@ -31,6 +31,21 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereUrgency($value)
+ * @property string $desired_date
+ * @property string $processing_date
+ * @property int $processor_id
+ * @property int $user_id
+ * @property int $equipe_id
+ * @property int $statut_id
+ * @property int $categorie_id
+ * @property-read \App\Categorie $Categorie
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereCategorieId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereDesiredDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereEquipeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereProcessingDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereProcessorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereStatutId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereUserId($value)
  */
 class Demande extends Model
 {
