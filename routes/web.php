@@ -20,7 +20,7 @@ Auth::routes();
 Route::Get('/home', 'HomeController@index')->name('home');
 
 
-Route::Get('/registerForm', [
+Route::Get('/registerUserForm', [
     'middleware' => 'auth',
     'uses' => 'UserController@showForm'
 ])->name('userForm');
@@ -28,9 +28,9 @@ Route::Get('/registerForm', [
 Route::Post('/registerUser', [
     'middleware' => 'auth',
     'uses' => 'UserController@createUser',
-    'name' => 'createUser'
 ])->name('createUser');
 
+<<<<<<< HEAD
 Route::Post('/registerEquipe', [
     'middleware' => 'auth',
     'uses' => 'EquipeController@showForm@createEquipe',
@@ -41,3 +41,14 @@ Route::Get('/homeEquipe', [
     'middleware' => 'auth',
     'uses' => 'EquipeController@show'
 ])->name('homeEquipe');
+=======
+Route::Get('/editUserForm/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'UserController@showEditForm'
+]);
+
+Route::Post('/editUser/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'UserController@editUser',
+]);
+>>>>>>> EEI
