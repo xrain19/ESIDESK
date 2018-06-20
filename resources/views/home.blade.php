@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    VOUS ÊTES CONNECTÉ SUR ESIDESK!
                 </div>
             </div>
         </div>
