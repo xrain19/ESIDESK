@@ -30,3 +30,14 @@ Route::Post('/registerUser', [
     'uses' => 'UserController@createUser',
     'name' => 'createUser'
 ])->name('createUser');
+
+Route::Post('/registerEquipe', [
+    'middleware' => 'auth',
+    'uses' => 'EquipeController@showForm@createEquipe',
+    'name' => 'createEquipe'
+])->name('createEquipe');
+
+Route::Get('/homeEquipe', [
+    'middleware' => 'auth',
+    'uses' => 'EquipeController@show'
+])->name('homeEquipe');

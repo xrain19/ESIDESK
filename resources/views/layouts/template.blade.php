@@ -61,9 +61,7 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
-                    <a class="nav-link" href="index.html">
-                        <i class="fa fa-fw fa-users"></i>
-                        <span class="nav-link-text">Equipes</span>
+                    <a class="nav-link" href="{{ url('/registerForm') }}"><i class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Example Pages">
@@ -233,7 +231,7 @@
                             <a class="nav-link" href="{{ url('/registerForm') }}">{{ __('Ajouter un utilisateur') }}</a>
                         </li>
                     @endif
-                
+
                 <div class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
