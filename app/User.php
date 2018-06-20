@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 /**
  * App\User
  *
@@ -13,28 +14,26 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $email
  * @property string $password
  * @property string $firstname
- * @property string $username
  * @property string|null $remember_token
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property int $role_id
+ * @property int|null $equipe_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Demande[] $Demande
+ * @property-read \App\Equipe|null $Equipe
+ * @property-read \App\Role $Role
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEquipeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFirstname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUsername($value)
- * @mixin \Eloquent
- * @property-read \App\Equipe $Equipe
- * @property-read \App\Role $Role
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Demande[] $Demande
- * @property int $role_id
- * @property int $equipe_id
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEquipeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable
 {
@@ -46,7 +45,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'lastname', 'email', 'password', 'firstname'
+        'lastname', 'email', 'password', 'firstname', 'equipe_id', 'role_id'
     ];
 
     /**

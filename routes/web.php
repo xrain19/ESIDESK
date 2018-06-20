@@ -17,8 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::Get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::Get('/registerForm', [
+    'middleware' => 'auth',
+    'uses' => 'UserController@showForm'
+])->name('userForm');
+
+Route::Post('/registerUser', [
+    'middleware' => 'auth',
+    'uses' => 'UserController@createUser',
+    'name' => 'createUser'
+])->name('createUser');

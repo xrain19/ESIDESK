@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\User;
+use App\role;
+use App\equipe;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
-class RegisterController extends Controller
+
+class UserController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -35,11 +39,6 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -53,7 +52,6 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'lastname' => 'required|string|',
-            'use'
         ]);
     }
 
@@ -63,13 +61,23 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function createUser(Request $request)
     {
         return User::create([
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'lastname' => $data['lastname'],
-            'firstname' => $data['firstname'],
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'lastname' => $request->input('lastname'),
+            'firstname' => $request->input('firstname'),
+            'role_id' => $request->input('role'),
+            'equipe_id' => $request->input('equipe'),
         ]);
+    }
+
+    public function showForm() {
+        $rolesEquipes = array();
+        $rolesEquipes['roles'] = Role::all()->sortBy('name');
+        $rolesEquipes['equipes'] = Equipe::all()->sortBy('name');
+
+        return view('register', ['rolesEquipes' => $rolesEquipes]);
     }
 }

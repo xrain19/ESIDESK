@@ -12,6 +12,10 @@ class equipeSeeder extends Seeder
     public function run()
     {
         DB::table('equipes')->insert([
+            'name' => 'Administrateur',
+        ]);
+
+        DB::table('equipes')->insert([
             'name' => 'Réseau',
         ]);
 
