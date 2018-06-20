@@ -8,21 +8,26 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
     <!-- Font Awesome -->
     {{--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">--}}
-
     <!-- Custom fonts for this template-->
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'ESIDESK') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/sb-admin.js') }}" defer></script>
-
+    <script src="{{ asset('js/jquery.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap.bundle.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -31,13 +36,14 @@
     <!-- Styles -->
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
 
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <div id="app">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <a class="navbar-brand" href="{{ url('/home') }}">ESIDESK</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -52,22 +58,14 @@
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tables">
                     <a class="nav-link" href="tables.html">
                         <i class="fa fa-fw fa-table"></i>
-                        <span class="nav-link-text">Tables</span>
+                        <span class="nav-link-text">Liste des demandes</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Components">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-wrench"></i>
-                        <span class="nav-link-text">Components</span>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+                    <a class="nav-link" href="index.html">
+                        <i class="fa fa-fw fa-users"></i>
+                        <span class="nav-link-text">Equipes</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseComponents">
-                        <li>
-                            <a href="navbar.html">Navbar</a>
-                        </li>
-                        <li>
-                            <a href="cards.html">Cards</a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Example Pages">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
@@ -241,8 +239,11 @@
                 <li class="breadcrumb-item active">My Dashboard</li>
             </ol>
         </div>
-        <!-- /.container-fluid-->
-        <!-- /.content-wrapper-->
+
+        <main class="py-4">
+            @yield('content')
+        </main>
+
         <footer class="sticky-footer">
             <div class="container">
                 <div class="text-center">
@@ -272,75 +273,7 @@
                 </div>
             </div>
         </div>
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-        <!-- Page level plugin JavaScript-->
-        <script src="vendor/chart.js/Chart.min.js"></script>
-        <script src="vendor/datatables/jquery.dataTables.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin.min.js"></script>
-        <!-- Custom scripts for this page-->
-        <script src="js/sb-admin-datatables.min.js"></script>
-        <script src="js/sb-admin-charts.min.js"></script>
     </div>
-
-
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <main class="py-4">
-        @yield('content')
-    </main>
 </div>
 
 <!-- JS -->
