@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'lastname' => 'Administrateur',
             'firstname' => 'Administrateur',
-            'password' => 'Administrateur',
+            'password' => Hash::make('Administrateur'),
             'email' => 'administrateur@esidesk.fr',
             'role_id' => 1
         ]);
