@@ -17,6 +17,8 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+mix.scripts('../../../node_modules/bootstra-sass/assets/javascript/bootstrap.min.js');
+
 const app = new Vue({
     el: '#app'
 });
