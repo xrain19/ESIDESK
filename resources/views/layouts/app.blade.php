@@ -45,15 +45,17 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
                             </li>
                         @else
+                            @if(Auth::user()->role->name == 'Administrateur')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/registerForm') }}">{{ __('Ajouter un utilisateur') }}</a>
                             </li>
+                            @endif
 
                                 <div class="nav-item">
                                     <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Se déconecter') }}
+                                        {{ __('Se déconnecter') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

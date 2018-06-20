@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\role;
 use App\equipe;
-use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -63,14 +63,22 @@ class UserController extends Controller
      */
     protected function createUser(Request $request)
     {
-        return User::create([
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'lastname' => $request->input('lastname'),
-            'firstname' => $request->input('firstname'),
-            'role_id' => $request->input('role'),
-            'equipe_id' => $request->input('equipe'),
-        ]);
+        if(Auth::user()->role->name == 'Administrateur')
+        {
+            User::create([
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'lastname' => $request->input('lastname'),
+                'firstname' => $request->input('firstname'),
+                'role_id' => $request->input('role'),
+                'equipe_id' => $request->input('equipe'),
+            ]);
+
+            return redirect('/home');
+        }else
+        {
+            return redirect('/home');
+        }
     }
 
     public function showForm() {
