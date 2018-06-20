@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $fillable = [
-        'Name',
+        'name',
     ];
 
     public function User()
