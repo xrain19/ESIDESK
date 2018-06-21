@@ -5,7 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+<<<<<<< HEAD
 <<<<<<< HEAD:resources/views/auth/register2.blade.php
+=======
+>>>>>>> EEI
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
@@ -14,6 +17,7 @@
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+<<<<<<< HEAD
 =======
                 @if(Request::path() ==  'registerUserForm')
                 <div class="card-header">{{ __('Ajouter un collaborateur') }}</div>
@@ -30,6 +34,8 @@
                         <div class="form-group row">
                             <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('Prénom') }}</label>
 >>>>>>> EEI:resources/views/register.blade.php
+=======
+>>>>>>> EEI
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
@@ -55,13 +61,6 @@
                                 @endif
                             </div>
                         </div>
-                        @elseif(Auth::user()->role->name != 'Administrateur')
-                            <div class="card-header">{{ __('Changer son mot de passe') }}</div>
-                            <div class="card-body">
-                            <form method="POST" action="{{ route('editUser') }}" aria-label="{{ __('Changer son mot de passe') }}">
-                    @endif
-
-                        @csrf
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -84,6 +83,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+<<<<<<< HEAD
 <<<<<<< HEAD:resources/views/auth/register2.blade.php
 =======
                         @if(Auth::user()->role->name == 'Administrateur')
@@ -102,6 +102,8 @@
                         </div>
                         @endif
 >>>>>>> EEI:resources/views/register.blade.php
+=======
+>>>>>>> EEI
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
