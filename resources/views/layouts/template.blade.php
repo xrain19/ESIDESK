@@ -14,10 +14,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-
     <!-- Font Awesome -->
-    {{--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">--}}
-    <!-- Custom fonts for this template-->
+{{--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">--}}
+<!-- Custom fonts for this template-->
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
 
     <title>{{ config('app.name', 'ESIDESK') }}</title>
@@ -43,12 +42,15 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <a class="navbar-brand" href="{{ url('/home') }}">ESIDESK</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
+                    data-original-title="Dashboard">
                     <a class="nav-link" href="index.html">
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
@@ -60,12 +62,15 @@
                         <span class="nav-link-text">Liste des demandes</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
+                    data-original-title="Dashboard">
                     <a class="nav-link" href="{{ url('/registerForm') }}"><i class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Example Pages">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
+                    data-original-title="Example Pages">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages"
+                       data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-file"></i>
                         <span class="nav-link-text">Example Pages</span>
                     </a>
@@ -84,8 +89,10 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Menu Levels">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
+                    data-original-title="Menu Levels">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
+                       data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-sitemap"></i>
                         <span class="nav-link-text">Menu Levels</span>
                     </a>
@@ -100,7 +107,8 @@
                             <a href="#">Second Level Item</a>
                         </li>
                         <li>
-                            <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
+                            <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third
+                                Level</a>
                             <ul class="sidenav-third-level collapse" id="collapseMulti2">
                                 <li>
                                     <a href="#">Third Level Item</a>
@@ -131,7 +139,8 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-fw fa-envelope"></i>
                         <span class="d-lg-none">Messages
               <span class="badge badge-pill badge-primary">12 New</span>
@@ -146,26 +155,34 @@
                         <a class="dropdown-item" href="#">
                             <strong>David Miller</strong>
                             <span class="small float-right text-muted">11:21 AM</span>
-                            <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+                            <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty
+                                awesome! These messages clip off when they reach the end of the box so they don't
+                                overflow over to the sides!
+                            </div>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
                             <strong>Jane Smith</strong>
                             <span class="small float-right text-muted">11:21 AM</span>
-                            <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
+                            <div class="dropdown-message small">I was wondering if you could meet for an appointment at
+                                3:00 instead of 4:00. Thanks!
+                            </div>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
                             <strong>John Doe</strong>
                             <span class="small float-right text-muted">11:21 AM</span>
-                            <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
+                            <div class="dropdown-message small">I've sent the final files over to you for review. When
+                                you're able to sign off of them let me know and we can discuss distribution.
+                            </div>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item small" href="#">View all messages</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-fw fa-bell"></i>
                         <span class="d-lg-none">Alerts
               <span class="badge badge-pill badge-warning">6 New</span>
@@ -183,7 +200,9 @@
                   <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
               </span>
                             <span class="small float-right text-muted">11:21 AM</span>
-                            <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+                            <div class="dropdown-message small">This is an automated server response message. All
+                                systems are online.
+                            </div>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
@@ -192,7 +211,9 @@
                   <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
               </span>
                             <span class="small float-right text-muted">11:21 AM</span>
-                            <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+                            <div class="dropdown-message small">This is an automated server response message. All
+                                systems are online.
+                            </div>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
@@ -201,7 +222,9 @@
                   <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
               </span>
                             <span class="small float-right text-muted">11:21 AM</span>
-                            <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+                            <div class="dropdown-message small">This is an automated server response message. All
+                                systems are online.
+                            </div>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item small" href="#">View all alerts</a>
@@ -274,7 +297,8 @@
             <i class="fa fa-angle-up"></i>
         </a>
         <!-- Logout Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -283,10 +307,16 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body">Voulez-vous vraiment vous déconnecter ?</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a  class="btn btn-primary" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        Se déconnecter</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
@@ -295,8 +325,14 @@
 </div>
 
 <!-- JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
 </body>
 </html>

@@ -16,7 +16,8 @@ class AdminSeeder extends Seeder
             'firstname' => 'Administrateur',
             'password' => Hash::make('Administrateur'),
             'email' => 'administrateur@esidesk.fr',
-            'role_id' => 1
+            'role_id' => 1,
+            'equipe_id' =>1
         ]);
     }
 }
