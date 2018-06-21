@@ -6,9 +6,8 @@ use App\User;
 use App\role;
 use App\equipe;
 use Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -58,7 +57,7 @@ class UserController extends Controller
             $rolesEquipes['roles'] = Role::all()->sortBy('name');
             $rolesEquipes['equipes'] = Equipe::all()->sortBy('name');
 
-            return view('register', ['rolesEquipes' => $rolesEquipes]);
+            return view('registerUser', ['rolesEquipes' => $rolesEquipes]);
         }else
         {
             \Session::flash('alert-danger', "Seulement l'admnistrateur peut accéder à cette page");
@@ -74,11 +73,11 @@ class UserController extends Controller
             $data['equipes'] = Equipe::all()->sortBy('name');
             $data['user'] = User::whereId($id)->first();
 
-            return view('register', ['data' => $data]);
+            return view('editUser', ['data' => $data]);
         }elseif($id == Auth::user()->id)
         {
             $data['user'] = User::whereId($id)->first();
-            return view('register', ['data' => $data]);
+            return view('editUser', ['data' => $data]);
         }
 
         \Session::flash('alert-danger', "Seulement l'admnistrateur peut accéder à cette page");
@@ -91,7 +90,6 @@ class UserController extends Controller
             $validator = \Validator::make($request->all(), [
                 'firstname' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
-                'password' => 'required|string|min:6|confirmed',
                 'lastname' => 'required|string|',
                 'role_id' => 'required|integer|',
                 'equipe_id' => 'required|integer|',
@@ -107,7 +105,10 @@ class UserController extends Controller
             $user = User::whereId($id);
             $user->firstname = $request->input('firstname');
             $user->lastname = $request->input('lastname');
-            $user->password = $request->input('password');
+            if($user->password != null)
+            {
+                $user->password = $request->input('password');
+            }
             $user->role_id = $request->input('role_id');
             $user->equipe_id = $request->input('equipe_id');
             if($user->email != $request->input('email'))

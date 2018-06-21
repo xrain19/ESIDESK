@@ -24,16 +24,16 @@ class CreateDemandesTable extends Migration
             $table->integer('processor_id');
             $table->timestamps();
 
-            $table->integer('user_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->integer('equipe_id')->unsigned()->index();
+            $table->integer('equipe_id')->unsigned();
             $table->foreign('equipe_id')->references('id')->on('equipes');
 
-            $table->integer('statut_id')->unsigned()->index();
+            $table->integer('statut_id')->unsigned();
             $table->foreign('statut_id')->references('id')->on('statuts');
 
-            $table->integer('categorie_id')->unsigned()->index();
+            $table->integer('categorie_id')->unsigned();
             $table->foreign('categorie_id')->references('id')->on('categories');
         });
     }

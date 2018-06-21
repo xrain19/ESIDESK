@@ -22,10 +22,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->integer('role_id')->unsigned()->index();
+            $table->integer('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles');
 
-            $table->integer('equipe_id')->unsigned()->index()->nullable();
+            $table->integer('equipe_id')->unsigned();
             $table->foreign('equipe_id')->references('id')->on('equipes');
         });
     }
