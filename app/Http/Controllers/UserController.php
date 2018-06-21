@@ -24,7 +24,6 @@ class UserController extends Controller
                 'role_id' => 'required',
                 'equipe_id' => 'required',
             ]);
-            dump($request);
 
             $user = User::create([
                 'email' => $request->input('email'),
@@ -50,7 +49,7 @@ class UserController extends Controller
 
             return view('registerUser', ['rolesEquipes' => $rolesEquipes]);
         } else {
-            \Session::flash('alert-danger', "Seulement l'admnistrateur peut accéder à cette page");
+            \Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
     }
