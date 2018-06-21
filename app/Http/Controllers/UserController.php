@@ -15,6 +15,7 @@ class UserController extends Controller
 {
     protected function createUser(Request $request)
     {
+        dd($_POST);
         if (Auth::user()->role->name == 'Administrateur') {
             $validatedData = $request->validate([
                 'firstname' => 'required|string|max:255',
