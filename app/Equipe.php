@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
 class Equipe extends Model
 {
     protected $fillable = [
-        'name', 'manager_id'
+        'name', 'manager_id','member_id',
     ];
 
     public function User()

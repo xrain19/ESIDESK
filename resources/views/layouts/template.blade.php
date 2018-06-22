@@ -8,12 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
     <!-- Font Awesome -->
     {{--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">--}}
@@ -21,12 +16,6 @@
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
 
     <title>{{ config('app.name', 'ESIDESK') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/sb-admin.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.js') }}" defer></script>
-    <script src="{{ asset('js/bootstrap.bundle.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -49,7 +38,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{{ url('/home') }}">
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
                     </a>
@@ -61,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
-                    <a class="nav-link" href="{{ url('/registerForm') }}"><i class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
+                    <a class="nav-link" href="{{ url('/homeEquipe') }}"><i class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Example Pages">
@@ -294,9 +283,19 @@
     </div>
 </div>
 
-<!-- JS -->
+<!-- Scripts JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/sb-admin.js') }}" defer></script>
+<script src="{{ asset('js/jquery.js') }}" defer></script>
+<script src="{{ asset('js/bootstrap.bundle.js') }}" defer></script>
+
+@yield('script')
+
 </body>
 </html>

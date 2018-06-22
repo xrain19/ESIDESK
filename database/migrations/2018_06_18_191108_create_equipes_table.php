@@ -17,6 +17,7 @@ class CreateEquipesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('manager_id')->nullable();
+            $table->string('member_id')->nullable();
             $table->timestamps();
         });
     }
