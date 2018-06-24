@@ -21,18 +21,6 @@
                               aria-label="{{ __('Ajouter un utilisateur') }}">
 
                             <div class="form-group row">
-                                <label for="role_id2"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
-                                <div class="col-md-6">
-                                    <select name="role_id2" class="custom-select" id="role_id2" multiple="multiple">
-                                        @foreach ($rolesEquipes['roles'] as $role)
-                                            <option value="{{ $role->id}}">{{ $role->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="lastname"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
 
@@ -141,14 +129,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        $('#role_id2').multiselect({
-            templates: {
-                li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
-            }
-        });
-    </script>
 @endsection

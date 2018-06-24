@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     @if(Auth::user()->role->name == 'Administrateur')
-                        <div class="card-header">{{ __('Modifier les informations' . $data['user']->email) }}</div>
+                        <div class="card-header">{{ __('Modifier les informations de ' . $data['user']->email) }}</div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('/editUser/' . $data['user']->id) }}"
                                   aria-label="{{ __('Ajouter un utilisateur') }}">
@@ -86,20 +86,27 @@
                                                            class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
                                                     <div class="col-md-6">
                                                         <select name="role_id" class="form-control" id="role_id">
-                                                            @foreach ($rolesEquipes['roles'] as $role)
-                                                                <option value="{{ $role->id}}">{{ $role->name }}</option>
+                                                            @foreach ($data['roles'] as $role)
+                                                                @if($data['user']->role_id == $role->id)
+                                                                    <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
+                                                                @else
+                                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group row">
                                                     <label for="equipe_id"
                                                            class="col-md-4 col-form-label text-md-right">{{ __('Equipe') }}</label>
                                                     <div class="col-md-6">
                                                         <select name="equipe_id" class="form-control" id="equipe_id">
-                                                            @foreach ($rolesEquipes['equipes'] as $equipe)
-                                                                <option value="{{ $equipe->id}}">{{ $equipe->name }}</option>
+                                                            @foreach ($data['equipes'] as $equipe)
+                                                                    @if($data['user']->equipe_id == $equipe->id)
+                                                                        <option value="{{ $equipe->id }}" selected>{{ $equipe->name }}</option>
+                                                                    @else
+                                                                        <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
+                                                                    @endif
                                                             @endforeach
                                                         </select>
                                                     </div>

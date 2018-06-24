@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::Get('/', 'HomeController@index');
 
 Auth::routes();
 
@@ -39,3 +37,8 @@ Route::Post('/editUser/{id}', [
     'middleware' => 'auth',
     'uses' => 'UserController@editUser',
 ]);
+
+Route::Get('/adminUsers', [
+    'middleware' => 'auth',
+    'uses' => 'UserController@showAdminUsers',
+])->name('adminUsers');

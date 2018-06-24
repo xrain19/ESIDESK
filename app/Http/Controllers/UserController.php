@@ -6,6 +6,7 @@ use App\User;
 use App\role;
 use App\equipe;
 use Auth;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Validator;
@@ -13,9 +14,21 @@ use Validator;
 
 class UserController extends Controller
 {
+    public function showAdminUsers()
+    {
+        if (Auth::user()->role->name != 'Administrateur')
+        {
+            Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
+            return redirect('/home');
+        }
+
+        $data['users'] = User::all()->sortBy('lastname');
+        return view('adminUsers', ['data' => $data]);
+    }
+
+
     protected function createUser(Request $request)
     {
-        dd($_POST);
         if (Auth::user()->role->name == 'Administrateur') {
             $validatedData = $request->validate([
                 'firstname' => 'required|string|max:255',
@@ -37,6 +50,7 @@ class UserController extends Controller
 
             return redirect('/user/' . $user->id);
         } else {
+            Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
     }
@@ -50,7 +64,7 @@ class UserController extends Controller
 
             return view('registerUser', ['rolesEquipes' => $rolesEquipes]);
         } else {
-            \Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
+            Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
     }
@@ -59,8 +73,8 @@ class UserController extends Controller
     {
         $data = array();
         if (Auth::user()->role->name == 'Administrateur') {
-            $data['roles'] = Role::all()->sortBy('name');
-            $data['equipes'] = Equipe::all()->sortBy('name');
+            $data['roles'] = Role::all()->sortBy('id');
+            $data['equipes'] = Equipe::all()->sortBy('id');
             $data['user'] = User::whereId($id)->first();
 
             return view('editUser', ['data' => $data]);
@@ -69,7 +83,7 @@ class UserController extends Controller
             return view('editUser', ['data' => $data]);
         }
 
-        \Session::flash('alert-danger', "Seulement l'admnistrateur peut accéder à cette page");
+        Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
         return redirect('/home');
     }
 
@@ -90,11 +104,12 @@ class UserController extends Controller
                     ->withErrors($validator);
             }
 
-            $user = User::whereId($id);
+            $user = User::whereId($id)->first();
+
             $user->firstname = $request->input('firstname');
             $user->lastname = $request->input('lastname');
-            if ($user->password != null) {
-                $user->password = $request->input('password');
+            if ($request->input('password')) {
+                $user->password = Hash::make($request->input('password'));
             }
             $user->role_id = $request->input('role_id');
             $user->equipe_id = $request->input('equipe_id');
@@ -106,6 +121,7 @@ class UserController extends Controller
                 $user->email = $request->input('email');
             }
             $user->save();
+            return redirect('/user/' . $id);
 
         } elseif ($id == Auth::user()->id) {
             $validator = \Validator::make($request->all(), [
@@ -121,7 +137,9 @@ class UserController extends Controller
             $user = User::whereId($id);
             $user->password = $request->input('password');
             $user->save();
+            return redirect('/user/' . $id);
         }
-        return redirect('/user/' . $id);
+        Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
+        return redirect('/home');
     }
 }
