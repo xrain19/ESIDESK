@@ -9,7 +9,6 @@ use Auth;
 use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Validator;
 
 
 class UserController extends Controller
@@ -48,7 +47,8 @@ class UserController extends Controller
                 'equipe_id' => $request->input('equipe_id'),
             ]);
 
-            return redirect('/user/' . $user->id);
+            Session::flash('alert-success', "L'utilisateur " . $request->input('email') . " créé avec succès" );
+            return redirect('/adminUsers');
         } else {
             Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
             return redirect('/home');
@@ -90,19 +90,19 @@ class UserController extends Controller
     public function editUser(request $request, int $id)
     {
         if (Auth::user()->role->name == 'Administrateur') {
-            $validator = \Validator::make($request->all(), [
-                'firstname' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255',
-                'lastname' => 'required|string|',
-                'role_id' => 'required|integer|',
-                'equipe_id' => 'required|integer|',
-            ]);
+                $validator = \Validator::make($request->all(), [
+                    'firstname' => 'required|string|max:255',
+                    'email' => 'required|string|email|max:255',
+                    'lastname' => 'required|string|',
+                    'role_id' => 'required|integer|',
+                    'equipe_id' => 'required|integer|',
+                ]);
 
-            if ($validator->fails()) {
-                return redirect('/editUserForm/' . $id)
-                    ->withInput()
-                    ->withErrors($validator);
-            }
+                if ($validator->fails()) {
+                    return redirect('/editUserForm/' . $id)
+                        ->withInput()
+                        ->withErrors($validator);
+                }
 
             $user = User::whereId($id)->first();
 
@@ -121,7 +121,8 @@ class UserController extends Controller
                 $user->email = $request->input('email');
             }
             $user->save();
-            return redirect('/user/' . $id);
+            Session::flash('alert-success', "L'utilisateur " . $request->input('email') . " modifié avec succès" );
+            return redirect('/adminUsers');
 
         } elseif ($id == Auth::user()->id) {
             $validator = \Validator::make($request->all(), [
@@ -137,7 +138,8 @@ class UserController extends Controller
             $user = User::whereId($id);
             $user->password = $request->input('password');
             $user->save();
-            return redirect('/user/' . $id);
+            Session::flash('alert-success', "Mot de passe modifié avec succès");
+            return redirect('/home');
         }
         Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
         return redirect('/home');

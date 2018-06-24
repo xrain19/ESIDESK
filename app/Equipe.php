@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\User $Manager
  */
 class Equipe extends Model
 {
@@ -42,6 +43,11 @@ class Equipe extends Model
     public function Demande()
     {
         return $this->hasMany('App\Demande');
+    }
+
+    public function Manager()
+    {
+        return $this->hasOne('App\User');
     }
 }
 

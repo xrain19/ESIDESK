@@ -2,6 +2,11 @@
 
 @section('content')
 
+    @if(Session::has('alert-danger'))
+        <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
+    @elseif(Session::has('alert-sucess'))
+        <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
+    @endif
     <div class="container bootstrap snippet">
         <div class="row">
             <div class="col-lg-12">
@@ -18,12 +23,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 @foreach($data['users'] as $user)
                                     <tr>
                                         <td>
-                                            <strong>{{$user->lastname . " " . $user->firstname}}  </strong>
-                                            <br />
-                                            <span class="user-subhead"><strong>{{$user->role->name}}</strong> </span>
+                                            <b>
+                                                <strong>{{$user->lastname . " " . $user->firstname}}  </strong>
+                                                <br/>
+                                                <span class="user-subhead"><i>Role : {{$user->role->name}}</i> </span>
+                                                <br/>
+                                                @if($user->equipe->manager_id == $user->id)
+                                                    <span
+                                                        class="user-subhead"><i>Manager de l'équipe : {{$user->equipe->name}}</i> </span>
+                                                @endif
+                                            </b>
                                         </td>
                                         <td>{{ $user->equipe->name }}</td>
                                         <td>{{ $user->email }}</td>
