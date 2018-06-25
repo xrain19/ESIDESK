@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\role;
+use App\equipe;
+use App\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class EquipeController extends Controller
@@ -49,18 +53,33 @@ class EquipeController extends Controller
      * @param  array  $data
      * @return \App\Equipe
      */
-    protected function createEquipe(Request $request)
-    {
-        return Equipe::create([
-            'name' => $request->input('name'),
-            'manager_id' => $request->input('utilisateur'),
+    protected function createEquipe(Request $request){
+
+        Equipe::create([
+            'name' => $request->get('nameTeam'),
+            'manager_id' => $request->get('manager')
         ]);
+
+       return redirect('/home');
     }
 
-    public function show() {
-        $rolesEquipes = array();
-        $rolesEquipes['utilisateurs'] = Role::all()->sortBy('name');
+    public function showForm() {
+        $users = array();
+        $users['users'] = User::all();
+        return view('registerEquipe', ['users' => $users]);
+    }
 
-        return view('equipe', ['rolesEquipes' => $rolesEquipes]);
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function homeEquipe()
+    {
+       $equipes = Equipe::all();
+       foreach ( $equipes as $equipe){
+           dd($equipe->manager);
+       }
+        return view('equipe',array('equipes' => $equipes));
     }
 }
