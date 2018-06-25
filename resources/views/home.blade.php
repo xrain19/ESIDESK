@@ -7,37 +7,32 @@
                 <div class="card">
                     <div class="card-header">Message</div>
                     <div class="card-body">
-
-<<<<<<< HEAD
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    VOUS ÊTES CONNECTÉ SUR ESIDESK!
-=======
-                        @if(Session::has('alert-danger'))
-                            <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
-                        @elseif(Session::has('alert-sucess'))
-                            <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
-                            @else
-                            @guest
-                                <div class="alert alert-warning" role="alert">
-                                    Veilleur vous connecter pour accéder à l'application
-                                </div>
-                            @else
+                        <div class="card-body">
+                            @if (session('status'))
                                 <div class="alert alert-success" role="alert">
-                                    Bienvenue dans l'application Esidesk
+                                    {{ session('status') }}
                                 </div>
-                            @endguest
-                        @endif
+                            @endif
+                            @if(Session::has('alert-danger'))
+                                <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
+                            @elseif(Session::has('alert-sucess'))
+                                <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
+                            @else
+                                @guest
+                                    <div class="alert alert-warning" role="alert">
+                                        Veilleur vous connecter pour accéder à l'application
+                                    </div>
+                                @else
+                                    <div class="alert alert-success" role="alert">
+                                        Bienvenue dans l'application Esidesk
+                                    </div>
+                                @endguest
+                            @endif
+                        </div>
                     </div>
->>>>>>> EEI
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 
