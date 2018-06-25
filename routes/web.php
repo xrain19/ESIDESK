@@ -50,10 +50,8 @@ Route::Post('/editUser/{id}', [
     'uses' => 'UserController@editUser',
 ]);
 
-<<<<<<< HEAD
-=======
+
 Route::Get('/adminUsers', [
     'middleware' => 'auth',
     'uses' => 'UserController@showAdminUsers',
 ])->name('adminUsers');
->>>>>>> EEI
