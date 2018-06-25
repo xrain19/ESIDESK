@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Categorie[] $Categorie
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Demande[] $Demande
+ * @property-read \App\User $Manager
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $User
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereId($value)
@@ -26,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
 class Equipe extends Model
 {
     protected $fillable = [
-        'name', 'manager_id','member_id',
+        'name', 'manager_id'
     ];
 
     public function User()
@@ -43,5 +44,12 @@ class Equipe extends Model
     {
         return $this->hasMany('App\Demande');
     }
+
+    public function Manager()
+    {
+        return $this->hasOne('App\User');
+    }
+
+
 }
 

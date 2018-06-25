@@ -7,7 +7,6 @@ use App\equipe;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use function PHPSTORM_META\type;
 
 class EquipeController extends Controller
 {
@@ -56,14 +55,9 @@ class EquipeController extends Controller
      */
     protected function createEquipe(Request $request){
 
-        //Sérialisation de la du tableau user
-        //https://stackoverflow.com/questions/21658926/storing-array-or-std-object-in-database-of-laravel-app
-        $serializedArr = serialize($request->get('user'));
-
         Equipe::create([
             'name' => $request->get('nameTeam'),
-            'manager_id' => $request->get('manager'),
-            'member_id' => $serializedArr,
+            'manager_id' => $request->get('manager')
         ]);
 
        return redirect('/home');
@@ -82,30 +76,10 @@ class EquipeController extends Controller
      */
     public function homeEquipe()
     {
-       $equipesAll = Equipe::all();
-       $equipes = array();
-       $result = "";
-
-        foreach($equipesAll as $key => $m)
-        {
-            //dd($equipesAll);
-            $equipes['name'][$key] = $m->name;
-            $manager = User::whereId($m->manager_id)->first();
-            $manager = $manager->lastname;
-            $equipes['manager'][$key] = $manager;
-            $member = $m->getAttribute('member_id');
-            $member = unserialize($member);
-            foreach ($member as $i => $item){
-                $user = User::whereId($item)->first();
-                $user = $user->lastname;
-                $result .= $user.' , ';
-            }
-            $result = rtrim($result," , ");
-            $equipes['member'][$key] = $result;
-            $result = "";
-            //dd($equipes);
-        }
-        //dd($equipes);
+       $equipes = Equipe::all();
+       foreach ( $equipes as $equipe){
+           dd($equipe->manager);
+       }
         return view('equipe',array('equipes' => $equipes));
     }
 }

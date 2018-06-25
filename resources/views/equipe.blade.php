@@ -39,12 +39,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     <tr role="row" class="odd">
-                                    @foreach($equipes['name'] as $k => $equipe)
-                                            <td class="sorting_1">{{ $equipe }}</td>
-                                            <td >{{ $equipes['manager'][$k] }}</td>
-                                            <td >{{ $equipes['member'][$k] }}</td>
+                                    @foreach($equipes as $equipe)
+                                            <td class="sorting_1">{{ $equipe->name }}</td>
+                                        @if($equipe->manager != null)
+                                            <td >{{ $equipe->manager->lastname }}</td>
+                                        @else
+                                                <td >Aucun manager</td>
+                                        @endif
                                     </tr>
                                         @endforeach
                                     </tbody>
