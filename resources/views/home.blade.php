@@ -13,7 +13,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    VOUS ÊTES CONNECTÉ SUR ESIDESK!
                         @if(Session::has('alert-danger'))
                             <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
                         @elseif(Session::has('alert-sucess'))
