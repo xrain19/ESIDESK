@@ -8,8 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
 <<<<<<< HEAD
     <!-- Scripts -->
@@ -28,12 +27,6 @@
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
 
     <title>{{ config('app.name', 'ESIDESK') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/sb-admin.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.js') }}" defer></script>
-    <script src="{{ asset('js/bootstrap.bundle.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -60,7 +53,7 @@
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
                     data-original-title="Dashboard">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{{ url('/home') }}">
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
                     </a>
@@ -339,7 +332,7 @@
     </div>
 </div>
 
-<!-- JS -->
+<!-- Scripts JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -352,5 +345,15 @@
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
 @yield('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/sb-admin.js') }}" defer></script>
+<script src="{{ asset('js/jquery.js') }}" defer></script>
+<script src="{{ asset('js/bootstrap.bundle.js') }}" defer></script>
+
+@yield('script')
+
 </body>
 </html>

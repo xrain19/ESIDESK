@@ -28,16 +28,20 @@ Route::Post('/registerUser', [
     'uses' => 'UserController@createUser',
 ])->name('createUser');
 
+Route::Get('/registerFormEquipe', [
+    'middleware' => 'auth',
+    'uses' => 'EquipeController@showForm'
+])->name('userForm');
 
 Route::Post('/registerEquipe', [
     'middleware' => 'auth',
-    'uses' => 'EquipeController@showForm@createEquipe',
+    'uses' => 'EquipeController@createEquipe',
     'name' => 'createEquipe'
 ])->name('createEquipe');
 
 Route::Get('/homeEquipe', [
     'middleware' => 'auth',
-    'uses' => 'EquipeController@show'
+    'uses' => 'EquipeController@homeEquipe'
 ])->name('homeEquipe');
 
 Route::Get('/editUserForm/{id}', [
