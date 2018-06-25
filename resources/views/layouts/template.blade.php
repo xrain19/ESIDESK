@@ -18,8 +18,6 @@
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
-    <!-- Font Awesome -->
-{{--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">--}}
 <!-- Custom fonts for this template-->
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
 
@@ -104,7 +102,7 @@
                                     <a href="{{ url('/registerUserForm') }}">Ajouter un utilisateur</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('adminUsers') }}">liste des utilisateurs</a>
+                                    <a href="{{ route('adminUsers') }}">Liste des utilisateurs</a>
                                 </li>
                                 <li>
                                     <a href="#">Supprimer un utilisateur</a>
@@ -336,14 +334,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
-@yield('script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{ asset('js/sb-admin.js') }}" defer></script>
-<script src="{{ asset('js/jquery.js') }}" defer></script>
-<script src="{{ asset('js/bootstrap.bundle.js') }}" defer></script>
 
 @yield('script')
 

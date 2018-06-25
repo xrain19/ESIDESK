@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \App\User $Manager
  */
 class Equipe extends Model
 {
