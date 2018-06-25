@@ -73,7 +73,7 @@
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
                     data-original-title="Dashboard">
-                    <a class="nav-link" href="{{ url('/registerForm') }}"><i class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
+                    <a class="nav-link" href="{{ url('/homeEquipe') }}"><i class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
