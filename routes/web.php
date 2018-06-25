@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::Get('/', 'HomeController@index');
 
 Auth::routes();
 
@@ -52,3 +50,10 @@ Route::Post('/editUser/{id}', [
     'uses' => 'UserController@editUser',
 ]);
 
+<<<<<<< HEAD
+=======
+Route::Get('/adminUsers', [
+    'middleware' => 'auth',
+    'uses' => 'UserController@showAdminUsers',
+])->name('adminUsers');
+>>>>>>> EEI

@@ -19,6 +19,7 @@
 
                         <form method="POST" action="{{ route('createUser') }}"
                               aria-label="{{ __('Ajouter un utilisateur') }}">
+
                             <div class="form-group row">
                                 <label for="lastname"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
@@ -63,6 +64,7 @@
                                     @endif
                                 </div>
                             </div>
+
                             @csrf
 
                             <div class="form-group row">

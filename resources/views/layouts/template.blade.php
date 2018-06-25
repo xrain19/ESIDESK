@@ -11,8 +11,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<<<<<<< HEAD
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+=======
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+>>>>>>> EEI
 
     <!-- Font Awesome -->
 {{--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">--}}
@@ -35,6 +43,7 @@
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/userProfil.css') }}" rel="stylesheet">
 
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -89,40 +98,46 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
-                    data-original-title="Menu Levels">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
-                       data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-sitemap"></i>
-                        <span class="nav-link-text">Menu Levels</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseMulti">
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third
-                                Level</a>
-                            <ul class="sidenav-third-level collapse" id="collapseMulti2">
+
+                @guest
+                @else
+                    @if(Auth::user()->role->name == 'Administrateur')
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Administrateur"
+                            data-original-title="Administrateur">
+                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
+                               data-parent="#exampleAccordion">
+                                <i class="fa fa-fw fa-sitemap"></i>
+                                <span class="nav-link-text">Administrateur</span>
+                            </a>
+                            <ul class="sidenav-second-level collapse" id="collapseMulti">
                                 <li>
-                                    <a href="#">Third Level Item</a>
+                                    <a href="{{ url('/registerUserForm') }}">Ajouter un utilisateur</a>
                                 </li>
                                 <li>
-                                    <a href="#">Third Level Item</a>
+                                    <a href="{{ route('adminUsers') }}">liste des utilisateurs</a>
                                 </li>
                                 <li>
-                                    <a href="#">Third Level Item</a>
+                                    <a href="#">Supprimer un utilisateur</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third
+                                        Level</a>
+                                    <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                </li>
+                    @endif
+                @endguest
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Link">
                     <a class="nav-link" href="#">
                         <i class="fa fa-fw fa-link"></i>
@@ -310,10 +325,10 @@
                     <div class="modal-body">Voulez-vous vraiment vous déconnecter ?</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a  class="btn btn-primary" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                        <a class="btn btn-primary" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                        Se déconnecter</a>
+                            Se déconnecter</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
@@ -328,11 +343,14 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+@yield('script')
 </body>
 </html>
