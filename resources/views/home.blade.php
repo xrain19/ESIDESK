@@ -7,8 +7,6 @@
                 <div class="card">
                     <div class="card-header">Message</div>
                     <div class="card-body">
-
-<<<<<<< HEAD
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -16,7 +14,6 @@
                         </div>
                     @endif
                     VOUS ÊTES CONNECTÉ SUR ESIDESK!
-=======
                         @if(Session::has('alert-danger'))
                             <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
                         @elseif(Session::has('alert-sucess'))
@@ -33,7 +30,6 @@
                             @endguest
                         @endif
                     </div>
->>>>>>> EEI
                 </div>
             </div>
         </div>

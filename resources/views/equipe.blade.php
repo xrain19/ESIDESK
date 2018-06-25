@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div id="dataTable_filter" class="dataTables_filter">
-                                    <label>Search:
+                                    <label>Recherche:
                                         <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
                                     </label>
                                 </div>
@@ -36,17 +36,53 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Equipe: activate to sort column descending" aria-sort="ascending" style="width: 137px;">Equipe</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width: 213px;">Manager</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Membre de l'équipe: activate to sort column ascending" style="width: 96px;">Membre de l'équipe</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Membre de l'équipe: activate to sort column ascending" style="width: 96px;"</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr role="row" class="odd">
                                     @foreach($equipes as $equipe)
                                             <td class="sorting_1">{{ $equipe->name }}</td>
-                                        @if($equipe->manager != null)
-                                            <td >{{ $equipe->manager->lastname }}</td>
+                                        @if($equipe->manager_id != null)
+                                            {!! $manager = false !!}
+                                            <td >@foreach($equipe->user as $member)
+                                                     @if($member->id == $equipe->manager_id)
+                                                        {!! $member->lastname !!}
+                                                        <input type="hidden" {!! $manager = true !!}>
+                                                    @endif
+                                                @endforeach
+                                                @if($manager != true)
+                                                    Aucun Manager
+                                                    @endif
+                                            </td>
                                         @else
                                                 <td >Aucun manager</td>
                                         @endif
+                                        <td>@foreach($equipe->user as $member)
+                                                @if($loop->last)
+                                                    {!! $member->lastname !!}
+                                                    @else
+                                                    {!! $member->lastname.' , ' !!}
+                                                    @endif
+                                        @endforeach
+                                            @if($equipe->user->count() == 0)
+                                                Aucun membre
+                                            @endif
+                                        </td>
+                                                <td style="width: 20%;">
+                                                    <a href={{url('/editEquipeForm/' . $equipe->id)}}  class="table-link">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                                    </a>
+                                                    <a href="#" class="table-link danger">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                                    </a>
+                                                </td>
                                     </tr>
                                         @endforeach
                                     </tbody>

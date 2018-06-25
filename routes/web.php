@@ -54,8 +54,18 @@ Route::Post('/editUser/{id}', [
     'uses' => 'UserController@editUser',
 ]);
 
-
 Route::Get('/adminUsers', [
     'middleware' => 'auth',
     'uses' => 'UserController@showAdminUsers',
 ])->name('adminUsers');
+
+Route::Get('/editEquipeForm/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'EquipeController@showEditForm'
+]);
+
+Route::Post('/editEquipe/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'EquipeController@editEquipe',
+    'name' => 'editEquipe'
+])->name('editEquipe');

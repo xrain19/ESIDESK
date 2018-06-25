@@ -6,10 +6,10 @@
             <div class="col-md-8">
                 <div class="card">
                     @if(Auth::user()->role->name == 'Administrateur')
-                        <div class="card-header">{{ __('Modifier les informations de ' . $data['user']->email) }}</div>
+                        <div class="card-header">{{ __('Modifier les informations de : ' . $data['user']->email) }}</div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('/editUser/' . $data['user']->id) }}"
-                                  aria-label="{{ __('Ajouter un utilisateur') }}">
+                                  aria-label="{{ __('Modifier les informations') }}">
                                 <div class="form-group row">
                                     <label for="lastname"
                                            class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
