@@ -41,7 +41,7 @@
                                         <td>{{ $user->equipe->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td style="width: 20%;">
-                                            <a href={{'/editUserForm/' . $user->id}}  class="table-link">
+                                            <a href={{url('/editUserForm/' . $user->id)}}  class="table-link">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>

@@ -77,9 +77,6 @@ class EquipeController extends Controller
     public function homeEquipe()
     {
        $equipes = Equipe::all();
-       foreach ( $equipes as $equipe){
-           dd($equipe->manager);
-       }
         return view('equipe',array('equipes' => $equipes));
     }
 }
