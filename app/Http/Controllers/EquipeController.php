@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\role;
 use App\equipe;
 use App\User;
+use Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -55,22 +56,47 @@ class EquipeController extends Controller
      */
     protected function createEquipe(Request $request){
 
+
         $manager = User::whereId($request->input('manager'))->first();
-        $equipe = Equipe::create([
-            'name' => $request->get('nameTeam'),
-            'manager_id' => $request->get('manager')
-        ]);
 
-        $manager->equipe_id = $equipe->id;
-        $manager->save();
+        //Check si l'équipe éxiste déja
+        $equipeExist = Equipe::whereName($request->get('nameTeam'))->first();
 
-        foreach ($request->input('user') as $member){
-            $user = User::whereId($member)->first();
-            $user->equipe_id = $equipe->id;
-            $user->save();
+        $managerInfo = User::whereId($request->get('manager'))->first();
+        if($managerInfo->equipe_id !== null){
+            $equipeInfo = Equipe::whereId($managerInfo->equipe_id)->first();
+            if($equipeInfo->manager_id === $managerInfo->id){
+                Session::flash('alert-danger', "Le manager " . $managerInfo->firstname." ".$managerInfo->lastname . " est déjà manager d'une autre équipe" );
+                $users['users'] = User::all();
+                return view('registerEquipe', ['users' => $users]);
+
+            }
         }
 
-       return redirect('/homeEquipe');
+        if($equipeExist === null){
+            $equipe = Equipe::create([
+                'name' => $request->get('nameTeam'),
+                'manager_id' => $request->get('manager')
+            ]);
+
+            $manager->equipe_id = $equipe->id;
+            $manager->save();
+
+            foreach ($request->input('user') as $member){
+                $user = User::whereId($member)->first();
+                $user->equipe_id = $equipe->id;
+                $user->save();
+
+                Session::flash('alert-success', "L'équipe " . $request->input('nameTeam') . " a bien été crée   ." );
+                return redirect('/homeEquipe');
+            }
+        }else{
+            Session::flash('alert-danger', "L'équipe " . $request->input('nameTeam') . " éxiste déja." );
+            $users['users'] = User::all();
+            return view('registerEquipe', ['users' => $users]);
+        }
+
+
     }
 
     public function showForm() {
@@ -95,9 +121,18 @@ class EquipeController extends Controller
         $data = array();
         $data['equipe'] = Equipe::whereId($id)->first();
         $manager = User::whereId($data['equipe']->manager_id)->first();
+
+        //Manager de l'équipe
         $data['manager'] = $manager;
+
+        //Liste de tous les utilisateurs
         $data['users'] = User::all()->sortBy('id');
+
+        //Liste des membres de l'équipe
         $data['members'] = User::whereEquipeId($id)->get();
+
+        //Liste de la différente entre member et user
+        $data['diff'] = $data['users']->diff( $data['members']);
 
         //Supprimer le manager si présent
         foreach ($data['users'] as $key => $user){
@@ -107,11 +142,8 @@ class EquipeController extends Controller
             }
 
             foreach ($data['members'] as $k => $member){
-
-                if($data['manager']->id != $member->id){
-                    if($member->id == $user->id){
-                        unset($data['members'][$k]);
-                    }
+                if($data['manager']->id == $member->id){
+                    unset($data['members'][$k]);
                 }
             }
         }
@@ -121,7 +153,7 @@ class EquipeController extends Controller
 
     public function editEquipe(request $request, int $id)
     {
-        if (Auth::user()->role->name == 'Administrateur') {
+
             $validator = \Validator::make($request->all(), [
                 'name' => 'required|string|max:255'
             ]);
@@ -134,42 +166,43 @@ class EquipeController extends Controller
 
             $equipe = Equipe::whereId($id)->first();
 
-            $equipe->name = $request->input('name');
-            $user->manager_id = $request->input('lastname');
-            if ($request->input('password')) {
-                $user->password = Hash::make($request->input('password'));
-            }
-            $user->role_id = $request->input('role_id');
-            $user->equipe_id = $request->input('equipe_id');
-            if ($user->email != $request->input('email')) {
-                if (User::whereEmail($request->input('email'))->first()) {
-                    \Session::flash('alert-danger', 'Email déjà utilisé');
-                    return redirect('/editUserForm/' . $id);
+            if ($equipe->name != $request->input('name')) {
+                if (Equipe::whereName($request->input('name'))->first()) {
+                    \Session::flash('alert-danger', 'Ce nom est déjà utilisé');
+                    return redirect('/editEquipeForm/' . $id);
                 }
-                $user->email = $request->input('email');
+                $equipe->name = $request->input('name');
             }
-            $user->save();
-            Session::flash('alert-success', "L'utilisateur " . $request->input('email') . " modifié avec succès" );
-            return redirect('/adminUsers');
+            $equipe->manager_id = $request->input('manager');
 
-        } elseif ($id == Auth::user()->id) {
-            $validator = \Validator::make($request->all(), [
-                'password' => 'required|string|min:6|confirmed',
-            ]);
+            //Sauvegarde du manager
+            $manager = User::whereId($request->input('manager'))->first();
+            $manager->equipe_id = $equipe->id;
+            $manager->save();
 
-            if ($validator->fails()) {
-                return redirect('/editUserForm/' . $id)
-                    ->withInput()
-                    ->withErrors($validator);
+            //Sauvegarde de la liste d'utilisateur
+            foreach ($request->input('user') as $member){
+                $user = User::whereId($member)->first();
+                $user->equipe_id = $equipe->id;
+                $user->save();
             }
 
-            $user = User::whereId($id);
-            $user->password = $request->input('password');
-            $user->save();
-            Session::flash('alert-success', "Mot de passe modifié avec succès");
-            return redirect('/home');
-        }
-        Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
-        return redirect('/home');
+            $equipe->save();
+
+            Session::flash('alert-success', "L'équipe " . $request->input('name') . " modifié avec succès" );
+            return redirect('/homeEquipe');
+
     }
+
+    public function deleteEquipe(int $id)
+    {
+
+        Equipe::whereId($id)->delete();
+        $table->foreign('fk_id')->references('id')->on('table')->onDelete('cascade');
+
+        Session::flash('alert-success', "L'équipe a été supprimé avec succès" );
+        return redirect('/homeEquipe');
+    }
+
+
 }

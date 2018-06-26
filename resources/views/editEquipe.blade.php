@@ -13,9 +13,15 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="nameTeam" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
                                 <div class="col-md-6">
-                                    <input id="nameTeam" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nameTeam" value="{{ $data['equipe']->name }}" required autofocus>
+                                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $data['equipe']->name }}" required autofocus>
+
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -23,35 +29,32 @@
                                 <label for="manager" class="col-md-4 col-form-label text-md-right">{{ __('Manager') }}</label>
                                 <div class="col-md-6">
                                     <div class="-align-center">
-                                        {!!Form::select('manager',['new_section'=> $data['manager']->lastname] + array_pluck($data['users'], 'lastname', 'id'),null, ['class' => 'form-control'])!!}
+                                        {!!Form::select('manager',[$data['manager']->id => $data['manager']->lastname] + array_pluck($data['users'], 'lastname', 'id'),null, ['class' => 'form-control'])!!}
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="usertext" class="col-md-4 col-form-label text-md-right">{{ __('Utilisateur') }}</label>
-                                <div class="col-md-6">
-                                    <div class="-align-center">
-                                        {!! Form::select('user', ['new_section'=> array_pluck($data['users'], 'lastname', 'id')] + array_pluck($data['users'], 'lastname', 'id'), null, ['id'=>'user','multiple'=>'multiple','multiselect'=>'multiselect','class'=>'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-
+                            {{--  <div class="form-group row">
+                                  <label for="usertext" class="col-md-4 col-form-label text-md-right">{{ __('Utilisateur') }}</label>
+                                  <div class="col-md-6">
+                                      <div class="-align-center">
+                                          {!! Form::select('user', array_pluck($data['users'], 'lastname', 'id'), null, ['id'=>'user','multiple'=>'multiple','multiselect'=>'multiselect','class'=>'form-control']) !!}
+                                      </div>
+                                  </div>
+                              </div>
+  --}}
                             <div class="form-group row">
                                 <label for="user" class="col-md-4 col-form-label text-md-right">{{ __('Utilisateur') }}</label>
                                 <div class="col-md-6">
                                     <div class="-align-center">
-
-                                        <select class="custom-select" id="user" name="user" multiple="multiple">
-                                            @foreach ($data['users'] as $user)
-                                                    <option value="{{ $user->id }}" >{{ $user->lastname }}</option>
+                                        <select id="user" name="user[]" multiple="multiple">
+                                            @foreach($data['members'] as $member)
+                                                <option value="{{$member->id}}" selected="selected">{{$member->lastname}}</option>
                                             @endforeach
-
-                                                    <option  @foreach ($data['members'] as $member)
-                                                             value="{{ $member->id }}" selected="selected" >{{ $member->lastname }}</option>
-                                                @endforeach
+                                            @foreach($data['diff'] as $user)
+                                                <option value="{{$user->id}}">{{$user->lastname}}</option>
+                                            @endforeach
                                         </select>
-
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +62,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('enregister') }}
+                                        {{ __('Enregister') }}
                                     </button>
                                 </div>
                             </div>
@@ -78,6 +81,7 @@
                 li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
             },
             nonSelectedText: '-- Sélectionnez --'
+
         });
     </script>
 @endsection

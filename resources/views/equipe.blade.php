@@ -1,6 +1,11 @@
 @extends('layouts.template')
 
 @section('content')
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if (Session::has('alert-' . $msg))
+            <div class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</div>
+        @endif
+    @endforeach
     <div class="container">
                 <div class="card">
                     <div class="card-header">Equipes</div>
@@ -56,7 +61,7 @@
                                                     @endif
                                             </td>
                                         @else
-                                                <td >Aucun manager</td>
+                                                <td >Aucun Manager</td>
                                         @endif
                                         <td>@foreach($equipe->user as $member)
                                                 @if($loop->last)
@@ -76,7 +81,7 @@
                                                     <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                                                 </span>
                                                     </a>
-                                                    <a href="#" class="table-link danger">
+                                                    <a class="table-link danger" onclick="return confirm('Voulez-vous supprimer cette équipe ?')" href={{url('/deleteEquipe/' . $equipe->id)}}>
                                                 <span class="fa-stack">
                                                     <i class="fa fa-square fa-stack-2x"></i>
                                                     <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>

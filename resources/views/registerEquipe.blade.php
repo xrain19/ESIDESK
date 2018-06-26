@@ -1,6 +1,11 @@
 @extends('layouts.template')
 
 @section('content')
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if (Session::has('alert-' . $msg))
+            <div class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</div>
+        @endif
+    @endforeach
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -59,7 +64,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('enregister') }}
+                                    {{ __('Enregister') }}
                                 </button>
                             </div>
                         </div>

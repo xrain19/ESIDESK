@@ -19,10 +19,11 @@
                         @elseif(Session::has('alert-sucess'))
                             <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
                             @else
-                            @guest
-                                <div class="alert alert-warning" role="alert">
-                                    Veilleur vous connecter pour accéder à l'application
-                                </div>
+                                @guest
+                                    <div class="alert alert-warning" role="alert">
+                                     Veilleur vous connecter pour accéder à l'application
+                                    </div>
+                                @endguest
                             @endif
                             @if(Session::has('alert-danger'))
                                 <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>

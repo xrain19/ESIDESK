@@ -64,6 +64,11 @@ Route::Get('/editEquipeForm/{id}', [
     'uses' => 'EquipeController@showEditForm'
 ]);
 
+Route::Get('/deleteEquipe/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'EquipeController@deleteEquipe'
+]);
+
 Route::Post('/editEquipe/{id}', [
     'middleware' => 'auth',
     'uses' => 'EquipeController@editEquipe',
