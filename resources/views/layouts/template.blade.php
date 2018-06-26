@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,7 +19,7 @@
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
-<!-- Custom fonts for this template-->
+    <!-- Custom fonts for this template-->
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
 
     <title>{{ config('app.name', 'ESIDESK') }}</title>
@@ -61,7 +62,8 @@
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
                     data-original-title="Dashboard">
-                    <a class="nav-link" href="{{ url('/homeEquipe') }}"><i class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
+                    <a class="nav-link" href="{{ url('/homeEquipe') }}"><i
+                                class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
@@ -89,38 +91,38 @@
 
                 @guest
                 @else
+
+                    @if( Request::session()->get('manager') == true)
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manager"
+                            data-original-title="Manager">
+                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Manager"
+                               data-parent="#exampleAccordion">
+                                <i class="fa fa-fw fa-sitemap"></i>
+                                <span class="nav-link-text">Manager</span>
+                            </a>
+                            <ul class="sidenav-second-level collapse" id="Manager">
+                                <li>
+                                    <a href="{{ url('/catForm/' . Request::session()->get('equipe')->id) }}">Créer une catégorie dans {!! Request::session()->get('equipe')->name !!}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+
                     @if(Auth::user()->role->name == 'Administrateur')
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Administrateur"
                             data-original-title="Administrateur">
-                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
+                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+                               href="#Administrateur"
                                data-parent="#exampleAccordion">
                                 <i class="fa fa-fw fa-sitemap"></i>
                                 <span class="nav-link-text">Administrateur</span>
                             </a>
-                            <ul class="sidenav-second-level collapse" id="collapseMulti">
+                            <ul class="sidenav-second-level collapse" id="Administrateur">
                                 <li>
                                     <a href="{{ url('/registerUserForm') }}">Ajouter un utilisateur</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('adminUsers') }}">Liste des utilisateurs</a>
-                                </li>
-                                <li>
-                                    <a href="#">Supprimer un utilisateur</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third
-                                        Level</a>
-                                    <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -253,17 +255,17 @@
                     </li>
                 @else
 
-                <div class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
+                    <div class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                        <i class="fa fa-fw fa-sign-out"></i> {{ __('Se déconnecter') }}
-                    </a>
+                            <i class="fa fa-fw fa-sign-out"></i> {{ __('Se déconnecter') }}
+                        </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 @endguest
             </ul>
         </div>
@@ -327,7 +329,7 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>

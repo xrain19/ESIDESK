@@ -22,10 +22,10 @@ Route::Get('/catForm/{id}', [
     'uses' => 'CategoriesController@showForm'
 ]);
 
-Route::Post('/catRgister/{id}', [
+Route::Post('/catRegister', [
     'middleware' => 'auth',
     'uses' => 'CategoriesController@createCat',
-]);
+])->name('createCat');
 
 Route::Get('/registerUserForm', [
     'middleware' => 'auth',

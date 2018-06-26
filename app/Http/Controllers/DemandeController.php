@@ -35,4 +35,9 @@ class DemandeController extends Controller
             Session::flash('alert-success', "Demande " . $request->input('title') . " créé avec succès" );
             return redirect('/home');
     }
+
+    protected function showForm()
+    {
+
+    }
 }

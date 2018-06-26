@@ -15,8 +15,8 @@
                             @endif
                             @if(Session::has('alert-danger'))
                                 <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
-                            @elseif(Session::has('alert-sucess'))
-                                <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
+                            @elseif(Session::has('alert-success'))
+                                <p class="alert alert-success">{{ Session::get('alert-success') }}</p>
                             @else
                                 @guest
                                     <div class="alert alert-warning" role="alert">

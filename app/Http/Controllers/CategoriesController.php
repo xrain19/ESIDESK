@@ -10,9 +10,10 @@ use Session;
 
 class CategoriesController extends Controller
 {
-    protected function createCat(Request $request, $id)
+    protected function createCat(Request $request)
     {
-        $equipe = Equipe::whereId($id)->first();
+        $equipe_id = $request->session()->get('equipe')->id;
+        $equipe = Equipe::whereId($equipe_id)->first();
 
         if ($equipe->manager_id != Auth::user()->id) {
             Session::flash('alert-danger', "Vous ne disposez pas des droits pour accéder à cette page");
@@ -26,7 +27,7 @@ class CategoriesController extends Controller
         Categorie::create([
             'description' => $request->input('description'),
             'name' => $request->input('name'),
-            'equipe_id' => $id,
+            'equipe_id' => $equipe_id,
         ]);
 
         Session::flash('alert-success', "Catégorie " . $request->input('name') . " créé avec succès");
@@ -43,8 +44,8 @@ class CategoriesController extends Controller
         }
 
         $data = array();
-        $data['equipe_id'] = $id;
-        return view('createCat', ['data' => $data]);
+        $data['equipe'] = $equipe;
+        return view('registerCat', ['data' => $data]);
     }
 
     protected function showEditForm($id)
