@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categorie extends Model
 {
     protected $fillable = [
-        'descriptions', 'name'
+        'descriptions', 'name', 'equipe_id'
     ];
 
     public function Equipe()

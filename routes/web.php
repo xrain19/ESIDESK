@@ -17,6 +17,15 @@ Auth::routes();
 
 Route::Get('/home', 'HomeController@index')->name('home');
 
+Route::Get('/catForm/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@showForm'
+]);
+
+Route::Post('/catRgister/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@createCat',
+]);
 
 Route::Get('/registerUserForm', [
     'middleware' => 'auth',

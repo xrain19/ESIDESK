@@ -8,13 +8,14 @@ use App\Equipe;
 use App\Statut;
 use App\Demande;
 use Auth;
+use Session;
 
 #'descriptions', 'urgency', 'closed', 'desired_date', 'status', 'processor_id', 'processing_date', 'title', 'user_id', 'equipe_id', 'statuts_id'
 
 class DemandeController extends Controller
 {
 
-    protected function createUser(Request $request)
+    protected function createDemande(Request $request)
     {
             $validatedData = $request->validate([
                 'description' => 'required|string|',
