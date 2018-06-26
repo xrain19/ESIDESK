@@ -32,13 +32,19 @@
                                                 <br/>
                                                 <span class="user-subhead"><i>Role : {{$user->role->name}}</i> </span>
                                                 <br/>
-                                                @if($user->equipe->manager_id == $user->id)
-                                                    <span
-                                                        class="user-subhead"><i>Manager de l'équipe : {{$user->equipe->name}}</i> </span>
+                                                @if($user->equipe_id != null)
+                                                    @if($user->equipe->manager_id == $user->id)
+                                                        <span
+                                                            class="user-subhead"><i>Manager de l'équipe : {{$user->equipe->name}}</i> </span>
+                                                    @endif
                                                 @endif
                                             </b>
                                         </td>
-                                        <td>{{ $user->equipe->name }}</td>
+                                        @if($user->equipe_id != null)
+                                            <td>{{ $user->equipe->name }}</td>
+                                            @else
+                                                <td>L'utilisateur n'est dans aucune équipe</td>
+                                        @endif
                                         <td>{{ $user->email }}</td>
                                         <td style="width: 20%;">
                                             <a href={{url('/editUserForm/' . $user->id)}}  class="table-link">

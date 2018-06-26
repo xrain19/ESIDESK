@@ -112,7 +112,7 @@ class EquipeController extends Controller
      */
     public function homeEquipe()
     {
-       $equipes = Equipe::all();
+       $equipes = Equipe::all()->where('actived',true);
         return view('equipe',array('equipes' => $equipes));
     }
 
@@ -197,8 +197,16 @@ class EquipeController extends Controller
     public function deleteEquipe(int $id)
     {
 
-        Equipe::whereId($id)->delete();
-        $table->foreign('fk_id')->references('id')->on('table')->onDelete('cascade');
+       $equipeDisable = Equipe::whereId($id)->first();
+       $equipeDisable->actived = false;
+       $equipeDisable->manager_id = null;
+       $equipeDisable->save();
+
+       $userEquipe = User::whereEquipeId($id)->get();
+        foreach ($userEquipe as $user){
+            $user->equipe_id = null;
+            $user->save();
+        }
 
         Session::flash('alert-success', "L'équipe a été supprimé avec succès" );
         return redirect('/homeEquipe');
