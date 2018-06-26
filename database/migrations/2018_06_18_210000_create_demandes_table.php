@@ -30,7 +30,7 @@ class CreateDemandesTable extends Migration
             $table->integer('equipe_id')->unsigned();
             $table->foreign('equipe_id')->references('id')->on('equipes');
 
-            $table->integer('statut_id')->unsigned();
+            $table->integer('statut_id')->unsigned()->default(1);
             $table->foreign('statut_id')->references('id')->on('statuts');
 
             $table->integer('categorie_id')->unsigned();

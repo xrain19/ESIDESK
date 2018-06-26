@@ -337,7 +337,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
-<script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{ asset('js/sb-admin.js') }}" defer></script>
 
 @yield('script')
