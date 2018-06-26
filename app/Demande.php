@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 /**
  * App\Demande
  *
@@ -45,8 +44,8 @@ use Illuminate\Database\Eloquent\Model;
 class Demande extends Model
 {
     protected $fillable = [
-        'descriptions', 'urgency', 'closed', 'desired_date', 'status', 'processor_id', 'processing_date', 'title'
-    ];
+'descriptions', 'urgency', 'closed', 'desired_date', 'status', 'processor_id', 'processing_date', 'title', 'user_id', 'equipe_id', 'statuts_id'
+];
 
     public function User()
     {
