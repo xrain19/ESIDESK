@@ -17,6 +17,16 @@ Auth::routes();
 
 Route::Get('/home', 'HomeController@index')->name('home');
 
+Route::Post('createDemande/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@createDemande'
+]);
+
+Route::Get('createDemandeForm/{id}', [
+   'middleware' => 'auth',
+   'uses' => 'DemandeController@showForm'
+]);
+
 Route::Get('/listCat/{id}', [
     'middleware' => 'auth',
     'uses' => 'CategoriesController@listCat'
@@ -26,11 +36,11 @@ Route::Get('/editCatForm/{id}', [
     'middleware' => 'auth',
     'uses' => 'CategoriesController@showEditForm'
 ]);
+
 Route::Post('/editCat/{id}', [
     'middleware' => 'auth',
     'uses' => 'CategoriesController@editCat'
 ]);
-
 
 Route::Get('/catForm/{id}', [
     'middleware' => 'auth',

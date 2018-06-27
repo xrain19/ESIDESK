@@ -2,10 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Role;
-use App\Equipe;
-use App\Statut;
+
 use App\Demande;
 use Auth;
 use Session;
@@ -15,7 +12,7 @@ use Session;
 class DemandeController extends Controller
 {
 
-    protected function createDemande(Request $request)
+    protected function createDemande(Request $request, $id)
     {
             $validatedData = $request->validate([
                 'description' => 'required|string|',
@@ -30,6 +27,7 @@ class DemandeController extends Controller
                 'title' => $request->input('title'),
                 'user_id' => Auth::user()->id,
                 'equipe_id' => $request->input('equipe_id'),
+                'categorie_id' => $id,
             ]);
 
             Session::flash('alert-success', "Demande " . $request->input('title') . " créé avec succès" );

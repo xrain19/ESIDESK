@@ -17,10 +17,11 @@ class CategoriesController extends Controller
         if ($equipe == null) {
             Session::flash('alert-danger', "Equipe introuvable");
             return redirect('/home');
-        }   
+        }
 
         $categories = $equipe->Categorie()->get();
-        if ($categories == null) {
+
+        if ($categories->isEmpty()) {
             Session::flash('alert-danger', "Aucune catégorie créée dans l'équipe " . $equipe->name);
             return redirect('/home');
         }

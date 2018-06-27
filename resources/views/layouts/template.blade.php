@@ -92,6 +92,21 @@
                 @guest
                 @else
 
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Demande"
+                        data-original-title="Demande">
+                        <a id="cDemande" class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+                           href="#Demande"
+                           data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-sitemap"></i>
+                            <span class="nav-link-text">Demande</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="Demande">
+                            <li>
+                                <a href="#">Mes demandes</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     @if( Request::session()->get('manager') == true)
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manager"
                             data-original-title="Manager">

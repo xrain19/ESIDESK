@@ -11,18 +11,27 @@
     <div class="container bootstrap snippet">
         <div class="row">
             @foreach($data['categories'] as $category)
-                <div>
-                    <div class="card" style="width: 18rem;">
+                <div style="padding-left: 3rem">
+                    <div class="card" style="width: 18rem;border-color: black;height: 25rem">
                         <div class="card-body">
                             <h5 class="card-title">{!! $category->name !!}</h5>
-                            <p class="card-text">{!! $category->description !!}</p>
-                            <a href={{url('/editCatForm/' . $category->id)}}  class="table-link">
+                            <p class="card-text text-body">{!! $category->description !!}</p>
+                        </div>
+
+                        <div class="card-footer">
+                            @if($data['equipe']->manager_id == Auth::user()->id or Auth::user()->role->name == 'Administrateur')
+                                <a href={{url('/editCatForm/' . $category->id)}}  class="table-link">
                             <span class="fa-stack">
                             <i class="fa fa-square fa-stack-2x"></i>
                             <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                             </span>
-                            </a>
+                                </a>
+                            @elseif(Auth::user()->equipe_id != $category->equipe->id)
+                                <a href="/createDemandeForm/" . {!! $category->id !!} class="btn btn-primary">Faire
+                                    une demande</a>
+                            @endif
                         </div>
+
                     </div>
                 </div>
             @endforeach
