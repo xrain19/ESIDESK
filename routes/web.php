@@ -17,15 +17,30 @@ Auth::routes();
 
 Route::Get('/home', 'HomeController@index')->name('home');
 
+Route::Get('/listCat/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@listCat'
+]);
+
+Route::Get('/editCatForm/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@showEditForm'
+]);
+Route::Post('/editCat/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@editCat'
+]);
+
+
 Route::Get('/catForm/{id}', [
     'middleware' => 'auth',
     'uses' => 'CategoriesController@showForm'
 ]);
 
-Route::Post('/catRegister', [
+Route::Post('/catRegister/{id}', [
     'middleware' => 'auth',
     'uses' => 'CategoriesController@createCat',
-])->name('createCat');
+]);
 
 Route::Get('/registerUserForm', [
     'middleware' => 'auth',

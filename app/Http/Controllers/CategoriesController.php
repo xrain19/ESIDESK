@@ -10,12 +10,33 @@ use Session;
 
 class CategoriesController extends Controller
 {
-    protected function createCat(Request $request)
+    protected function listCat($id)
     {
-        $equipe_id = $request->session()->get('equipe')->id;
-        $equipe = Equipe::whereId($equipe_id)->first();
+        $equipe = Equipe::whereId($id)->first();
 
-        if ($equipe->manager_id != Auth::user()->id) {
+        if ($equipe == null) {
+            Session::flash('alert-danger', "Equipe introuvable");
+            return redirect('/home');
+        }   
+
+        $categories = $equipe->Categorie()->get();
+        if ($categories == null) {
+            Session::flash('alert-danger', "Aucune catégorie créée dans l'équipe " . $equipe->name);
+            return redirect('/home');
+        }
+
+        $data = array();
+        $data['equipe'] = $equipe;
+        $data['categories'] = $categories;
+        return view('listCat', ['data' => $data]);
+    }
+
+    protected function createCat(Request $request, $id)
+    {
+        $equipe = Equipe::whereId($id)->first();
+        $user = Auth::user();
+
+        if ($equipe->manager_id != $user->id and $user->role->name != 'Administrateur') {
             Session::flash('alert-danger', "Vous ne disposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
@@ -27,7 +48,7 @@ class CategoriesController extends Controller
         Categorie::create([
             'description' => $request->input('description'),
             'name' => $request->input('name'),
-            'equipe_id' => $equipe_id,
+            'equipe_id' => $id,
         ]);
 
         Session::flash('alert-success', "Catégorie " . $request->input('name') . " créé avec succès");
@@ -38,7 +59,14 @@ class CategoriesController extends Controller
     {
         $equipe = Equipe::whereId($id)->first();
 
-        if ($equipe->manager_id != Auth::user()->id) {
+        if ($equipe == null) {
+            Session::flash('alert-danger', "Equipe introuvable");
+            return redirect('/home');
+        }
+
+        $user = Auth::user();
+
+        if ($equipe->manager_id != $user->id and $user->role->name != 'Administrateur') {
             Session::flash('alert-danger', "Vous ne disposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
@@ -58,15 +86,16 @@ class CategoriesController extends Controller
         }
 
         $equipe = Equipe::whereId($cat->equipe_id)->first();
+        $user = Auth::user();
 
-        if ($equipe->manager_id != Auth::user()->id) {
+        if ($equipe->manager_id != $user->id and $user->role->name != 'Administrateur') {
             Session::flash('alert-danger', "Vous ne disposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
 
         $data = array();
         $data['cat'] = $cat;
-        return view('createCat', ['data' => $data]);
+        return view('editCat', ['data' => $data]);
     }
 
     protected function editCat(Request $request, $id)
@@ -79,14 +108,15 @@ class CategoriesController extends Controller
         }
 
         $equipe = Equipe::whereId($cat->equipe_id)->first();
+        $user = Auth::user();
 
-        if ($equipe->manager_id != Auth::user()->id) {
+        if ($equipe->manager_id != $user->id and $user->role->name != 'Administrateur') {
             Session::flash('alert-danger', "Vous ne disposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
 
         $cat->name = $request->input('name');
-        $cat->descriptions = $request->input('description');
+        $cat->description = $request->input('description');
         $cat->save();
 
         Session::flash('alert-success', "Catégorie " . $request->input('name') . " modifiée avec succès");

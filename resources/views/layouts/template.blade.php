@@ -102,7 +102,13 @@
                             </a>
                             <ul class="sidenav-second-level collapse" id="Manager">
                                 <li>
-                                    <a href="{{ url('/catForm/' . Request::session()->get('equipe')->id) }}">Créer une catégorie dans {!! Request::session()->get('equipe')->name !!}}</a>
+                                    <a href="{{ url('/catForm/' . Request::session()->get('equipe')->id) }}">Créer une
+                                        catégorie dans <strong>{!! Request::session()->get('equipe')->name !!}</strong></a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ url('/listCat/' . Request::session()->get('equipe')->id) }}">Categories
+                                        de demande <strong>{!! Request::session()->get('equipe')->name !!}</strong></a>
                                 </li>
                             </ul>
                         </li>

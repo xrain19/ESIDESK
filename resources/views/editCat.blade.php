@@ -5,10 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __("Créer une Catégorie dans l'équipe " . $data['equipe']->name) }}</div>
+                    <div class="card-header">{{ __("Modifier la catégorie" . $data['cat']->name) }}</div>
                     <div class="card-body">
 
-                        <form method="POST" action="{{ url('/catRegister/' . $data['equipe']->id) }}"
+                        <form method="POST" action="{{ url('/editCat/' . $data['cat']->id) }}"
                               aria-label="{{ __('Créer une Catégorie') }}">
 
                             @csrf
@@ -19,7 +19,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                           name="name" value="{{ old('name') }}" required autofocus>
+                                           name="name" value="{{ $data['cat']->name }}" required autofocus>
                                 </div>
                             </div>
 
@@ -36,7 +36,7 @@
                                 <div class="col-md-6">
                                     <input id="description" type="text"
                                            class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
-                                           name="description" value="{{ old('description') }}" required>
+                                           name="description" value="{{ $data['cat']->description }}" required>
 
                                     @if ($errors->has('description'))
                                         <span class="invalid-feedback" role="alert">

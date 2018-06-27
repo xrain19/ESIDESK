@@ -4,7 +4,7 @@
 
     @if(Session::has('alert-danger'))
         <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
-    @elseif(Session::has('alert-sucess'))
+    @elseif(Session::has('alert-success'))
         <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
     @endif
     <div class="container bootstrap snippet">
