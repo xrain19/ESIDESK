@@ -17,6 +17,50 @@ Auth::routes();
 
 Route::Get('/home', 'HomeController@index')->name('home');
 
+Route::Get('/detailsDemande/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@detailsDemande'
+]);
+
+Route::Get('/listDemande/{list}/{tri}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@listDemande'
+]);
+
+Route::Post('createDemande/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@createDemande'
+]);
+
+Route::Get('createDemandeForm/{id}', [
+   'middleware' => 'auth',
+   'uses' => 'DemandeController@showForm'
+]);
+
+Route::Get('/listCat/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@listCat'
+]);
+
+Route::Get('/editCatForm/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@showEditForm'
+]);
+
+Route::Post('/editCat/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@editCat'
+]);
+
+Route::Get('/catForm/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@showForm'
+]);
+
+Route::Post('/catRegister/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'CategoriesController@createCat',
+]);
 
 Route::Get('/registerUserForm', [
     'middleware' => 'auth',

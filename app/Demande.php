@@ -44,7 +44,7 @@ use Illuminate\Database\Eloquent\Model;
 class Demande extends Model
 {
     protected $fillable = [
-'descriptions', 'urgency', 'closed', 'desired_date', 'status', 'processor_id', 'processing_date', 'title', 'user_id', 'equipe_id', 'statuts_id'
+'description', 'urgency', 'closed', 'desired_date', 'status_id', 'processor_id', 'processing_date', 'title', 'user_id', 'equipe_id', 'statut_id', 'categorie_id'
 ];
 
     public function User()

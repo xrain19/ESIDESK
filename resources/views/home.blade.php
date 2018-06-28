@@ -7,17 +7,16 @@
                 <div class="card">
                     <div class="card-header">Message</div>
                     <div class="card-body">
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    VOUS ÊTES CONNECTÉ SUR ESIDESK!
-                        @if(Session::has('alert-danger'))
-                            <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
-                        @elseif(Session::has('alert-sucess'))
-                            <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            @if(Session::has('alert-danger'))
+                                <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
+                            @elseif(Session::has('alert-success'))
+                                <p class="alert alert-success">{{ Session::get('alert-success') }}</p>
                             @else
                                 @guest
                                     <div class="alert alert-warning" role="alert">
