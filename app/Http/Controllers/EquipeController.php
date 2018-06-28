@@ -82,21 +82,22 @@ class EquipeController extends Controller
             $manager->equipe_id = $equipe->id;
             $manager->save();
 
-            foreach ($request->input('user') as $member){
-                $user = User::whereId($member)->first();
-                $user->equipe_id = $equipe->id;
-                $user->save();
+            if($request->input('user') != null) {
+                foreach ($request->input('user') as $member) {
+                    $user = User::whereId($member)->first();
+                    $user->equipe_id = $equipe->id;
+                    $user->save();
+                }
+            }
 
                 Session::flash('alert-success', "L'équipe " . $request->input('nameTeam') . " a bien été crée   ." );
                 return redirect('/homeEquipe');
             }
-        }else{
+        else{
             Session::flash('alert-danger', "L'équipe " . $request->input('nameTeam') . " éxiste déja." );
             $users['users'] = User::all();
             return view('registerEquipe', ['users' => $users]);
         }
-
-
     }
 
     public function showForm() {

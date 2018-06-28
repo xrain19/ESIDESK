@@ -1,5 +1,12 @@
 @extends('layouts.template')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item">
+        <a href="{{ url('/homeEquipe') }}">Liste des équipes</a>
+    </li>
+    <li class="breadcrumb-item active">Edition d'une équipe</li>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

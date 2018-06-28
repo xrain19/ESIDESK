@@ -1,5 +1,8 @@
 @extends('layouts.template')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item active">Liste des équipes</li>
+    @endsection
 @section('content')
     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if (Session::has('alert-' . $msg))

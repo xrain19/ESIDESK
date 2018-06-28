@@ -1,5 +1,12 @@
 @extends('layouts.template')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item">
+        <a href="{{ url('/homeEquipe') }}">Liste des équipes</a>
+    </li>
+    <li class="breadcrumb-item active">Création d'une équipe</li>
+@endsection
+
 @section('content')
     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if (Session::has('alert-' . $msg))
