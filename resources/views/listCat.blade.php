@@ -27,11 +27,10 @@
                             </span>
                                 </a>
                             @elseif(Auth::user()->equipe_id != $category->equipe->id)
-                                <a href="/createDemandeForm/" . {!! $category->id !!} class="btn btn-primary">Faire
+                                <a href='{!!'/createDemandeForm/' .  $category->id !!}' class="btn btn-primary">Faire
                                     une demande</a>
                             @endif
                         </div>
-
                     </div>
                 </div>
             @endforeach

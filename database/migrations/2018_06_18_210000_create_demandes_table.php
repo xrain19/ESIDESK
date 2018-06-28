@@ -16,7 +16,7 @@ class CreateDemandesTable extends Migration
         Schema::create('demandes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('descriptions');
+            $table->text('description');
             $table->integer('urgency');
             $table->boolean('closed')->default(false);
             $table->date('desired_date');
