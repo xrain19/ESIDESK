@@ -66,9 +66,9 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Urgence') }}</label>
                                 <div class="col-md-6">
                                     <select name="urgency" id="urgency">
-                                        <option value=1>1</option>
-                                        <option value=2>2</option>
-                                        <option value=3>3</option>
+                                        <option value=1>Forte</option>
+                                        <option value=2>Moyenne</option>
+                                        <option value=3>Faible</option>
                                     </select>
                                 </div>
                             </div>
@@ -86,9 +86,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-    </script>
 @endsection

@@ -102,7 +102,13 @@
                         </a>
                         <ul class="sidenav-second-level collapse" id="Demande">
                             <li>
-                                <a href="#">Mes demandes</a>
+                                <a href="/listDemande/mine/created_at">Mes demandes</a>
+                            </li>
+                            <li>
+                                <a href="/listDemande/inprogress/desired_date">Demande(s) en cours de traitement</a>
+                            </li>
+                            <li>
+                                <a href="/listDemande/equipe/created_date">Demande(s) à traiter</a>
                             </li>
                         </ul>
                     </li>

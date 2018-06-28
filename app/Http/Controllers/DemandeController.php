@@ -15,15 +15,72 @@ use Session;
 class DemandeController extends Controller
 {
 
-    protected function listDemande($list)
+    protected function detailsDemande($id)
     {
+        $demande = Demande::whereId($id)->first();
+        if($demande == null) {
+            Session::flash('alert-danger', "Demande introuvable");
+            return redirect('/home');
+        }
+        $data['demande'] = $demande;
+        return view('detailsDemande', ['data' => $data]);
+    }
 
+    protected function listDemande($list, $tri)
+    {
+        $data = array();
+
+        switch ($list) {
+            case 'equipe':
+                $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
+                $demandes = Demande::whereEquipeId($equipe->id)->orderBy($tri)->get();
+                if ($demandes->isEmpty()) {
+                    Session::flash('alert-danger', "Aucunes demandes à traiter");
+                    return redirect('/home');
+                }
+                $data['title'] = "Demande de l'équipe" . $equipe->name;
+                break;
+            case 'all':
+                if (Auth::user()->role->name != 'Administrateur') {
+                    Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
+                    return redirect('/home');
+                }
+                $demandes = Demande::all()->sortBy($tri);
+                if ($demandes->isEmpty()) {
+                    Session::flash('alert-danger', "Aucunes demandes");
+                    return redirect('/home');
+                }
+                $data['title'] = "les demandes";
+                break;
+            case 'mine':
+                $demandes = Demande::whereUserId(Auth::user()->id)->orderBy($tri)->get();
+                if ($demandes->isEmpty()) {
+                    Session::flash('alert-danger', "Aucunes demandes");
+                    return redirect('/home');
+                }
+                $data['title'] = "Mes demandes";
+                break;
+            case 'inprogress':
+                $demandes = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->orderBy($tri)->get();
+                if ($demandes->isEmpty()) {
+                    Session::flash('alert-danger', "Aucunes demandes en cours de traitement");
+                    return redirect('/home');
+                }
+                $data['title'] = "Demandes en cours de traitement";
+                break;
+            default:
+                Session::flash('alert-danger', "Liste de demandes introuvable");
+                return redirect('/home');
+        }
+
+        $data['demandes'] = $demandes;
+        return view('listDemande', ['data' => $data]);
     }
 
     protected function createDemande(Request $request, $id)
     {
         $cat = Categorie::whereId($id)->first();
-        if($cat == null){
+        if ($cat == null) {
             Session::flash('alert-danger', "Catégorie introuvable");
             return redirect('/home');
         }
@@ -52,7 +109,7 @@ class DemandeController extends Controller
     {
         $cat = Categorie::whereId($id)->first();
 
-        if($cat == null){
+        if ($cat == null) {
             Session::flash('alert-danger', "Catégorie introuvable");
             return redirect('/home');
         }

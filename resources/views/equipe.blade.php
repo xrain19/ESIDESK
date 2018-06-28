@@ -59,7 +59,7 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1"
                                             aria-label="Membre de l'équipe: activate to sort column ascending"
-                                            style="width: 96px;"
+                                            style="width: 96px;">
                                         </th>
                                     </tr>
                                     </thead>
@@ -95,7 +95,7 @@
                                             </td>
                                             <td style="width: 20%;">
                                                 <a href="{{url('/listCat/' . $equipe->id)}}" class="btn btn-primary">Catégories</a>
-                                                @if(auth::user()->role->name == 'Administrateur')
+                                                @if(Auth::user()->role->name == 'Administrateur' or Auth::user()->id == $equipe->manager_id)
                                                     <a href={{url('/editEquipeForm/' . $equipe->id)}}  class="table-link">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-square fa-stack-2x"></i>
