@@ -24,7 +24,7 @@ class Statut extends Model
         'name',
     ];
 
-    public function User()
+    public function Demande()
     {
         return $this->hasMany('App\Demande');
     }

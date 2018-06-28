@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(roleSeeder::class);
         $this->call(equipeSeeder::class);
         $this->call(AdminSeeder::class);
+        $this->call(StatutsSeeder::class);
 
         DB::table('users')->insert([
             'lastname' => 'El Jaziri',

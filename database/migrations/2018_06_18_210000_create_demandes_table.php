@@ -16,12 +16,12 @@ class CreateDemandesTable extends Migration
         Schema::create('demandes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('descriptions');
+            $table->text('description');
             $table->integer('urgency');
             $table->boolean('closed')->default(false);
             $table->date('desired_date');
-            $table->date('processing_date');
-            $table->integer('processor_id');
+            $table->date('processing_date')->nullable();
+            $table->integer('processor_id')->nullable();
             $table->timestamps();
 
             $table->integer('user_id')->unsigned();
@@ -30,7 +30,7 @@ class CreateDemandesTable extends Migration
             $table->integer('equipe_id')->unsigned();
             $table->foreign('equipe_id')->references('id')->on('equipes');
 
-            $table->integer('statut_id')->unsigned();
+            $table->integer('statut_id')->unsigned()->default(1);
             $table->foreign('statut_id')->references('id')->on('statuts');
 
             $table->integer('categorie_id')->unsigned();
