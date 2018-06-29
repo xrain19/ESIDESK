@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Equipe;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Demande;
@@ -18,11 +19,13 @@ class DemandeController extends Controller
     protected function detailsDemande($id)
     {
         $demande = Demande::whereId($id)->first();
+        $user = User::whereEquipeId($demande->equipe_id)->get();
         if($demande == null) {
             Session::flash('alert-danger', "Demande introuvable");
             return redirect('/home');
         }
         $data['demande'] = $demande;
+        $data['member'] = $user;
         return view('detailsDemande', ['data' => $data]);
     }
 
@@ -33,12 +36,21 @@ class DemandeController extends Controller
         switch ($list) {
             case 'equipe':
                 $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
-                $demandes = Demande::whereEquipeId($equipe->id)->orderBy($tri)->get();
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->orderBy($tri)->get();
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes à traiter");
                     return redirect('/home');
                 }
                 $data['title'] = "Demande de l'équipe" . $equipe->name;
+                break;
+            case 'refus':
+                $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->orderBy($tri)->get();
+                if ($demandes->isEmpty()) {
+                    Session::flash('alert-danger', "Aucunes demandes refusées");
+                    return redirect('/home');
+                }
+                $data['title'] = "Demande refusées";
                 break;
             case 'all':
                 if (Auth::user()->role->name != 'Administrateur') {
@@ -50,7 +62,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');
                 }
-                $data['title'] = "les demandes";
+                $data['title'] = "Les demandes";
                 break;
             case 'mine':
                 $demandes = Demande::whereUserId(Auth::user()->id)->orderBy($tri)->get();
@@ -122,14 +134,54 @@ class DemandeController extends Controller
         return view('registerDemande', ['data' => $data]);
     }
 
-    protected function validerDemande($id){
+    protected function validerDemande($id,$validator){
+        switch ($validator) {
+            case 'OK':
+                $demande = Demande::whereId($id)->first();
+                $demande->validated = true;
+                $demande->statut_id = 2;
+                $demande->save();
+                Session::flash('alert-success', "Demande acceptée");
+                return redirect('/listDemande/equipe/created_at');
+                break;
+            case 'KO':
+                $demande = Demande::whereId($id)->first();
+                $demande->statut_id = 3;
+                $demande->closed = true;
+                $demande->save();
+                Session::flash('alert-danger', "Demande refusée");
+                return redirect('/listDemande/equipe/created_at');
+                break;
+            default:
+                Session::flash('alert-danger', "Erreur");
+                return redirect('/listDemande/equipe/created_at');
+        }
 
-        $demande = Demande::whereId($id)->first();
-        $demande->validated = true;
-        $demande->statut_id = 2;
-        $demande->save();
+    }
 
-        Session::flash('alert-success', "Catégorie introuvable");
-        return redirect('/home');
+    protected function addMemberDemande(Request $request,$idDemande,$member){
+
+        switch ($member) {
+            case 'me':
+                $demande = Demande::whereId($idDemande)->first();
+                $demande->processor_id = Auth::user()->id;
+                $demande->statut_id = 4;
+                $demande->save();
+                Session::flash('alert-success', "Demande prise en charge par moi-même");
+                return redirect('/listDemande/equipe/created_at');
+                break;
+            case 'member':
+                $demande = Demande::whereId($idDemande)->first();
+                $user = User::whereId($request->input('member'))->first();
+                $demande->processor_id = $request->input('member');
+                $demande->statut_id = 4;
+                $demande->save();
+                Session::flash('alert-success', "Demande prise en charge par ".$user->firstname." ".$user->lastname);
+                return redirect('/listDemande/equipe/created_at');
+                break;
+            default:
+                Session::flash('alert-danger', "Erreur");
+                return redirect('/listDemande/equipe/created_at');
+        }
     }
 }

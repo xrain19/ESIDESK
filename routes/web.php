@@ -119,7 +119,17 @@ Route::Post('/editEquipe/{id}', [
     'name' => 'editEquipe'
 ])->name('editEquipe');
 
-Route::Get('/validerDemande/{id}', [
+Route::Get('/validerDemande/{id}/{validator}', [
     'middleware' => 'auth',
     'uses' => 'DemandeController@validerDemande'
+]);
+
+Route::Post('/addMemberDemande/{idDemande}/{member}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@addMemberDemande',
+]);
+
+Route::Get('/addMemberDemande/{idDemande}/{member}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@addMemberDemande',
 ]);

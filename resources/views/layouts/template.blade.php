@@ -54,19 +54,15 @@
                         <span class="nav-link-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tables">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fa fa-fw fa-table"></i>
-                        <span class="nav-link-text">Liste des demandes</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
-                    data-original-title="Dashboard">
-                    <a class="nav-link" href="{{ url('/homeEquipe') }}">
-                        <i class="fa fa-fw fa-users"></i>
-                        <span class="nav-link-text">Equipes</span>
-                    </a>
-                </li>
+                @if(Auth::user() != NULL)
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
+                        data-original-title="Dashboard">
+                        <a class="nav-link" href="{{ url('/homeEquipe') }}">
+                            <i class="fa fa-fw fa-users"></i>
+                            <span class="nav-link-text">Equipes</span>
+                        </a>
+                    </li>
+                @endif
 
                 @guest
                 @else
@@ -88,6 +84,9 @@
                             </li>
                             <li>
                                 <a href="{{url('/listDemande/equipe/created_at')}}">Demande(s) à traiter</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/listDemande/refus/created_at')}}">Demande(s) rejetée(s)</a>
                             </li>
                         </ul>
                     </li>
@@ -136,12 +135,6 @@
                         </li>
                     @endif
                 @endguest
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Link">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-fw fa-link"></i>
-                        <span class="nav-link-text">Link</span>
-                    </a>
-                </li>
             </ul>
             <ul class="navbar-nav sidenav-toggler">
                 <li class="nav-item">
@@ -244,16 +237,9 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Search for...">
-                            <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-                        </div>
-                    </form>
+                    @if(Auth::user() != null)
+                        <a class="navbar-loucas" style="color: white" >{{Auth::user()->lastname.' '.Auth::user()->firstname}}</a>
+                    @endif
                 </li>
 
                 <!-- Authentication Links -->
@@ -262,7 +248,6 @@
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
                     </li>
                 @else
-
                     <div class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -336,8 +321,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{ asset('js/sb-admin.js') }}" defer></script>
-<script src="{{ asset('js/sb-admin-datatables.js') }}" defer></script>
-<script src="{{ asset('js/sb-admin-charts.js') }}" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
