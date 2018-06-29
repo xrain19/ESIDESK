@@ -70,6 +70,12 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');
                 }
+                foreach ($demandes as $k=>$demande){
+                    if($demande->processor_id != NULL){
+                        $processor = User::whereId($demande->processor_id)->first();
+                        $data['processor'][$k] = $processor;
+                    }
+                }
                 $data['title'] = "Mes demandes";
                 break;
             case 'inprogress':

@@ -8,6 +8,11 @@
 @endsection
 
 @section('content')
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if (Session::has('alert-' . $msg))
+            <div class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</div>
+        @endif
+    @endforeach
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">

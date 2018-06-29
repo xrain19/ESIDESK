@@ -58,14 +58,20 @@
                                     </thead>
                                     <tbody>
                                     <tr role="row" class="odd">
-                                        @foreach($data['demandes'] as $demande)
+                                        @foreach($data['demandes'] as $k=>$demande)
                                             <td>
                                                 <strong> <a href={{url('/detailsDemande/' . $demande->id)}}>{{$demande->title}}</a>  </strong>
                                                 <br/>
-                                                <span class="user-subhead" style="font-size: medium"><i>Demandeur: {{$demande->user->firstname . " " .$demande->user->lastname}}</i> </span>
+                                                <span class="user-subhead" style="font-size: medium"><i>Demandeur : {{$demande->user->firstname . " " .$demande->user->lastname}}</i> </span>
                                             </td>
                                             <td>
-                                                {{$demande->statut->name}}
+                                                <strong> {{$demande->statut->name}} </strong>
+                                                @if(array_key_exists('processor', $data))
+                                                    </br>
+                                                    @if($demande->processor_id != NULL)
+                                                        <span class="user-subhead" style="font-size: medium"><i>Realisateur : {{$data['processor'][$k]->firstname . " " .$data['processor'][$k]->lastname}}</i> </span>
+                                                    @endif
+                                                @endif
                                             </td>
                                             <td>
                                                 @switch($demande->urgency)

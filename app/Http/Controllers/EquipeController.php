@@ -169,7 +169,7 @@ class EquipeController extends Controller
 
             if ($equipe->name != $request->input('name')) {
                 if (Equipe::whereName($request->input('name'))->first()) {
-                    \Session::flash('alert-danger', 'Ce nom est déjà utilisé');
+                    Session::flash('alert-danger', 'Ce nom est déjà utilisé');
                     return redirect('/editEquipeForm/' . $id);
                 }
                 $equipe->name = $request->input('name');
@@ -181,11 +181,13 @@ class EquipeController extends Controller
             $manager->equipe_id = $equipe->id;
             $manager->save();
 
-            //Sauvegarde de la liste d'utilisateur
-            foreach ($request->input('user') as $member){
-                $user = User::whereId($member)->first();
-                $user->equipe_id = $equipe->id;
-                $user->save();
+            if($request->input('user') != NULL){
+                //Sauvegarde de la liste d'utilisateur
+                foreach ($request->input('user') as $member){
+                    $user = User::whereId($member)->first();
+                    $user->equipe_id = $equipe->id;
+                    $user->save();
+                }
             }
 
             $equipe->save();
