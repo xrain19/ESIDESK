@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(equipeSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(StatutsSeeder::class);
+        $this->call(CategorieSeeder::class);
 
         DB::table('users')->insert([
             'lastname' => 'El Jaziri',
@@ -95,6 +96,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'gregoire@esidesk.fr',
             'role_id' => 4,
             'equipe_id' => 9
+        ]);
+
+        DB::table('users')->insert([
+            'lastname' => 'Leonforte',
+            'firstname' => 'Lucas',
+            'password' => Hash::make('Lucas'),
+            'email' => 'Lucas@esidesk.fr',
+            'role_id' => 1
         ]);
     }
 }

@@ -118,3 +118,8 @@ Route::Post('/editEquipe/{id}', [
     'uses' => 'EquipeController@editEquipe',
     'name' => 'editEquipe'
 ])->name('editEquipe');
+
+Route::Get('/validerDemande/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@validerDemande'
+]);

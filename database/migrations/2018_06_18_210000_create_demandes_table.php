@@ -22,6 +22,7 @@ class CreateDemandesTable extends Migration
             $table->date('desired_date');
             $table->date('processing_date')->nullable();
             $table->integer('processor_id')->nullable();
+            $table->boolean('validated')->default(false);
             $table->timestamps();
 
             $table->integer('user_id')->unsigned();

@@ -62,66 +62,46 @@
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
                     data-original-title="Dashboard">
-                    <a class="nav-link" href="{{ url('/homeEquipe') }}"><i
-                                class="fa fa-fw fa-users"></i>{{ __('Equipes') }}</a>
+                    <a class="nav-link" href="{{ url('/homeEquipe') }}">
+                        <i class="fa fa-fw fa-users"></i>
+                        <span class="nav-link-text">Equipes</span>
                     </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
-                    data-original-title="Example Pages">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages"
-                       data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-file"></i>
-                        <span class="nav-link-text">Example Pages</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                        <li>
-                            <a href="login.html">Login Page</a>
-                        </li>
-                        <li>
-                            <a href="register.html">Registration Page</a>
-                        </li>
-                        <li>
-                            <a href="forgot-password.html">Forgot Password Page</a>
-                        </li>
-                        <li>
-                            <a href="blank.html">Blank Page</a>
-                        </li>
-                    </ul>
                 </li>
 
                 @guest
                 @else
 
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Demande"
+                    <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right" title="Demande"
                         data-original-title="Demande">
-                        <a id="cDemande" class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-                           href="#Demande"
-                           data-parent="#exampleAccordion">
+                        <a class="nav-link nav-link-collapse dropdown-toggle" id="Demande"  data-toggle="dropdown"
+                           href="#" data-parent="#exampleAccordion">
                             <i class="fa fa-fw fa-sitemap"></i>
                             <span class="nav-link-text">Demande</span>
+                            <span class="caret"></span>
                         </a>
-                        <ul class="sidenav-second-level collapse" id="Demande">
+                        <ul class="dropdown-menu sidenav-second-level collapse" id="Demande">
                             <li>
-                                <a href="/listDemande/mine/created_at">Mes demandes</a>
+                                <a href="{{ url('/listDemande/mine/created_at') }}">Mes demandes</a>
                             </li>
                             <li>
-                                <a href="/listDemande/inprogress/desired_date">Demande(s) en cours de traitement</a>
+                                <a href="{{url('/listDemande/inprogress/desired_date')}}">Demande(s) en cours de traitement</a>
                             </li>
                             <li>
-                                <a href="/listDemande/equipe/created_date">Demande(s) à traiter</a>
+                                <a href="{{url('/listDemande/equipe/created_at')}}">Demande(s) à traiter</a>
                             </li>
                         </ul>
                     </li>
 
                     @if( Request::session()->get('manager') == true)
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manager"
+                        <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right" title="Manager"
                             data-original-title="Manager">
-                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Manager"
+                            <a class="nav-link nav-link-collapse dropdown-toggle" data-toggle="dropdown" href="#"
                                data-parent="#exampleAccordion">
                                 <i class="fa fa-fw fa-sitemap"></i>
                                 <span class="nav-link-text">Manager</span>
+                                <span class="caret"></span>
                             </a>
-                            <ul class="sidenav-second-level collapse" id="Manager">
+                            <ul class="dropdown-menu sidenav-second-level collapse" id="Manager">
                                 <li>
                                     <a href="{{ url('/catForm/' . Request::session()->get('equipe')->id) }}">Créer une
                                         catégorie dans <strong>{!! Request::session()->get('equipe')->name !!}</strong></a>
@@ -136,15 +116,16 @@
                     @endif
 
                     @if(Auth::user()->role->name == 'Administrateur')
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Administrateur"
+                        <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right" title="Administrateur"
                             data-original-title="Administrateur">
-                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-                               href="#Administrateur"
+                            <a class="nav-link nav-link-collapse dropdown-toggle" data-toggle="dropdown"
+                               href="#"
                                data-parent="#exampleAccordion">
                                 <i class="fa fa-fw fa-sitemap"></i>
                                 <span class="nav-link-text">Administrateur</span>
+                                <span class="caret"></span>
                             </a>
-                            <ul class="sidenav-second-level collapse" id="Administrateur">
+                            <ul class="dropdown-menu sidenav-second-level collapse" id="Administrateur">
                                 <li>
                                     <a href="{{ url('/registerUserForm') }}">Ajouter un utilisateur</a>
                                 </li>
@@ -352,23 +333,21 @@
 </div>
 
 <!-- Scripts JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/sb-admin.js') }}" defer></script>
+<script src="{{ asset('js/sb-admin-datatables.js') }}" defer></script>
+<script src="{{ asset('js/sb-admin-charts.js') }}" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-collapse.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
-<script src="{{ asset('js/sb-admin.js') }}" defer></script>
-
 @yield('script')
-
+<script>
+    $('.collapse').collapse()
+</script>
 </body>
 </html>

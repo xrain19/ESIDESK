@@ -13893,7 +13893,7 @@ window.Vue = __webpack_require__(36);
 
 Vue.component('example-component', __webpack_require__(39));
 
-mix.scripts('../../../node_modules/bootstra-sass/assets/javascript/bootstrap.min.js');
+mix.scripts('../../../node_modules/bootstrap-sass/assets/javascript/bootstrap.min.js');
 
 var app = new Vue({
   el: '#app'

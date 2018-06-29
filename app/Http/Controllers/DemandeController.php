@@ -121,4 +121,15 @@ class DemandeController extends Controller
         $data['equipe'] = $equipe;
         return view('registerDemande', ['data' => $data]);
     }
+
+    protected function validerDemande($id){
+
+        $demande = Demande::whereId($id)->first();
+        $demande->validated = true;
+        $demande->statut_id = 2;
+        $demande->save();
+
+        Session::flash('alert-success', "Catégorie introuvable");
+        return redirect('/home');
+    }
 }

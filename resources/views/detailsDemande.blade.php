@@ -22,9 +22,14 @@
                         <div class="row">
                             Date souhaitée : {{date('d-m-Y', strtotime($data['demande']->desired_date))}}
                         </div>
+                        </br>
                         @if($data['demande']->processor_id == null and $data['demande']->equipe_id == Auth::user()->equipe_id)
-                            <div class="row">
+                            <div class="row-1">
                                 <a href='#' class="btn btn-primary">Prendre en charge la demande</a>
+                                @if( (Request::session()->get('manager') == true or Auth::user()->role->name == 'Administrateur') and $data['demande']->validated == false)
+                                    <a href='{{url('validerDemande/'. $data['demande']->id)}}' class="btn btn-primary btn-outline-success">Valider la demande</a>
+                                    <a href='{{url('validerDemande/'. $data['demande']->id)}}' class="btn btn-primary btn-outline-success">Refuser la demande</a>
+                                @endif
                             </div>
                         @endif
                     </div>
