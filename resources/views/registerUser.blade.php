@@ -99,7 +99,9 @@
                                 <div class="col-md-6">
                                     <select name="role_id" class="form-control" id="role_id">
                                         @foreach ($rolesEquipes['roles'] as $role)
-                                            <option value="{{ $role->id}}">{{ $role->name }}</option>
+                                            <option value="{{ $role->id}}" @if($role->name == 'Simple utilisateur')
+                                            selected
+                                                    @endif>{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

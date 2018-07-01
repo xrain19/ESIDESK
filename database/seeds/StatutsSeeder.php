@@ -30,5 +30,9 @@ class StatutsSeeder extends Seeder
         DB::table('statuts')->insert([
             'name' => 'Traitée et cloturée',
         ]);
+
+        DB::table('statuts')->insert([
+            'name' => 'En attente de précisions',
+        ]);
     }
 }

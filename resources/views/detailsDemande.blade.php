@@ -11,10 +11,15 @@
                     <div class="card-body">
                         <h5>Description : </h5>
                         <p id="description" class="card-text text-body">{!! $data['demande']->description !!}</p>
+                        <strong>Statut : </strong>
+                        <span><strong> {{$data['demande']->statut->name}}</strong></span>
                     </div>
                     <div class="card-footer">
                         <div class="row">
                             Demandeur : {{$data['demande']->user->firstname . " " . $data['demande']->user->lastname}}
+                        </div>
+                        <div class="row">
+                            Equipe : {{$data['demande']->user->equipe->name}}
                         </div>
                         <div class="row">
                             Date de Création : {{date('d-m-Y à H', strtotime($data['demande']->created_at))}}h

@@ -16,11 +16,96 @@ use Session;
 class DemandeController extends Controller
 {
 
+    private $rules;
+    private $messages;
+
+    public function __construct()
+    {
+        $this->rules = ([
+            'description' => 'required|string',
+            'desired_date' => 'required|date',
+            'title' => 'required|string|max:30',
+        ]);
+
+        $this->messages = ([
+            'description.required' => 'La description est requise',
+            'desired_date.date' => "La date n'est pas au bon format",
+            'desired_date.required' => "La date est requise",
+            'title.required' => 'Le titre est requis',
+            'title.max' => 'le titre ne peut pas dépacer 30 caractères',
+        ]);
+    }
+
+    protected function editDemande(request $request, $id)
+    {
+        $demande = Demande::whereId($id)->first();
+
+        if ($demande == null) {
+            Session::flash('alert-danger', "Demande introuvable");
+            return redirect('/home');
+        }
+
+        $user = Auth::user();
+
+        if ($demande->user_id != $user->id and $user->role->name) {
+            Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
+            return redirect('/home');
+        }
+
+        $statut = $demande->statut->name;
+
+        if ($statut != "En attente de validation") {
+            Session::flash('alert-danger', "la demande est " . $statut . ", vous ne pouvez pas la modifier");
+            return redirect('/home');
+        }
+
+        $this->validate($request, $this->rules, $this->messages);
+
+        $demande->description = $request->input('description');
+        $demande->urgency = $request->input('urgency');
+        $demande->desired_date = $request->input('desired_date');
+        $demande->title = $request->input('title');
+
+        $demande->save();
+        return redirect("/detailsDemande/" . $id);
+    }
+
+    protected function showEditForm($id)
+    {
+        $demande = Demande::whereId($id)->first();
+
+        if ($demande == null) {
+            Session::flash('alert-danger', "Demande introuvable");
+            return redirect('/home');
+        }
+
+        $user = Auth::user();
+
+        if ($demande->user_id != $user->id) {
+            Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
+            return redirect('/home');
+        }
+
+        $statut = $demande->statut->name;
+
+        if ($statut != "En attente de validation") {
+            Session::flash('alert-danger', "la demande est " . $statut . ", vous ne pouvez pas la modifier");
+            return redirect('/home');
+        }
+
+        $equipe = Equipe::whereId($demande->equipe_id)->first();
+
+        $data = array();
+        $data['demande'] = $demande;
+        $data['equipe'] = $equipe;
+        return view('editDemande', ['data' => $data]);
+    }
+
     protected function detailsDemande($id)
     {
         $demande = Demande::whereId($id)->first();
         $user = User::whereEquipeId($demande->equipe_id)->get();
-        if($demande == null) {
+        if ($demande == null) {
             Session::flash('alert-danger', "Demande introuvable");
             return redirect('/home');
         }
@@ -70,8 +155,8 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');
                 }
-                foreach ($demandes as $k=>$demande){
-                    if($demande->processor_id != NULL){
+                foreach ($demandes as $k => $demande) {
+                    if ($demande->processor_id != NULL) {
                         $processor = User::whereId($demande->processor_id)->first();
                         $data['processor'][$k] = $processor;
                     }
@@ -102,13 +187,10 @@ class DemandeController extends Controller
             Session::flash('alert-danger', "Catégorie introuvable");
             return redirect('/home');
         }
-        $validatedData = $request->validate([
-            'description' => 'required|string|',
-            'desired_date' => 'required|date',
-            'title' => 'required|string|',
-        ]);
 
-        $user = Demande::create([
+        $this->validate($request, $this->rules, $this->messages);
+
+        Demande::create([
             'description' => $request->input('description'),
             'urgency' => $request->input('urgency'),
             'desired_date' => $request->input('desired_date'),
@@ -140,7 +222,8 @@ class DemandeController extends Controller
         return view('registerDemande', ['data' => $data]);
     }
 
-    protected function validerDemande($id,$validator){
+    protected function validerDemande($id, $validator)
+    {
         switch ($validator) {
             case 'OK':
                 $demande = Demande::whereId($id)->first();
@@ -165,7 +248,8 @@ class DemandeController extends Controller
 
     }
 
-    protected function addMemberDemande(Request $request,$idDemande,$member){
+    protected function addMemberDemande(Request $request, $idDemande, $member)
+    {
 
         switch ($member) {
             case 'me':
@@ -182,7 +266,7 @@ class DemandeController extends Controller
                 $demande->processor_id = $request->input('member');
                 $demande->statut_id = 4;
                 $demande->save();
-                Session::flash('alert-success', "Demande prise en charge par ".$user->firstname." ".$user->lastname);
+                Session::flash('alert-success', "Demande prise en charge par " . $user->firstname . " " . $user->lastname);
                 return redirect('/listDemande/equipe/created_at');
                 break;
             default:

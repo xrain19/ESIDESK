@@ -17,6 +17,16 @@ Auth::routes();
 
 Route::Get('/home', 'HomeController@index')->name('home');
 
+Route::Post('editDemande/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@editDemande'
+]);
+
+Route::Get('editDemandeForm/{id}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@showEditForm'
+]);
+
 Route::Get('/detailsDemande/{id}', [
     'middleware' => 'auth',
     'uses' => 'DemandeController@detailsDemande'
