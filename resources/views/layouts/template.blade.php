@@ -55,6 +55,24 @@
                     </a>
                 </li>
                 @if(Auth::user() != NULL)
+                <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right" title="{{Auth::user()->lastname.' '.Auth::user()->firstname}}"
+                    data-original-title="{{Auth::user()->lastname.' '.Auth::user()->firstname}}">
+                    <a class="nav-link nav-link-collapse dropdown-toggle" data-toggle="dropdown"
+                       href="#"
+                       data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-sitemap"></i>
+                        <span class="nav-link-text">{{Auth::user()->lastname.' '.Auth::user()->firstname}}</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu sidenav-second-level collapse" id="user">
+                        <li>
+                            <a href="{{ url('/userDetails/' . Auth::user()->id) }}">Mon profil</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/editUserForm/' . Auth::user()->id) }}">Modifier mon mot de passe</a>
+                        </li>
+                    </ul>
+                </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
                         data-original-title="Dashboard">
                         <a class="nav-link" href="{{ url('/homeEquipe') }}">
@@ -134,6 +152,8 @@
                             </ul>
                         </li>
                     @endif
+
+
                 @endguest
             </ul>
             <ul class="navbar-nav sidenav-toggler">

@@ -55,15 +55,37 @@
                                     </div>
                                 </div>
 
-                                @elseif(Auth::user()->role->name != 'Administrateur')
+                                <div class="form-group row">
+                                    <label for="password"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('Nouveau mot de passe') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password" type="password"
+                                               class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                               name="password">
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="password-confirm"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('Confirmer le mot de passe') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password-confirm" type="password" class="form-control"
+                                               name="password_confirmation">
+                                    </div>
+                                </div>
+
+                                @else
                                     <div class="card-header">{{ __('Changer son mot de passe') }}</div>
                                     <div class="card-body">
-                                        <form method="POST" action="{{ route('/editUser/' . $data['user']->id) }}"
+                                        <form method="POST" action="{{ url('/editUser/' . $data['user']->id) }}"
                                               aria-label="{{ __('Changer son mot de passe') }}">
-                                            @endif
-
-                                            @csrf
-
                                             <div class="form-group row">
                                                 <label for="password"
                                                        class="col-md-4 col-form-label text-md-right">{{ __('Nouveau mot de passe') }}</label>
@@ -71,7 +93,7 @@
                                                 <div class="col-md-6">
                                                     <input id="password" type="password"
                                                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                                           name="password">
+                                                           name="password" required>
                                                     @if ($errors->has('password'))
                                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -79,6 +101,19 @@
                                                     @endif
                                                 </div>
                                             </div>
+
+                                            <div class="form-group row">
+                                                <label for="password-confirm"
+                                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirmer le mot de passe') }}</label>
+
+                                                <div class="col-md-6">
+                                                    <input id="password-confirm" type="password" class="form-control"
+                                                           name="password_confirmation" required>
+                                                </div>
+                                            </div>
+                                            @endif
+
+                                            @csrf
 
                                             @if(Auth::user()->role->name == 'Administrateur')
                                                 <div class="form-group row">
@@ -88,7 +123,8 @@
                                                         <select name="role_id" class="form-control" id="role_id">
                                                             @foreach ($data['roles'] as $role)
                                                                 @if($data['user']->role_id == $role->id)
-                                                                    <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
+                                                                    <option value="{{ $role->id }}"
+                                                                            selected>{{ $role->name }}</option>
                                                                 @else
                                                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                                                 @endif
@@ -102,11 +138,12 @@
                                                     <div class="col-md-6">
                                                         <select name="equipe_id" class="form-control" id="equipe_id">
                                                             @foreach ($data['equipes'] as $equipe)
-                                                                    @if($data['user']->equipe_id == $equipe->id)
-                                                                        <option value="{{ $equipe->id }}" selected>{{ $equipe->name }}</option>
-                                                                    @else
-                                                                        <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
-                                                                    @endif
+                                                                @if($data['user']->equipe_id == $equipe->id)
+                                                                    <option value="{{ $equipe->id }}"
+                                                                            selected>{{ $equipe->name }}</option>
+                                                                @else
+                                                                    <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -122,6 +159,7 @@
                                             </div>
                                         </form>
                                     </div>
+                            </form>
                         </div>
                 </div>
             </div>

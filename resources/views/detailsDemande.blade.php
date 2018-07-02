@@ -9,7 +9,8 @@
                         <div class="row">
                             <h4>{{ __("Demande : " . $data['demande']->title . ", Id :" . $data['demande']->id) }}</h4>
                             @if(Auth::user()->id ==  $data['demande']->user->id and  $data['demande']->statut->name == 'En attente de validation')
-                                <a href={{url('/editDemandeForm/' .  $data['demande']->id)}}  class="table-link" style="margin-left: 2em">
+                                <a href={{url('/editDemandeForm/' .  $data['demande']->id)}}  class="table-link"
+                                   style="margin-left: 2em">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
