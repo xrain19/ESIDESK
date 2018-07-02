@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $actived
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Equipe whereActived($value)
  */
 class Equipe extends Model
 {

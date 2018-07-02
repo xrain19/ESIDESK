@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Commentaire;
 use App\Equipe;
 use App\User;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ class DemandeController extends Controller
             'desired_date.required' => "La date est requise",
             'title.required' => 'Le titre est requis',
             'title.max' => 'le titre ne peut pas dépacer 30 caractères',
+            'commentaire.required' => 'Le commentaire est requis',
         ]);
     }
 
@@ -109,6 +111,16 @@ class DemandeController extends Controller
             Session::flash('alert-danger', "Demande introuvable");
             return redirect('/home');
         }
+        if ($user == NULL) {
+            Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
+            return redirect('/home');
+        }
+        $commentaires = Commentaire::whereDemandeId($demande->id)->get();
+        if ($commentaires->isNotEmpty()) {
+            foreach ($commentaires as $k => $commentaire) {
+                $data['commentaires'][$k] = $commentaire;
+            }
+        }
         $data['demande'] = $demande;
         $data['member'] = $user;
         return view('detailsDemande', ['data' => $data]);
@@ -121,6 +133,10 @@ class DemandeController extends Controller
         switch ($list) {
             case 'equipe':
                 $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
+                if ($equipe == NULL) {
+                    Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
+                    return redirect('/home');
+                }
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->orderBy($tri)->get();
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes à traiter");
@@ -130,6 +146,10 @@ class DemandeController extends Controller
                 break;
             case 'refus':
                 $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
+                if ($equipe == NULL) {
+                    Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
+                    return redirect('/home');
+                }
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->orderBy($tri)->get();
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes refusées");
@@ -170,6 +190,14 @@ class DemandeController extends Controller
                     return redirect('/home');
                 }
                 $data['title'] = "Demandes en cours de traitement";
+                break;
+            case 'plus' :
+                $demandes = Demande::whereUserId(Auth::user()->id)->whereStatutId(6)->get();
+                if ($demandes->isEmpty()) {
+                    Session::flash('alert-danger', "Aucunes demandes");
+                    return redirect('/home');
+                }
+                $data['title'] = "Demandes en attente de précision";
                 break;
             default:
                 Session::flash('alert-danger', "Liste de demandes introuvable");
@@ -241,6 +269,13 @@ class DemandeController extends Controller
                 Session::flash('alert-danger', "Demande refusée");
                 return redirect('/listDemande/equipe/created_at');
                 break;
+            case 'PLUS' :
+                $demande = Demande::whereId($id)->first();
+                $demande->statut_id = 6;
+                $demande->save();
+                Session::flash('alert-success', "Demande de précision envoyé au collaborateur");
+                return redirect('/listDemande/equipe/created_at');
+                break;
             default:
                 Session::flash('alert-danger', "Erreur");
                 return redirect('/listDemande/equipe/created_at');
@@ -273,5 +308,51 @@ class DemandeController extends Controller
                 Session::flash('alert-danger', "Erreur");
                 return redirect('/listDemande/equipe/created_at');
         }
+    }
+
+    protected function addCommentaireDemande(Request $request,$idDemande){
+
+        $demande = Demande::whereId($idDemande)->first();
+        if ($demande == null) {
+            Session::flash('alert-danger', "Demande introuvable");
+            return redirect('/home');
+        }
+
+        $this->validate($request, $this->messages);
+
+        Commentaire::create([
+            'commentaire' => $request->input('commentaire'),
+            'user_id' => Auth::user()->id,
+            'demande_id' => $idDemande,
+        ]);
+
+        $demande->statut_id = 1;
+        $demande->save();
+
+        Session::flash('alert-success', "Commentaire ajouté à la demande" . $demande->title . "avec succès");
+        return redirect('/home');
+    }
+
+    protected function cloturerDemande(Request $request,$idDemande){
+
+        $demande = Demande::whereId($idDemande)->first();
+        if ($demande == null) {
+            Session::flash('alert-danger', "Demande introuvable");
+            return redirect('/home');
+        }
+
+        Commentaire::create([
+            'commentaire' => $request->input('commentaire'),
+            'user_id' => Auth::user()->id,
+            'demande_id' => $idDemande,
+        ]);
+
+        $demande->statut_id = 5;
+        $demande->closed = 1;
+        $demande->processing_date = date("Y/m/d");
+        $demande->save();
+
+        Session::flash('alert-success', "Cloture de la demande " . $demande->title . " avec succès");
+        return redirect('/home');
     }
 }

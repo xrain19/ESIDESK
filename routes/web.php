@@ -143,3 +143,13 @@ Route::Get('/addMemberDemande/{idDemande}/{member}', [
     'middleware' => 'auth',
     'uses' => 'DemandeController@addMemberDemande',
 ]);
+
+Route::Post('/addCommentaireDemande/{idDemande}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@addCommentaireDemande',
+]);
+
+Route::Post('/cloturerDemande/{idDemande}', [
+    'middleware' => 'auth',
+    'uses' => 'DemandeController@cloturerDemande',
+]);

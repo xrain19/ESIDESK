@@ -33,6 +33,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Commentaire[] $Commentaire
  */
 class User extends Authenticatable
 {
@@ -70,5 +71,10 @@ class User extends Authenticatable
     public function Demande()
     {
         return $this->hasMany('App\Demande');
+    }
+
+    public function Commentaire()
+    {
+        return $this->hasMany('App\Commentaire');
     }
 }

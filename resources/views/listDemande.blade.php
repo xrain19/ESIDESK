@@ -33,11 +33,11 @@
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Equipe: activate to sort column descending"
-                                            aria-sort="ascending" style="width: 137px;">Demande
+                                            aria-sort="ascending" style="width: 150px;">Demande
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Manager: activate to sort column ascending"
-                                            style="width: 213px;">Statut
+                                            style="width: 96px;">Statut
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1"
@@ -53,6 +53,11 @@
                                             colspan="1"
                                             aria-label="Date souhaitée"
                                             style="width: 96px;">Date souhaitée
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1"
+                                            aria-label="Date souhaitée"
+                                            style="width: 96px;">Equipe / Catégorie
                                         </th>
                                     </tr>
                                     </thead>
@@ -92,6 +97,10 @@
                                             </td>
                                             <td>
                                                 {{date('d-m-Y', strtotime($demande->desired_date))}}
+                                            </td>
+                                            <td>
+                                                {{$demande->equipe->name}} /
+                                                {{$demande->categorie->name}}
                                             </td>
                                     </tr>
                                     @endforeach

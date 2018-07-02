@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Statut whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Statut whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Demande[] $Demande
  */
 class Statut extends Model
 {

@@ -88,6 +88,9 @@
                             <li>
                                 <a href="{{url('/listDemande/refus/created_at')}}">Demande(s) rejetée(s)</a>
                             </li>
+                            <li>
+                                <a href="{{url('/listDemande/plus/created_at')}}">Demande(s) en attente de précision(s)</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -156,7 +159,7 @@
             </span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-                        <h6 class="dropdown-header">New Messages:</h6>
+                        <h6 class="dropdown-header">Nouveau message :</h6>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
                             <strong>David Miller</strong>

@@ -40,6 +40,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereUrgency($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereUserId($value)
  * @mixin \Eloquent
+ * @property string $description
+ * @property int $validated
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Commentaire[] $Commentaire
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Demande whereValidated($value)
  */
 class Demande extends Model
 {
@@ -65,5 +70,10 @@ class Demande extends Model
     public function Categorie()
     {
         return $this->belongsTo('App\Categorie');
+    }
+
+    public function Commentaire()
+    {
+        return $this->hasMany('App\Commentaire');
     }
 }
