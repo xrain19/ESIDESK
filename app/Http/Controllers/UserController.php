@@ -32,22 +32,6 @@ class UserController extends Controller
         ]);
     }
 
-    public function search()
-    {
-        if (Auth::user()->role->name != 'Administrateur') {
-            Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
-            return redirect('/home');
-        }
-        $string = request('q');
-        $users = User::where('lastname', 'LIKE', '%' . $string . '%')->orderBy('lastname');
-        if ($users == null) {
-            session()->flash('alert-danger', 'Aucun résultat');
-        } else {
-            $data['users'] = $users;
-            return view('adminUsers', ['data' => $data]);
-        }
-    }
-
     public function showAdminUsers()
     {
         if (Auth::user()->role->name != 'Administrateur') {
