@@ -38,10 +38,10 @@ class isManager
 
             $countDemMine = Demande::whereUserId(Auth::user()->id)->count();
             $countDemInProg = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->count();
+            Session::put('countDemMine', $countDemMine);
+            Session::put('countDemInProg', $countDemInProg);
         }
         Session::put('manager', $manager);
-        Session::put('countDemMine', $countDemMine);
-        Session::put('countDemInProg', $countDemInProg);
         return $next($request);
     }
 }
