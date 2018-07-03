@@ -22,6 +22,8 @@
                                     <div class="alert alert-warning" role="alert">
                                      Veuillez-vous connecter pour accéder à l'application.
                                     </div>
+                                @else
+                                        <p class="alert alert-success">Bienvenue dans l'application Esidesk {{Auth::user()->firstname . " " . Auth::user()->lastname}}</p>
                                     @endguest
                             @endif
                         </div>
