@@ -71,14 +71,6 @@
                                             <td>
                                                 <strong>
                                                     <a href={{url('/detailsDemande/' . $demande->id)}}>{{$demande->title}}</a>
-                                                    @if(Auth::user()->id == $demande->user->id and $demande->statut->name == 'En attente de validation')
-                                                        <a href={{url('/editDemandeForm/' . $demande->id)}}  class="table-link">
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                                        </a>
-                                                    @endif
                                                 </strong>
                                                 <br/>
                                                 <span class="user-subhead"

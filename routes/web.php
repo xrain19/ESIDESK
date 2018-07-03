@@ -159,7 +159,7 @@ Route::Get('/addMemberDemande/{idDemande}/{member}', [
     'uses' => 'DemandeController@addMemberDemande',
 ]);
 
-Route::Post('/addCommentaireDemande/{idDemande}', [
+Route::Post('/addCommentaireDemande/{idDemande}/{info}', [
     'middleware' => 'auth',
     'uses' => 'DemandeController@addCommentaireDemande',
 ]);

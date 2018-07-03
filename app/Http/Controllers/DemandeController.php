@@ -229,8 +229,8 @@ class DemandeController extends Controller
             'statut_id' => 1,
         ]);
 
-        Session::flash('alert-success', "Demande " . $request->input('title') . " créé avec succès");
-        return redirect('/home');
+        Session::flash('alert-success', "Demande \"" . $request->input('title') . "\" créé avec succès");
+        return redirect('/listDemande/mine/created_at');
     }
 
     protected function showForm($id)
@@ -293,7 +293,7 @@ class DemandeController extends Controller
                 $demande->statut_id = 4;
                 $demande->save();
                 Session::flash('alert-success', "Demande prise en charge par moi-même");
-                return redirect('/listDemande/equipe/created_at');
+                return redirect('/listDemande/inprogress/desired_date');
                 break;
             case 'member':
                 $demande = Demande::whereId($idDemande)->first();
@@ -310,27 +310,57 @@ class DemandeController extends Controller
         }
     }
 
-    protected function addCommentaireDemande(Request $request,$idDemande){
+    protected function addCommentaireDemande(Request $request,$idDemande,$info){
 
-        $demande = Demande::whereId($idDemande)->first();
-        if ($demande == null) {
-            Session::flash('alert-danger', "Demande introuvable");
-            return redirect('/home');
+        switch ($info) {
+            case 'one':
+                $demande = Demande::whereId($idDemande)->first();
+                if ($demande == null) {
+                    Session::flash('alert-danger', "Demande introuvable");
+                    return redirect('/home');
+                }
+
+                $this->validate($request, $this->messages);
+
+                Commentaire::create([
+                    'commentaire' => $request->input('commentaire'),
+                    'user_id' => Auth::user()->id,
+                    'demande_id' => $idDemande,
+                ]);
+
+                $demande->statut_id = 1;
+                $demande->save();
+
+                Session::flash('alert-success', "Commentaire ajouté à la demande" . $demande->title . "avec succès");
+                return redirect('/home');
+                break;
+            case 'more':
+                $demande = Demande::whereId($idDemande)->first();
+                if ($demande == null) {
+                    Session::flash('alert-danger', "Demande introuvable");
+                    return redirect('/home');
+                }
+
+                $this->validate($request, $this->messages);
+
+                Commentaire::create([
+                    'commentaire' => $request->input('commentaire'),
+                    'user_id' => Auth::user()->id,
+                    'demande_id' => $idDemande,
+                ]);
+
+                $demande->statut_id = 6;
+                $demande->save();
+
+                Session::flash('alert-success', "Demande de précision envoyé au collaborateur avec commentaire");
+                return redirect('/listDemande/equipe/created_at');
+                break;
+            default:
+                Session::flash('alert-danger', "Erreur");
+                return redirect('/listDemande/equipe/created_at');
         }
 
-        $this->validate($request, $this->messages);
 
-        Commentaire::create([
-            'commentaire' => $request->input('commentaire'),
-            'user_id' => Auth::user()->id,
-            'demande_id' => $idDemande,
-        ]);
-
-        $demande->statut_id = 1;
-        $demande->save();
-
-        Session::flash('alert-success', "Commentaire ajouté à la demande" . $demande->title . "avec succès");
-        return redirect('/home');
     }
 
     protected function cloturerDemande(Request $request,$idDemande){
@@ -353,6 +383,6 @@ class DemandeController extends Controller
         $demande->save();
 
         Session::flash('alert-success', "Cloture de la demande " . $demande->title . " avec succès");
-        return redirect('/home');
+        return redirect('/dashboard');
     }
 }
