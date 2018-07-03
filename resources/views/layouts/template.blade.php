@@ -5,14 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -51,8 +50,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
-                    data-original-title="Dashboard">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
                     @if(Auth::user() != NULL)
                         <a class="nav-link" href="{{ url('/dashboard') }}">
                     @else
@@ -60,7 +58,7 @@
                     @endif
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
-                    </a>
+                        </a>
                 </li>
                 @if(Auth::user() != NULL)
                 <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right" title="{{Auth::user()->lastname.' '.Auth::user()->firstname}}"
@@ -72,7 +70,7 @@
                         <span class="nav-link-text">{{Auth::user()->lastname.' '.Auth::user()->firstname}}</span>
                         <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu sidenav-second-level collapse" id="user">
+                    <ul class="dropdown-menu sidenav-second-level collapse" id="infoUser">
                         <li>
                             <a href="{{ url('/userDetails/' . Auth::user()->id) }}">Mon profil</a>
                         </li>
