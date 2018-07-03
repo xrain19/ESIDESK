@@ -1,5 +1,12 @@
 @extends('layouts.template')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item">
+        <a href="{{ url('/homeEquipe') }}">Liste des équipes</a>
+    </li>
+    <li class="breadcrumb-item active">Liste des catégories</li>
+@endsection
+
 @section('content')
 
     @if(Session::has('alert-danger'))

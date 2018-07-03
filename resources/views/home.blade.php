@@ -20,7 +20,7 @@
                             @else
                                 @guest
                                     <div class="alert alert-warning" role="alert">
-                                     Veilleur vous connecter pour accéder à l'application
+                                     Veuillez-vous connecter pour accéder à l'application.
                                     </div>
                                     @endguest
                             @endif

@@ -6,9 +6,12 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h4>{{ __("Demande : " . "\"".$data['demande']->title)."\"" }}</h4>
+                        <h4>{{ __("Demande : " . "\"".$data['demande']->title."\"")}}</h4>
+                        <h6>{{ __("Catégorie : ". $data['demande']->categorie->name)}}</h6>
                     </div>
                     <div class="card-body">
+                        <h5 class="card-title">Equipe :</h5>
+                        <p id="description" class="card-text text-body">{!! $data['demande']->equipe->name !!}</p>
                         <h5 class="card-title">Description : </h5>
                         <p id="description" class="card-text text-body">{!! $data['demande']->description !!}</p>
                         <strong>Statut : </strong>

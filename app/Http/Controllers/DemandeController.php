@@ -170,7 +170,7 @@ class DemandeController extends Controller
                 $data['title'] = "Les demandes";
                 break;
             case 'mine':
-                $demandes = Demande::whereUserId(Auth::user()->id)->orderBy($tri)->get();
+                $demandes = Demande::whereUserId(Auth::user()->id)->orderByDesc($tri)->get();
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');
