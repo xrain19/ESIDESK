@@ -169,4 +169,7 @@ Route::Post('/cloturerDemande/{idDemande}', [
     'uses' => 'DemandeController@cloturerDemande',
 ]);
 
-Route::Get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::Get('/dashboard', [
+    'middleware' => 'auth',
+    'uses' => 'HomeController@dashboard',
+])->name('dashboard');
