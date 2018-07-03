@@ -1,11 +1,15 @@
 @extends('layouts.template')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item active">Liste des utilisateurs</li>
+@endsection
+
 @section('content')
 
     @if(Session::has('alert-danger'))
         <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
     @elseif(Session::has('alert-success'))
-        <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
+        <p class="alert alert-success">{{ Session::get('alert-success') }}</p>
     @endif
     <div class="container bootstrap snippet">
         <div class="row">
