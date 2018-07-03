@@ -7,7 +7,6 @@ use App\Demande;
 use App\Equipe;
 use App\User;
 use Auth;
-use function PHPSTORM_META\type;
 use Session;
 
 class SearchController extends Controller
@@ -26,7 +25,6 @@ class SearchController extends Controller
             )->orWhere('email', 'like', "%" . $search . "%")->orderBy('lastname')->get();
 
         $data['users'] = $users;
-
         return view('adminUsers', ['data' => $data]);
     }
 
