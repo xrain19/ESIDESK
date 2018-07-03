@@ -134,7 +134,7 @@ class DemandeController extends Controller
             case 'equipe':
                 $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
                 if ($equipe == NULL) {
-                    Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
+                    Session::flash('alert-danger', "Vous n'appartenez à aucune équipe");
                     return redirect('/home');
                 }
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->orderBy($tri)->get();
@@ -144,6 +144,7 @@ class DemandeController extends Controller
                 }
                 $data['title'] = "Demande de l'équipe" . $equipe->name;
                 break;
+
             case 'refus':
                 $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
                 if ($equipe == NULL) {
@@ -157,6 +158,7 @@ class DemandeController extends Controller
                 }
                 $data['title'] = "Demande refusées";
                 break;
+
             case 'all':
                 if (Auth::user()->role->name != 'Administrateur') {
                     Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
@@ -169,6 +171,7 @@ class DemandeController extends Controller
                 }
                 $data['title'] = "Les demandes";
                 break;
+
             case 'mine':
                 $demandes = Demande::whereUserId(Auth::user()->id)->orderByDesc($tri)->get();
                 if ($demandes->isEmpty()) {
@@ -183,6 +186,7 @@ class DemandeController extends Controller
                 }
                 $data['title'] = "Mes demandes";
                 break;
+
             case 'inprogress':
                 $demandes = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->orderBy($tri)->get();
                 if ($demandes->isEmpty()) {
@@ -191,6 +195,7 @@ class DemandeController extends Controller
                 }
                 $data['title'] = "Demandes en cours de traitement";
                 break;
+
             case 'plus' :
                 $demandes = Demande::whereUserId(Auth::user()->id)->whereStatutId(6)->get();
                 if ($demandes->isEmpty()) {
@@ -199,11 +204,12 @@ class DemandeController extends Controller
                 }
                 $data['title'] = "Demandes en attente de précision";
                 break;
+
             default:
                 Session::flash('alert-danger', "Liste de demandes introuvable");
                 return redirect('/home');
         }
-
+        $data['from'] = $list;
         $data['demandes'] = $demandes;
         return view('listDemande', ['data' => $data]);
     }

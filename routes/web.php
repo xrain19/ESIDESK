@@ -19,17 +19,17 @@ Route::Get('/home', 'HomeController@index')->name('home');
 
 Route::Post('equipeSearch', [
     'middleware' => 'auth',
-    'use' => 'SearchController@equipeSearch'
+    'uses' => 'SearchController@equipeSearch'
 ]);
 
-Route::Post('demandeSearch', [
+Route::Post('demandeSearch/{list}', [
     'middleware' => 'auth',
-    'use' => 'SearchController@demandeSearch'
+    'uses' => 'SearchController@demandeSearch'
 ]);
 
 Route::Post('userSearch', [
    'middleware' => 'auth',
-   'use' => 'SearchController@userSearch'
+   'uses' => 'SearchController@userSearch'
 ]);
 
 Route::Post('editDemande/{id}', [

@@ -21,10 +21,14 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div id="dataTable_filter" class="dataTables_filter">
-                                    <label>Recherche:
-                                        <input type="search" class="form-control form-control-sm" placeholder=""
-                                               aria-controls="dataTable">
-                                    </label>
+                                    <form method="POST" action="{{ url('/demandeSearch/' . $data['from']) }}">
+                                        @csrf
+                                        <label>Recherche:
+                                            <input type="search" id="search" name="search"
+                                                   class="form-control form-control-sm" placeholder=""
+                                                   aria-controls="dataTable">
+                                        </label>
+                                    </form>
                                 </div>
                             </div>
                         </div>
