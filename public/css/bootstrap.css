@@ -3973,19 +3973,13 @@ tbody.collapse.show {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
-  font-size: 1.25rem;
+  font-size: 1.47rem;
   line-height: inherit;
   white-space: nowrap;
 }
 
 .navbar-loucas{
-  display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
-  margin-right: 1rem;
-  font-size: 1.25rem;
-  line-height: inherit;
-  white-space: nowrap;
+  font-size: 1.47rem;
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
