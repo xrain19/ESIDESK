@@ -175,7 +175,9 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     @if(Auth::user() != null)
-                        <a class="navbar-loucas" style="color: white" >{{Auth::user()->lastname.' '.Auth::user()->firstname}}</a>
+                        <div class="nav-item">
+                            <a class="navbar-loucas " style="color: white" >{{Auth::user()->lastname.' '.Auth::user()->firstname}}</a>
+                        </div>
                     @endif
                 </li>
 
