@@ -68,7 +68,7 @@
                     <a class="nav-link nav-link-collapse dropdown-toggle" data-toggle="dropdown"
                        href="#"
                        data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-sitemap"></i>
+                        <i class="fa fa-fw fa-user"></i>
                         <span class="nav-link-text">{{Auth::user()->lastname.' '.Auth::user()->firstname}}</span>
                         <span class="caret"></span>
                     </a>
@@ -97,7 +97,7 @@
                         data-original-title="Demande">
                         <a class="nav-link nav-link-collapse dropdown-toggle" id="Demande"  data-toggle="dropdown"
                            href="#" data-parent="#exampleAccordion">
-                            <i class="fa fa-fw fa-sitemap"></i>
+                            <i class="fa fa-fw fa-list"></i>
                             <span class="nav-link-text">Demande</span>
                             <span class="caret"></span>
                         </a>

@@ -40,7 +40,7 @@
 
                                 <div class="form-group row">
                                     <label for="email"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="email" type="email"
@@ -73,7 +73,7 @@
 
                                 <div class="form-group row">
                                     <label for="password-confirm"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('Confirmer le mot de passe') }}</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('Confirmez le mot de passe') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control"
@@ -104,7 +104,7 @@
 
                                             <div class="form-group row">
                                                 <label for="password-confirm"
-                                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirmer le mot de passe') }}</label>
+                                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirmez le mot de passe') }}</label>
 
                                                 <div class="col-md-6">
                                                     <input id="password-confirm" type="password" class="form-control"
