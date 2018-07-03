@@ -154,7 +154,7 @@ class UserController extends Controller
                 'lastname' => $request->input('lastname'),
                 'firstname' => $request->input('firstname'),
                 'role_id' => $request->input('role_id'),
-                'equipe_id' => $request->input('equipe_id'),
+                'equipe_id' => $request->input('equipe_id' ),
             ]);
 
             Session::flash('alert-success', "L'utilisateur " . $request->input('email') . " créé avec succès");

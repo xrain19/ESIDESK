@@ -6,11 +6,12 @@ use App\Commentaire;
 use App\Equipe;
 use App\User;
 use Illuminate\Http\Request;
-
 use App\Demande;
 use App\Categorie;
 use Auth;
 use Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\notification;
 
 #'descriptions', 'urgency', 'closed', 'desired_date', 'status', 'processor_id', 'processing_date', 'title', 'user_id', 'equipe_id', 'statuts_id'
 
@@ -224,7 +225,7 @@ class DemandeController extends Controller
 
         $this->validate($request, $this->rules, $this->messages);
 
-        Demande::create([
+        $demande = Demande::create([
             'description' => $request->input('description'),
             'urgency' => $request->input('urgency'),
             'desired_date' => $request->input('desired_date'),
@@ -234,6 +235,16 @@ class DemandeController extends Controller
             'categorie_id' => $id,
             'statut_id' => 1,
         ]);
+
+        $members = User::whereEquipeId($cat->equipe_id)->get();
+
+        $notification['title'] = "Une nouvelle demande faite à votre équipe par " . Auth::user()->email;
+        $notification['text'] = "Catégorie : " . $cat->name;
+        $notification ['link'] = "http://" . config('app.url') ."/detailsDemande/" . $demande->id;
+
+        foreach ($members as $member){
+            Mail::to($member->email)->send(new notification($notification));
+        }
 
         Session::flash('alert-success', "Demande \"" . $request->input('title') . "\" créé avec succès");
         return redirect('/listDemande/mine/created_at');
