@@ -42,8 +42,6 @@ class isManager
         Session::put('manager', $manager);
         Session::put('countDemMine', $countDemMine);
         Session::put('countDemInProg', $countDemInProg);
-
-
         return $next($request);
     }
 }

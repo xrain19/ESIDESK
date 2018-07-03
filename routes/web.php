@@ -17,7 +17,20 @@ Auth::routes();
 
 Route::Get('/home', 'HomeController@index')->name('home');
 
-Route::Get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::Post('equipeSearch', [
+    'middleware' => 'auth',
+    'use' => 'SearchController@equipeSearch'
+]);
+
+Route::Post('demandeSearch', [
+    'middleware' => 'auth',
+    'use' => 'SearchController@demandeSearch'
+]);
+
+Route::Post('userSearch', [
+   'middleware' => 'auth',
+   'use' => 'SearchController@userSearch'
+]);
 
 Route::Post('editDemande/{id}', [
     'middleware' => 'auth',
@@ -155,3 +168,5 @@ Route::Post('/cloturerDemande/{idDemande}', [
     'middleware' => 'auth',
     'uses' => 'DemandeController@cloturerDemande',
 ]);
+
+Route::Get('/dashboard', 'HomeController@dashboard')->name('dashboard');

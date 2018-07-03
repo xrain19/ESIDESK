@@ -69,17 +69,28 @@
                                     <tr role="row" class="odd">
                                         @foreach($data['demandes'] as $k=>$demande)
                                             <td>
-                                                <strong> <a href={{url('/detailsDemande/' . $demande->id)}}>{{$demande->title}}</a>  </strong>
+                                                <strong>
+                                                    <a href={{url('/detailsDemande/' . $demande->id)}}>{{$demande->title}}</a>
+                                                    @if(Auth::user()->id == $demande->user->id and $demande->statut->name == 'En attente de validation')
+                                                        <a href={{url('/editDemandeForm/' . $demande->id)}}  class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                                        </a>
+                                                    @endif
+                                                </strong>
                                                 <br/>
-                                                <span class="user-subhead" style="font-size: medium"><i>Demandeur : {{$demande->user->firstname . " " .$demande->user->lastname}}</i> </span>
+                                                <span class="user-subhead"
+                                                      style="font-size: medium"><i>Demandeur : {{$demande->user->firstname . " " .$demande->user->lastname}}</i> </span>
                                             </td>
                                             <td>
                                                 <strong> {{$demande->statut->name}} </strong>
                                                 @if(array_key_exists('processor', $data))
-                                                    </br>
-                                                    @if($demande->processor_id != NULL)
-                                                        <span class="user-subhead" style="font-size: medium"><i>Realisateur : {{$data['processor'][$k]->firstname . " " .$data['processor'][$k]->lastname}}</i> </span>
-                                                    @endif
+                                                </br>
+                                                @if($demande->processor_id != NULL)
+                                                    <span class="user-subhead" style="font-size: medium"><i>Realisateur : {{$data['processor'][$k]->firstname . " " .$data['processor'][$k]->lastname}}</i> </span>
+                                                @endif
                                                 @endif
                                             </td>
                                             <td>

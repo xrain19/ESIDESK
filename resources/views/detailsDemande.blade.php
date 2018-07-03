@@ -50,11 +50,14 @@
                         <ul class="list-group list-group-flush text-center">
                             <li class="list-group-item">
                                 @if($data['demande']->validated == true)
-                                    <a href='{{ url('/addMemberDemande/'. $data['demande']->id .'/me') }}' class="btn btn-primary">Prendre en charge la demande</a>
+                                    <a href='{{ url('/addMemberDemande/'. $data['demande']->id .'/me') }}'
+                                       class="btn btn-primary">Prendre en charge la demande</a>
                                 @endif
                                 @if( (Request::session()->get('manager') == true or Auth::user()->role->name == 'Administrateur') and $data['demande']->validated == false and  $data['demande']->closed == false)
-                                    <a href='{{url('validerDemande/'. $data['demande']->id .'/OK')}}' class="btn btn-primary btn-outline-success">Valider la demande</a>
-                                    <a href='{{url('validerDemande/'. $data['demande']->id.'/KO')}}' class="btn btn-primary btn-outline-danger">Refuser la demande</a>
+                                    <a href='{{url('validerDemande/'. $data['demande']->id .'/OK')}}'
+                                       class="btn btn-primary btn-outline-success">Valider la demande</a>
+                                    <a href='{{url('validerDemande/'. $data['demande']->id.'/KO')}}'
+                                       class="btn btn-primary btn-outline-danger">Refuser la demande</a>
                                     <a href='{{url('validerDemande/'. $data['demande']->id.'/PLUS')}}' class="btn btn-primary btn-outline-info">Demande de précision</a>
                                 @endif
                             </li>
