@@ -240,7 +240,7 @@ class DemandeController extends Controller
 
         $notification['title'] = "Une nouvelle demande faite à votre équipe par " . Auth::user()->email;
         $notification['text'] = "Catégorie : " . $cat->name;
-        $notification ['link'] = "http://" . config('app.url') ."/detailsDemande/" . $demande->id;
+        $notification ['link'] = config('app.url') ."/detailsDemande/" . $demande->id;
 
         foreach ($members as $member){
             Mail::to($member->email)->send(new notification($notification));
