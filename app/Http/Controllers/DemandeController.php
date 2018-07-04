@@ -152,9 +152,23 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
                     return redirect('/home');
                 }
-                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->orderBy($tri)->get();
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->whereStatutId(3)->orderBy($tri)->get();
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes refusées");
+                    return redirect('/home');
+                }
+                $data['title'] = "Demande refusées";
+                break;
+
+            case 'cloturee':
+                $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
+                if ($equipe == NULL) {
+                    Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
+                    return redirect('/home');
+                }
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->whereStatutId(5)->orderBy($tri)->get();
+                if ($demandes->isEmpty()) {
+                    Session::flash('alert-danger', "Aucunes demandes cloturées");
                     return redirect('/home');
                 }
                 $data['title'] = "Demande refusées";
