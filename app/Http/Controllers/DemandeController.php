@@ -136,7 +136,7 @@ class DemandeController extends Controller
     {
         $data = array();
 
-        if ($tri != 'created_at' and $tri != 'desired_dat' and $tri != 'title') {
+        if ($tri != 'created_at' and $tri != 'desired_date' and $tri != 'title') {
             Session::flash('alert-danger', "Donnée de triage érronées");
             return redirect('/home');
         }
@@ -189,7 +189,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
                     return redirect('/home');
                 }
-                $demandes = Demande::all()->sortBy($tri);
+                $demandes = Demande::orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');

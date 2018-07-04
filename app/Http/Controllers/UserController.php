@@ -47,9 +47,14 @@ class UserController extends Controller
     {
         $data = array();
         if (Auth::user()->role->name == 'Administrateur') {
+            $user = User::whereId($id)->first();
+            if ($user == null) {
+                Session::flash('alert-danger', "Utilisateur introuvable");
+                return redirect('/home');
+            }
             $data['roles'] = Role::all()->sortBy('id');
             $data['equipes'] = Equipe::all()->sortBy('id');
-            $data['user'] = User::whereId($id)->first();
+            $data['user'] = $user;
 
             return view('editUser', ['data' => $data]);
         } elseif ($id == Auth::user()->id) {
@@ -163,5 +168,39 @@ class UserController extends Controller
             Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
+    }
+
+    protected function activedUser($id, $action)
+    {
+        if (Auth::user()->role->name != 'Administrateur') {
+            Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
+            return redirect('/home');
+        }
+
+        $user = User::whereId($id)->first();
+        if ($user == null) {
+            Session::flash('alert-danger', "Utilisateur introuvable");
+            return redirect('/home');
+        }
+
+        switch ($action){
+            case 'activate':
+                $user->actived = true;
+                $msg = " activé";
+                break;
+
+            case 'deactivate' :
+                $user->actived = false;
+                $msg = " désactivé";
+                break;
+
+            default:
+                Session::flash('alert-danger', "Action introuvable");
+                return redirect('/home');
+        }
+
+        $user->save();
+        Session::flash('alert-success', "L'utilisateur " . $user->email . $msg . " avec succès");
+        return redirect('/adminUsers');
     }
 }
