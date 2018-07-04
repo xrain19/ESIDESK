@@ -115,6 +115,9 @@
                             <li>
                                 <a href="{{url('/listDemande/plus/created_at')}}">Demande(s) en attente de précision(s)</a>
                             </li>
+                            <li>
+                                <a href="{{url('/listDemande/cloturee/created_at')}}">Demande(s) cloturée(s)</a>
+                            </li>
                         </ul>
                     </li>
 
