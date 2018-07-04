@@ -136,7 +136,7 @@ class DemandeController extends Controller
     {
         $data = array();
 
-        if ($tri != 'created_at' and $tri != 'desired_dat' and $tri != 'title') {
+        if ($tri != 'created_at' and $tri != 'desired_date' and $tri != 'title') {
             Session::flash('alert-danger', "Donnée de triage érronées");
             return redirect('/home');
         }
@@ -148,7 +148,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Vous n'appartenez à aucune équipe");
                     return redirect('/home');
                 }
-                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->orderBy($tri)->paginate(6);
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->whereIn('statut_id', [1,2])->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes à traiter");
                     return redirect('/home');
@@ -213,7 +213,7 @@ class DemandeController extends Controller
                 break;
 
             case 'inprogress':
-                $demandes = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->orderBy($tri)->paginate(6);
+                $demandes = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->where('statut_id','=',4)->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes en cours de traitement");
                     return redirect('/home');
@@ -222,7 +222,7 @@ class DemandeController extends Controller
                 break;
 
             case 'plus' :
-                $demandes = Demande::whereUserId(Auth::user()->id)->whereStatutId(6)->paginate(6);
+                $demandes = Demande::whereUserId(Auth::user()->id)->whereClosed(false)->whereStatutId(6)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');

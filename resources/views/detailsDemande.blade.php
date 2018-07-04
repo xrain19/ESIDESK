@@ -35,7 +35,6 @@
                     <li class="list-group-item"><i>Date de Création : </i>{{date('d-m-Y à H', strtotime($data['demande']->created_at))}}h</li>
                     <li class="list-group-item"><i>Date souhaitée : </i>{{date('d-m-Y', strtotime($data['demande']->desired_date))}}</li>
                 </ul>
-
                     @if($data['demande']->processor_id == null and $data['demande']->equipe_id == Auth::user()->equipe_id)
                         @if($data['demande']->validated == true and Request::session()->get('manager') == true)
                             <ul class="list-group list-group-flush">
@@ -79,6 +78,23 @@
                                 </ul>
                             </form>
                         @endif
+                            @if(array_key_exists('commentaires', $data) and $data['demande']->validated == true and $data['demande']->processor_id != NULL)
+                                <form method="POST" action="{{ url('/addCommentaireDemande/'.$data['demande']->id.'/more') }}"
+                                      aria-label="{{ __('Ajouter un commentaire') }}">
+                                    @csrf
+                                    <ul class="list-group list-group-flush text-center">
+                                        <li class="list-group-item">
+                                            <label for="commentaire" class="col-form-label text-md-right">Ajouter un commentaire : </label>
+                                            <textarea id="commentaire" class="form-control" name="commentaire" rows="6" required=""></textarea>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-group list-group-flush text-center">
+                                        <li class="list-group-item">
+                                            <button type="submit" class="btn btn-primary btn-outline-info">{{ __('Demande de précision') }}</button>
+                                        </li>
+                                    </ul>
+                                </form>
+                            @endif
                         @if($data['demande']->validated == true)
                             <ul class="list-group list-group-flush text-center">
                                 <li class="list-group-item">
@@ -87,7 +103,7 @@
                                 </li>
                             </ul>
                         @endif
-                        @if( (Request::session()->get('manager') == true or Auth::user()->role->name == 'Administrateur') and $data['demande']->validated == false and  $data['demande']->closed == false and !array_key_exists('commentaires', $data))
+                        @if( (Request::session()->get('manager') == true or Auth::user()->role->name == 'Administrateur') and $data['demande']->validated == false and  $data['demande']->closed == false and !array_key_exists('commentaires', $data) and $data['demande']->statut_id == 1)
                         <ul class="list-group list-group-flush text-center">
                             <li class="list-group-item">
                             <a href='{{url('validerDemande/'. $data['demande']->id .'/OK')}}'

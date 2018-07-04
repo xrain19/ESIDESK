@@ -53,7 +53,7 @@ class SearchController extends Controller
                 }
 
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)
-                    ->whereProcessorId(NULL)->where('title', 'like', "%" . $search . "%")
+                    ->whereProcessorId(NULL)->whereIn('statut_id', [1,2])->where('title', 'like', "%" . $search . "%")
                     ->orWhere('id', $search)
                     ->orderBy('created_at')->get();
                 $data['title'] = "Demande de l'équipe" . $equipe->name;
@@ -102,6 +102,17 @@ class SearchController extends Controller
             case 'inprogress':
                 $demandes = Demande::whereProcessorId(Auth::user()->id)
                     ->whereClosed(false)
+                    ->where('statut_id','=',4)
+                    ->where('title', 'like', "%" . $search . "%")
+                    ->orWhere('id',  $search)
+                    ->orderBy('created_at')->get();
+
+                $data['title'] = "Demandes en cours de traitement";
+                break;
+            case 'plus' :
+                $demandes = Demande::whereUserId(Auth::user()->id)
+                    ->whereClosed(false)
+                    ->whereStatutId(6)
                     ->Where('title', 'like', "%" . $search . "%")
                     ->orWhere('id',  $search)
                     ->orderBy('created_at')->get();

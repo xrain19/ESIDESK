@@ -30,7 +30,7 @@ class isManager
             }
             $equipeDem = Equipe::whereId(Auth::user()->equipe_id)->first();
             if($equipeDem != null){
-                $countDemEquipe = Demande::whereEquipeId($equipeDem->id)->whereClosed(false)->whereProcessorId(NULL)->count();
+                $countDemEquipe = Demande::whereEquipeId($equipeDem->id)->whereClosed(false)->whereProcessorId(NULL)->whereIn('statut_id', [1,2])->count();
                 $countDemRefus = Demande::whereEquipeId($equipeDem->id)->whereClosed(true)->whereStatutId(3)->count();
                 Session::put('countDemEquipe', $countDemEquipe);
                 Session::put('countDemRefus', $countDemRefus);
@@ -41,7 +41,7 @@ class isManager
             }
 
             $countDemMine = Demande::whereUserId(Auth::user()->id)->count();
-            $countDemInProg = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->count();
+            $countDemInProg = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->where('statut_id','=',4)->count();
             Session::put('countDemMine', $countDemMine);
             Session::put('countDemInProg', $countDemInProg);
         }

@@ -12,21 +12,6 @@ class DemandeTableSeeder extends Seeder
     public function run()
     {
         DB::table('demandes')->insert([
-            'title' => 'Dolor auctor aliquam accumsan pellentesque',
-            'description' => 'Semper fermentum a sapien fermentum mauris nec. quisque lobortis accumsan accumsan ultricies potenti placerat. viverra dapibus eget etiam. aliquet sed',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 6,
-            'equipe_id' => 7,
-            'statut_id' => 3,
-            'categorie_id' => 8,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Auctor nec donec pellentesque posuere',
             'description' => 'Porttitor nisi aliquet mattis. commodo at taciti dapibus lectus rhoncus convallis habitant. justo elit non eleifend. amet porttitor nullam risus',
             'urgency' => 3,
@@ -102,21 +87,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Senectus himenaeos tellus elementum egestas',
-            'description' => 'Maecenas nisi vivamus eros lacus. augue adipiscing tellus congue sapien metus congue. turpis rhoncus sagittis ipsum hac vitae. iaculis sapien',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 6,
-            'equipe_id' => 6,
-            'statut_id' => 2,
-            'categorie_id' => 6,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Ultrices scelerisque nulla mi lobortis',
             'description' => 'Nullam augue rhoncus cursus ut. senectus magna vitae est phasellus eros feugiat. fames velit congue libero. aliquet potenti amet etiam',
             'urgency' => 1,
@@ -187,21 +157,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 8,
             'statut_id' => 5,
             'categorie_id' => 3,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Felis primis phasellus fermentum litora',
-            'description' => 'Enim ullamcorper erat facilisis sagittis rutrum mollis. mi ultricies sagittis diam posuere platea eget. curae hendrerit semper id habitant condimentum',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 7,
-            'equipe_id' => 5,
-            'statut_id' => 2,
-            'categorie_id' => 8,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
@@ -372,21 +327,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Gravida duis congue hac lacinia',
-            'description' => 'Sed aliquam semper maecenas sed. euismod magna blandit lobortis tellus vivamus. suspendisse hac ut varius amet. integer tristique dui ante',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 3,
-            'equipe_id' => 2,
-            'statut_id' => 3,
-            'categorie_id' => 5,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Netus cras luctus massa. commodo',
             'description' => 'Elit etiam euismod class sodales. tellus vestibulum aliquet eleifend vestibulum lobortis condimentum. curabitur senectus etiam felis. quam suspendisse lacinia metus',
             'urgency' => 2,
@@ -399,21 +339,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 2,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Sollicitudin quisque etiam turpis massa',
-            'description' => 'A per litora nulla libero. mattis at senectus semper tempor lectus aliquet. risus risus curabitur consectetur dolor amet. justo nullam',
-            'urgency' => 2,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 9,
-            'equipe_id' => 8,
-            'statut_id' => 2,
-            'categorie_id' => 3,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 4
         ]);
 
         DB::table('demandes')->insert([
@@ -474,21 +399,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 3,
             'desired_date' => date("Y/m/d"),
             'processor_id' => 3
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Interdum et suscipit feugiat viverra',
-            'description' => 'Elit quis odio erat lacinia porttitor scelerisque et. mattis purus cras curabitur. odio imperdiet etiam ultrices gravida. lorem viverra placerat',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 6,
-            'equipe_id' => 4,
-            'statut_id' => 3,
-            'categorie_id' => 8,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
         ]);
 
         DB::table('demandes')->insert([
@@ -597,21 +507,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Morbi ornare consequat sollicitudin tincidunt',
-            'description' => 'Arcu vivamus posuere mi nulla tempus accumsan. sem luctus quis ultrices blandit varius. pretium orci elit fermentum suspendisse leo volutpat.',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 9,
-            'equipe_id' => 9,
-            'statut_id' => 3,
-            'categorie_id' => 9,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 2
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Quis et fusce duis velit',
             'description' => 'Tempus est platea orci. interdum habitasse ac tempor vel maecenas. facilisis hendrerit tellus tortor lacus. elementum etiam interdum ornare aliquam.',
             'urgency' => 1,
@@ -684,21 +579,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 3,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Leo netus habitasse pharetra eu.',
-            'description' => 'Elementum tortor purus mauris porttitor. quisque arcu quam sem tincidunt. vel in habitant vulputate. class per aenean lectus risus vivamus',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 8,
-            'equipe_id' => 7,
-            'statut_id' => 2,
-            'categorie_id' => 1,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 7
         ]);
 
         DB::table('demandes')->insert([
@@ -777,36 +657,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Accumsan diam proin posuere malesuada',
-            'description' => 'Fusce ad egestas ut etiam cubilia integer. nec per sed proin. himenaeos senectus aptent tempor fermentum. aliquam elit quisque vulputate',
-            'urgency' => 3,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 3,
-            'equipe_id' => 3,
-            'statut_id' => 2,
-            'categorie_id' => 1,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 8
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Aptent condimentum aenean morbi torquent',
-            'description' => 'Conubia aenean consequat aenean adipiscing. ad per cras ut sociosqu fusce. orci pulvinar risus varius curabitur neque sociosqu. senectus faucibus',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 9,
-            'equipe_id' => 9,
-            'statut_id' => 2,
-            'categorie_id' => 8,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 9
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Neque fames proin ultricies taciti',
             'description' => 'Posuere lectus venenatis suscipit ad platea tellus nec. justo taciti faucibus erat. dapibus dui mi mattis quisque iaculis aenean feugiat.',
             'urgency' => 1,
@@ -832,21 +682,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 3,
             'statut_id' => 5,
             'categorie_id' => 4,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'A felis pellentesque mattis etiam',
-            'description' => 'Nulla malesuada habitasse nulla nulla sodales justo sed. nisl ut rhoncus elementum diam ultricies netus vel. laoreet suscipit sodales viverra',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 6,
-            'equipe_id' => 6,
-            'statut_id' => 3,
-            'categorie_id' => 8,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
@@ -1032,21 +867,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Tortor ullamcorper eros laoreet quisque',
-            'description' => 'Ac quisque nisi consectetur. morbi conubia lectus litora. dolor ligula libero dolor. sem tellus ornare nullam quisque. fringilla viverra quam',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 2,
-            'equipe_id' => 7,
-            'statut_id' => 3,
-            'categorie_id' => 2,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Elementum maecenas ligula sociosqu vehicula.',
             'description' => 'Curabitur porttitor faucibus nisi laoreet. leo conubia cubilia nullam. hac suspendisse vulputate class quis ultrices elementum. ad adipiscing gravida fringilla',
             'urgency' => 1,
@@ -1077,21 +897,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Auctor tincidunt habitasse sed class',
-            'description' => 'Feugiat pharetra sed hendrerit habitant metus nam. cubilia lorem diam suscipit sociosqu sem nibh pretium. feugiat lacus lectus urna maecenas',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 4,
-            'equipe_id' => 8,
-            'statut_id' => 3,
-            'categorie_id' => 4,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 9
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Vitae ad felis vel vel',
             'description' => 'Torquent enim quis litora mollis ante. donec commodo curabitur sodales integer lacinia aliquam. phasellus lacus platea habitasse tincidunt quis. euismod',
             'urgency' => 3,
@@ -1107,21 +912,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Massa fringilla ut arcu feugiat.',
-            'description' => 'Proin mollis etiam eros sem ultricies. litora placerat elit duis facilisis lectus vehicula. erat bibendum at vitae ultricies. posuere feugiat',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 7,
-            'equipe_id' => 4,
-            'statut_id' => 2,
-            'categorie_id' => 5,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 5
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Platea ipsum rutrum imperdiet nunc',
             'description' => 'Mattis venenatis etiam himenaeos rhoncus in arcu. urna dui aenean faucibus. eleifend dolor etiam posuere curae aenean ut. litora enim',
             'urgency' => 3,
@@ -1132,21 +922,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 9,
             'statut_id' => 1,
             'categorie_id' => 7,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Suspendisse quisque quisque ligula. cursus',
-            'description' => 'Vulputate tincidunt ligula ac curae tristique quisque. eleifend rhoncus per blandit sollicitudin nunc tellus. donec aliquet elit curae nunc fringilla',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 8,
-            'equipe_id' => 7,
-            'statut_id' => 2,
-            'categorie_id' => 5,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
@@ -1252,21 +1027,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 6,
             'statut_id' => 6,
             'categorie_id' => 7,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Dapibus ultrices ac ipsum erat',
-            'description' => 'Interdum rutrum ultrices laoreet massa tortor eu scelerisque. per amet semper eleifend et curabitur nullam. augue integer primis id vehicula',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 2,
-            'equipe_id' => 6,
-            'statut_id' => 3,
-            'categorie_id' => 9,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
@@ -1452,36 +1212,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Turpis mi augue cubilia elit',
-            'description' => 'Proin est ipsum mattis. convallis posuere quisque vestibulum litora aenean venenatis. conubia sit magna pretium interdum. bibendum habitant feugiat congue',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 3,
-            'equipe_id' => 1,
-            'statut_id' => 2,
-            'categorie_id' => 5,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 7
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Tempor purus tristique fames. sollicitudin',
-            'description' => 'Tristique dolor donec volutpat sapien. ligula tempus lectus tortor. suscipit platea sit tortor felis donec donec laoreet. ullamcorper curabitur sed',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 2,
-            'equipe_id' => 7,
-            'statut_id' => 2,
-            'categorie_id' => 6,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 1
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Viverra vitae est dictumst molestie',
             'description' => 'Quis ligula viverra per ultrices. pulvinar risus placerat metus. sapien ut vulputate ad diam ut. ipsum ut at diam purus',
             'urgency' => 1,
@@ -1527,21 +1257,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Dapibus justo diam placerat fermentum.',
-            'description' => 'Velit condimentum sodales conubia volutpat ultricies interdum. tristique velit volutpat curae nisl lacinia pulvinar leo. urna dui lacus volutpat et',
-            'urgency' => 3,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 7,
-            'equipe_id' => 4,
-            'statut_id' => 2,
-            'categorie_id' => 6,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 4
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Senectus nisl vel suspendisse auctor',
             'description' => 'Lacus cursus semper dapibus litora primis feugiat sollicitudin. velit porta lacus adipiscing aenean euismod velit. vulputate varius sociosqu potenti condimentum',
             'urgency' => 3,
@@ -1569,21 +1284,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 8,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Nulla quisque hac malesuada nisi',
-            'description' => 'Sem tellus platea mattis imperdiet. aptent tristique litora class posuere augue. non congue dolor convallis. dui at magna ut. fusce',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 1,
-            'equipe_id' => 5,
-            'statut_id' => 3,
-            'categorie_id' => 9,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 5
         ]);
 
         DB::table('demandes')->insert([
@@ -1707,21 +1407,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Nibh purus purus lacus vestibulum',
-            'description' => 'Eleifend dictumst ad aenean augue. risus habitasse sollicitudin pulvinar. per accumsan nisi praesent lacus pulvinar lectus commodo. aptent amet mi',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 6,
-            'equipe_id' => 8,
-            'statut_id' => 3,
-            'categorie_id' => 1,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Et habitant pharetra nunc imperdiet.',
             'description' => 'Ultricies ipsum convallis hendrerit nostra litora. fermentum mollis erat sagittis molestie. iaculis accumsan eu consequat mollis class feugiat felis. elit',
             'urgency' => 3,
@@ -1732,36 +1417,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 5,
             'statut_id' => 5,
             'categorie_id' => 1,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Curae nostra neque turpis. ullamcorper',
-            'description' => 'Quisque ullamcorper sit cursus etiam. magna consectetur rutrum sodales aliquam. nisl praesent arcu vestibulum donec congue. porttitor semper tempus lectus',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 7,
-            'equipe_id' => 4,
-            'statut_id' => 3,
-            'categorie_id' => 3,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Enim taciti donec condimentum tempor',
-            'description' => 'Faucibus nostra inceptos ornare adipiscing imperdiet fusce sed. habitasse massa facilisis tincidunt nulla. at eleifend etiam malesuada. aliquam etiam torquent',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 9,
-            'equipe_id' => 8,
-            'statut_id' => 3,
-            'categorie_id' => 2,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
@@ -1827,21 +1482,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Pretium eros nostra cras torquent',
-            'description' => 'Tellus velit mauris nibh class etiam. quisque phasellus habitasse ad ac convallis ac nec. felis bibendum scelerisque etiam class hendrerit.',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 8,
-            'equipe_id' => 6,
-            'statut_id' => 3,
-            'categorie_id' => 2,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Suscipit dui et viverra ut',
             'description' => 'Curae orci ultrices dui auctor convallis id. rhoncus massa duis nec. torquent felis dapibus odio curae et. imperdiet hendrerit lectus',
             'urgency' => 2,
@@ -1852,21 +1492,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 9,
             'statut_id' => 6,
             'categorie_id' => 4,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Dapibus at quisque aliquet. interdum',
-            'description' => 'Mollis fringilla etiam hac augue. rhoncus elementum integer vitae per at. consectetur fusce viverra mauris dapibus. fames ultricies auctor consequat.',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 9,
-            'equipe_id' => 3,
-            'statut_id' => 2,
-            'categorie_id' => 8,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
@@ -2022,21 +1647,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Dictum felis nulla purus. eget',
-            'description' => 'Tempus semper pharetra orci molestie ipsum mi commodo. a pretium curae torquent molestie donec sit. molestie mollis accumsan non tempus',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 7,
-            'equipe_id' => 1,
-            'statut_id' => 2,
-            'categorie_id' => 1,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 6
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Rutrum molestie primis felis lectus',
             'description' => 'Lectus quisque pulvinar tristique aliquam nullam dolor habitasse. torquent bibendum potenti quam magna est elementum vehicula. lorem interdum purus consectetur',
             'urgency' => 1,
@@ -2124,21 +1734,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 6,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Aenean quam feugiat phasellus. potenti',
-            'description' => 'Cubilia porta cursus aliquam sociosqu ornare erat nulla. dui nullam sem porta auctor in. turpis elementum euismod adipiscing duis cursus.',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 3,
-            'equipe_id' => 8,
-            'statut_id' => 3,
-            'categorie_id' => 4,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 2
         ]);
 
         DB::table('demandes')->insert([
@@ -2352,21 +1947,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Ornare leo venenatis placerat commodo',
-            'description' => 'Gravida per nulla in neque dictum etiam. phasellus fermentum ac fringilla. aptent turpis blandit inceptos eget quam. consequat volutpat orci',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 8,
-            'equipe_id' => 3,
-            'statut_id' => 3,
-            'categorie_id' => 8,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 3
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Dui est lectus maecenas. ad',
             'description' => 'Lectus pharetra eu fermentum. nec pretium donec dictumst mattis suspendisse convallis. eget rutrum suspendisse condimentum placerat aliquam. neque rutrum rutrum',
             'urgency' => 1,
@@ -2502,21 +2082,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Orci proin leo dictumst dictumst.',
-            'description' => 'Varius primis euismod platea elit pretium blandit mollis. laoreet odio est aptent adipiscing in. in est nunc facilisis ad lobortis',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 1,
-            'equipe_id' => 2,
-            'statut_id' => 3,
-            'categorie_id' => 7,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 8
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Cubilia dictumst iaculis in. tellus',
             'description' => 'Integer facilisis nisl in facilisis tempor. ornare cursus phasellus ipsum. habitant pellentesque lectus euismod. imperdiet facilisis condimentum nunc fames etiam.',
             'urgency' => 1,
@@ -2559,21 +2124,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 4,
             'desired_date' => date("Y/m/d"),
             'processor_id' => 4
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Bibendum malesuada platea pellentesque iaculis',
-            'description' => 'Lectus eleifend viverra nullam vehicula cras. dictum conubia maecenas platea amet. amet auctor euismod eu etiam convallis. vestibulum nulla arcu',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 8,
-            'equipe_id' => 4,
-            'statut_id' => 3,
-            'categorie_id' => 6,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 1
         ]);
 
         DB::table('demandes')->insert([
@@ -2697,21 +2247,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Nec eget arcu aliquam. nunc',
-            'description' => 'Morbi nulla curabitur eu enim fermentum ad class. pharetra volutpat purus molestie auctor posuere. lacinia pulvinar mi praesent consequat tellus',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 4,
-            'equipe_id' => 8,
-            'statut_id' => 2,
-            'categorie_id' => 3,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 5
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Amet pulvinar sit ante libero',
             'description' => 'Leo auctor curabitur elit fames donec ultrices. sit gravida accumsan lectus. mi sodales cras praesent egestas purus. consequat primis blandit',
             'urgency' => 1,
@@ -2724,51 +2259,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 7,
             'desired_date' => date("Y/m/d"),
             'processor_id' => 4
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Nostra urna pretium enim placerat',
-            'description' => 'Dictumst aliquet porttitor leo. senectus accumsan phasellus rutrum ornare auctor pharetra habitasse. odio at taciti est ad rhoncus mauris. et',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 3,
-            'equipe_id' => 4,
-            'statut_id' => 2,
-            'categorie_id' => 6,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 4
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Pulvinar aenean egestas quam donec.',
-            'description' => 'Bibendum porta praesent gravida duis nisl laoreet. tristique porta nibh mi. donec cras class nisl curabitur aenean laoreet convallis. facilisis',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 4,
-            'equipe_id' => 9,
-            'statut_id' => 2,
-            'categorie_id' => 3,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 9
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Fames etiam ac vulputate curabitur',
-            'description' => 'Eget lobortis lectus orci. nisi tempus lectus leo varius mattis sociosqu. lacus orci purus bibendum sagittis. enim nunc curabitur bibendum',
-            'urgency' => 2,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 6,
-            'equipe_id' => 9,
-            'statut_id' => 2,
-            'categorie_id' => 9,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
         ]);
 
         DB::table('demandes')->insert([
@@ -2814,21 +2304,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 9,
             'desired_date' => date("Y/m/d"),
             'processor_id' => 9
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Habitant placerat nam mi convallis',
-            'description' => 'Justo hac vehicula id curabitur condimentum aliquam et. fusce enim fusce orci. diam hac congue dolor tortor. turpis netus egestas',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 9,
-            'equipe_id' => 9,
-            'statut_id' => 3,
-            'categorie_id' => 5,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
         ]);
 
         DB::table('demandes')->insert([
@@ -2907,21 +2382,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Mi quisque turpis lacinia volutpat',
-            'description' => 'Eleifend enim commodo aptent integer tempor. faucibus tincidunt donec curae a. curabitur quisque urna nam. nullam platea convallis aliquam netus.',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 1,
-            'equipe_id' => 9,
-            'statut_id' => 2,
-            'categorie_id' => 8,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Adipiscing congue nibh per nostra.',
             'description' => 'Phasellus justo eget suscipit metus sed phasellus posuere. ac aenean egestas amet hac massa. varius tortor tempus iaculis risus. consectetur',
             'urgency' => 3,
@@ -2982,21 +2442,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Maecenas netus fusce dolor risus.',
-            'description' => 'Consequat pharetra eros sagittis hendrerit eget. sollicitudin sed pharetra mattis tempor cras est sed. nullam habitant vivamus laoreet nibh per',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 9,
-            'equipe_id' => 4,
-            'statut_id' => 2,
-            'categorie_id' => 7,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 1
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Velit nisl duis ad euismod',
             'description' => 'Mattis porta taciti ad ultricies fringilla. quisque ullamcorper vulputate et amet. arcu integer congue neque rhoncus fringilla bibendum nullam. molestie',
             'urgency' => 2,
@@ -3024,21 +2469,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 1,
             'desired_date' => date("Y/m/d"),
             'processor_id' => 9
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Gravida aliquam nam litora. faucibus',
-            'description' => 'Volutpat suspendisse mollis convallis praesent placerat. etiam scelerisque leo sagittis cubilia. sollicitudin habitant id eros. quisque purus pretium molestie congue',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 2,
-            'equipe_id' => 1,
-            'statut_id' => 3,
-            'categorie_id' => 2,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
         ]);
 
         DB::table('demandes')->insert([
@@ -3117,21 +2547,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Orci molestie vivamus mi sit',
-            'description' => 'Vulputate aenean diam placerat rutrum. fermentum cubilia nisl mauris viverra dapibus morbi tempor. egestas luctus dictum sapien congue commodo sollicitudin',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 7,
-            'equipe_id' => 1,
-            'statut_id' => 3,
-            'categorie_id' => 3,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 4
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Euismod dui purus massa. lorem',
             'description' => 'Torquent eget quisque tortor non faucibus leo. phasellus quisque hac auctor pharetra porta orci aenean. dui maecenas aliquam eget curabitur',
             'urgency' => 3,
@@ -3147,21 +2562,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Nulla ligula fringilla habitant sit',
-            'description' => 'Blandit curae orci elementum turpis. placerat netus dapibus himenaeos nostra donec. etiam nam mi turpis sapien. feugiat vitae cursus nisl.',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 7,
-            'equipe_id' => 7,
-            'statut_id' => 2,
-            'categorie_id' => 6,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 4
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Orci vivamus cras accumsan. euismod',
             'description' => 'Tristique diam nam netus fringilla vestibulum suscipit sociosqu. quam suscipit diam taciti. senectus curabitur tincidunt sociosqu netus. torquent curabitur ad',
             'urgency' => 1,
@@ -3174,36 +2574,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 3,
             'desired_date' => date("Y/m/d"),
             'processor_id' => 2
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Gravida faucibus nisl consequat nisl',
-            'description' => 'Dictum tempus molestie magna. suspendisse orci fusce vestibulum. tempus nisi nisl non nullam himenaeos mattis odio. augue inceptos ad sociosqu',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 9,
-            'equipe_id' => 1,
-            'statut_id' => 2,
-            'categorie_id' => 5,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Molestie vulputate nullam turpis nibh',
-            'description' => 'Etiam eleifend mollis pellentesque vitae orci ante orci. vehicula fringilla libero conubia nostra. cubilia et vitae vulputate. suspendisse curabitur dictum',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 5,
-            'equipe_id' => 6,
-            'statut_id' => 3,
-            'categorie_id' => 2,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
         ]);
 
         DB::table('demandes')->insert([
@@ -3282,21 +2652,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Nostra metus curabitur convallis sed',
-            'description' => 'Iaculis congue augue morbi donec aenean nisl. quisque fames metus rhoncus. nam nostra aliquam interdum class suspendisse netus consequat. id',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 3,
-            'equipe_id' => 3,
-            'statut_id' => 3,
-            'categorie_id' => 3,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 1
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Volutpat ante vulputate tempor ornare.',
             'description' => 'Blandit dictum orci ut. conubia netus aptent netus nostra fermentum ipsum. sodales eleifend erat etiam lectus. euismod maecenas phasellus etiam',
             'urgency' => 1,
@@ -3307,21 +2662,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 8,
             'statut_id' => 4,
             'categorie_id' => 9,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Tempor eros libero aliquam. risus',
-            'description' => 'Cubilia congue in egestas vestibulum quam quam. aliquam proin aliquam quis faucibus taciti hac. interdum amet donec nisi. adipiscing nulla',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 5,
-            'equipe_id' => 1,
-            'statut_id' => 3,
-            'categorie_id' => 7,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
@@ -3399,21 +2739,6 @@ class DemandeTableSeeder extends Seeder
             'categorie_id' => 9,
             'desired_date' => date("Y/m/d"),
             'processor_id' => 8
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Faucibus imperdiet semper sapien. quisque',
-            'description' => 'Taciti aenean integer quisque urna semper curabitur. ligula mollis sodales ac adipiscing duis primis mi. quisque tellus aptent tortor. inceptos',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 7,
-            'equipe_id' => 8,
-            'statut_id' => 2,
-            'categorie_id' => 7,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 1
         ]);
 
         DB::table('demandes')->insert([
@@ -3507,21 +2832,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Bibendum fames massa elit fringilla',
-            'description' => 'Ipsum dapibus metus ad. morbi etiam curabitur tempus posuere per. fringilla aliquam platea aliquet dictumst etiam aptent. magna potenti dictumst',
-            'urgency' => 2,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 2,
-            'equipe_id' => 8,
-            'statut_id' => 2,
-            'categorie_id' => 1,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 8
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Sit pretium nostra nisl erat',
             'description' => 'Etiam nostra faucibus id hendrerit. felis mollis lacus aptent nam ornare primis mi. massa curae lobortis leo magna tempor nam.',
             'urgency' => 3,
@@ -3562,21 +2872,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 5,
             'statut_id' => 6,
             'categorie_id' => 9,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => 6
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Nam leo sem suspendisse aenean',
-            'description' => 'Eleifend class accumsan aliquam erat odio et. ac habitant mauris cursus cursus quam dui ullamcorper. tempor nisl lobortis ac. euismod',
-            'urgency' => 1,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 5,
-            'equipe_id' => 5,
-            'statut_id' => 2,
-            'categorie_id' => 8,
             'desired_date' => date("Y/m/d"),
             'processor_id' => 6
         ]);
@@ -3672,21 +2967,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Lobortis imperdiet tristique lacus purus',
-            'description' => 'Pulvinar consequat luctus per eu adipiscing. nulla interdum odio purus. vel placerat vestibulum platea urna. ligula tortor pellentesque habitant vestibulum',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 2,
-            'equipe_id' => 8,
-            'statut_id' => 2,
-            'categorie_id' => 6,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Eget amet volutpat dictumst leo',
             'description' => 'Faucibus quisque justo nisl. curae bibendum id consectetur. praesent etiam volutpat orci. sociosqu pretium sodales convallis aptent taciti. odio aptent',
             'urgency' => 1,
@@ -3757,36 +3037,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 6,
             'statut_id' => 2,
             'categorie_id' => 8,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Sit inceptos auctor ut lorem',
-            'description' => 'Curabitur convallis bibendum vivamus adipiscing sociosqu pulvinar aliquam. eros class hendrerit diam curabitur vestibulum. ultricies maecenas augue est hac consectetur',
-            'urgency' => 2,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 1,
-            'equipe_id' => 6,
-            'statut_id' => 2,
-            'categorie_id' => 2,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Urna non curae netus dapibus.',
-            'description' => 'Ultricies facilisis pretium viverra per. porta maecenas eleifend litora. consequat elementum eros sagittis metus ut egestas. aptent consequat nec commodo',
-            'urgency' => 2,
-            'closed' => true,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 3,
-            'equipe_id' => 2,
-            'statut_id' => 2,
-            'categorie_id' => 9,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
@@ -4137,21 +3387,6 @@ class DemandeTableSeeder extends Seeder
         ]);
 
         DB::table('demandes')->insert([
-            'title' => 'Ut potenti euismod eros. in',
-            'description' => 'Nulla gravida hac tellus taciti etiam imperdiet himenaeos. velit integer condimentum facilisis est auctor. lacinia urna diam fermentum mattis lobortis',
-            'urgency' => 1,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => false,
-            'user_id' => 8,
-            'equipe_id' => 8,
-            'statut_id' => 3,
-            'categorie_id' => 3,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
             'title' => 'Suscipit vel tempor eget hac',
             'description' => 'Egestas mollis velit quis sem fusce rutrum erat. quisque praesent eros nibh cubilia et. torquent a maecenas aenean quisque. tincidunt',
             'urgency' => 3,
@@ -4447,21 +3682,6 @@ class DemandeTableSeeder extends Seeder
             'equipe_id' => 6,
             'statut_id' => 1,
             'categorie_id' => 8,
-            'desired_date' => date("Y/m/d"),
-            'processor_id' => NULL
-        ]);
-
-        DB::table('demandes')->insert([
-            'title' => 'Congue nam dolor velit praesent',
-            'description' => 'Quisque condimentum eleifend curabitur mollis senectus. faucibus etiam diam turpis class mattis non ipsum. congue primis gravida eget. eleifend dolor',
-            'urgency' => 3,
-            'closed' => false,
-            'processing_date' => NULL,
-            'validated' => true,
-            'user_id' => 8,
-            'equipe_id' => 6,
-            'statut_id' => 3,
-            'categorie_id' => 7,
             'desired_date' => date("Y/m/d"),
             'processor_id' => NULL
         ]);
