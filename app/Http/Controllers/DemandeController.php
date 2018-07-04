@@ -136,8 +136,7 @@ class DemandeController extends Controller
     {
         $data = array();
 
-        if($tri != 'created_at'and $tri != 'desired_dat' and $tri != 'title')
-        {
+        if ($tri != 'created_at' and $tri != 'desired_dat' and $tri != 'title') {
             Session::flash('alert-danger', "Donnée de triage érronées");
             return redirect('/home');
         }
@@ -468,7 +467,6 @@ class DemandeController extends Controller
         $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
 
         Mail::to($demande->user->email)->send(new notification($notification));
-
 
         Session::flash('alert-success', "Cloture de la demande " . $demande->title . " avec succès");
         return redirect('/dashboard');
