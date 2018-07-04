@@ -34,6 +34,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Commentaire[] $Commentaire
+ * @property int $actived
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereActived($value)
  */
 class User extends Authenticatable
 {
@@ -45,7 +47,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'lastname', 'email', 'password', 'firstname', 'equipe_id', 'role_id'
+        'lastname', 'email', 'password', 'firstname', 'equipe_id', 'role_id', 'actived'
     ];
 
     /**

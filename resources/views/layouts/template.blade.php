@@ -42,7 +42,7 @@
             <a class="navbar-brand" href="{{ url('/dashboard') }}">ESIDESK</a>
         @else
             <a class="navbar-brand" href="{{ url('/home') }}">ESIDESK</a>
-         @endif
+        @endif
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -50,35 +50,37 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
+                    data-original-title="Dashboard">
                     @if(Auth::user() != NULL)
                         <a class="nav-link" href="{{ url('/dashboard') }}">
-                    @else
-                        <a class="nav-link" href="{{ url('/home') }}">
-                    @endif
-                        <i class="fa fa-fw fa-dashboard"></i>
-                        <span class="nav-link-text">Dashboard</span>
-                        </a>
+                            @else
+                                <a class="nav-link" href="{{ url('/home') }}">
+                                    @endif
+                                    <i class="fa fa-fw fa-dashboard"></i>
+                                    <span class="nav-link-text">Dashboard</span>
+                                </a>
                 </li>
                 @if(Auth::user() != NULL)
-                <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right" title="{{Auth::user()->lastname.' '.Auth::user()->firstname}}"
-                    data-original-title="{{Auth::user()->lastname.' '.Auth::user()->firstname}}">
-                    <a class="nav-link nav-link-collapse dropdown-toggle" data-toggle="dropdown"
-                       href="#"
-                       data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-user"></i>
-                        <span class="nav-link-text">{{Auth::user()->lastname.' '.Auth::user()->firstname}}</span>
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu sidenav-second-level collapse" id="infoUser">
-                        <li>
-                            <a href="{{ url('/userDetails/' . Auth::user()->id) }}">Mon profil</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/editUserForm/' . Auth::user()->id) }}">Modifier mon mot de passe</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right"
+                        title="{{Auth::user()->lastname.' '.Auth::user()->firstname}}"
+                        data-original-title="{{Auth::user()->lastname.' '.Auth::user()->firstname}}">
+                        <a class="nav-link nav-link-collapse dropdown-toggle" data-toggle="dropdown"
+                           href="#"
+                           data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-user"></i>
+                            <span class="nav-link-text">{{Auth::user()->lastname.' '.Auth::user()->firstname}}</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu sidenav-second-level collapse" id="infoUser">
+                            <li>
+                                <a href="{{ url('/userDetails/' . Auth::user()->id) }}">Mon profil</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/editUserForm/' . Auth::user()->id) }}">Modifier mon mot de passe</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
                         data-original-title="Dashboard">
                         <a class="nav-link" href="{{ url('/homeEquipe') }}">
@@ -93,18 +95,24 @@
 
                     <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right" title="Demande"
                         data-original-title="Demande">
-                        <a class="nav-link nav-link-collapse dropdown-toggle" id="Demande"  data-toggle="dropdown"
+                        <a class="nav-link nav-link-collapse dropdown-toggle" id="Demande" data-toggle="dropdown"
                            href="#" data-parent="#exampleAccordion">
                             <i class="fa fa-fw fa-list"></i>
                             <span class="nav-link-text">Demande</span>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu sidenav-second-level collapse" id="Demande">
+                            @if(Auth::user()->role->name == 'Administrateur')
+                                <li>
+                                    <a href="{{ url('/listDemande/all/created_at') }}">Les demandes</a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="{{ url('/listDemande/mine/created_at') }}">Mes demandes</a>
                             </li>
                             <li>
-                                <a href="{{url('/listDemande/inprogress/desired_date')}}">Demande(s) en cours de traitement</a>
+                                <a href="{{url('/listDemande/inprogress/desired_date')}}">Demande(s) en cours de
+                                    traitement</a>
                             </li>
                             <li>
                                 <a href="{{url('/listDemande/equipe/created_at')}}">Demande(s) à traiter</a>
@@ -113,7 +121,8 @@
                                 <a href="{{url('/listDemande/refus/created_at')}}">Demande(s) rejetée(s)</a>
                             </li>
                             <li>
-                                <a href="{{url('/listDemande/plus/created_at')}}">Demande(s) en attente de précision(s)</a>
+                                <a href="{{url('/listDemande/plus/created_at')}}">Demande(s) en attente de
+                                    précision(s)</a>
                             </li>
                             <li>
                                 <a href="{{url('/listDemande/cloturee/created_at')}}">Demande(s) cloturée(s)</a>
@@ -145,7 +154,8 @@
                     @endif
 
                     @if(Auth::user()->role->name == 'Administrateur')
-                        <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right" title="Administrateur"
+                        <li class="nav-item dropdown" data-toggle="tooltip" data-placement="right"
+                            title="Administrateur"
                             data-original-title="Administrateur">
                             <a class="nav-link nav-link-collapse dropdown-toggle" data-toggle="dropdown"
                                href="#"
@@ -179,7 +189,8 @@
                 <li class="nav-item">
                     @if(Auth::user() != null)
                         <div class="nav-item">
-                            <a class="navbar-loucas " style="color: white" >{{Auth::user()->lastname.' '.Auth::user()->firstname}}</a>
+                            <a class="navbar-loucas "
+                               style="color: white">{{Auth::user()->lastname.' '.Auth::user()->firstname}}</a>
                         </div>
                     @endif
                 </li>
@@ -216,7 +227,7 @@
                         <a href="{{url('/home')}}">Dashboard</a>
                     @endif
                 </li>
-               @yield('breadcrumb')
+                @yield('breadcrumb')
             </ol>
         </div>
 

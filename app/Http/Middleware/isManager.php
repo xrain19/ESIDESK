@@ -23,6 +23,10 @@ class isManager
     {
         $manager = false;
         if (Auth::user() != null) {
+            if(Auth::user()->actived != true){
+                Auth::logout();
+                return view('/deactivateUser');
+            }
             $equipe = Equipe::whereManagerId(Auth::user()->id)->first();
             if ($equipe != null) {
                 $manager = true;

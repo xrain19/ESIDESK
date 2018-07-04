@@ -189,7 +189,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
                     return redirect('/home');
                 }
-                $demandes = Demande::all()->sortBy($tri);
+                $demandes = Demande::orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');
