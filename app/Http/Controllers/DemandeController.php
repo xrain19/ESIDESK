@@ -62,6 +62,11 @@ class DemandeController extends Controller
             return redirect('/home');
         }
 
+        if (strtotime($request->input('desired_date')) < strtotime(date("Y-m-d"))) {
+            Session::flash('alert-danger', "La date souhaitée ne peut être antérieur à aujourd'hui");
+            return redirect('/editDemandeForm/' . $id)->withInput($request->all());
+        }
+
         $this->validate($request, $this->rules, $this->messages);
 
         $demande->description = $request->input('description');
@@ -130,6 +135,12 @@ class DemandeController extends Controller
     protected function listDemande($list, $tri)
     {
         $data = array();
+
+        if($tri != 'created_at'and $tri != 'desired_dat' and $tri != 'title')
+        {
+            Session::flash('alert-danger', "Donnée de triage érronées");
+            return redirect('/home');
+        }
 
         switch ($list) {
             case 'equipe':
@@ -239,6 +250,11 @@ class DemandeController extends Controller
 
         $this->validate($request, $this->rules, $this->messages);
 
+        if (strtotime($request->input('desired_date')) < strtotime(date("Y-m-d"))) {
+            Session::flash('alert-danger', "La date souhaitée ne peut être antérieur à aujourd'hui");
+            return redirect('/createDemandeForm/' . $id)->withInput($request->all());
+        }
+
         $demande = Demande::create([
             'description' => $request->input('description'),
             'urgency' => $request->input('urgency'),
@@ -253,10 +269,10 @@ class DemandeController extends Controller
         $members = User::whereEquipeId($cat->equipe_id)->get();
 
         $notification['title'] = "Une nouvelle demande faite à votre équipe par " . Auth::user()->email;
-        $notification['text'] = "Catégorie : " . $cat->name;
-        $notification ['link'] = config('app.url') ."/detailsDemande/" . $demande->id;
+        $notification['demande'] = $demande;
+        $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
 
-        foreach ($members as $member){
+        foreach ($members as $member) {
             Mail::to($member->email)->send(new notification($notification));
         }
 
@@ -297,6 +313,13 @@ class DemandeController extends Controller
                 $demande->statut_id = 3;
                 $demande->closed = true;
                 $demande->save();
+
+                $notification['title'] = "Votre demande a été traitée et cloturée";
+                $notification['demande'] = $demande;
+                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+
+                Mail::to($demande->user->email)->send(new notification($notification));
+
                 Session::flash('alert-danger', "Demande refusée");
                 return redirect('/listDemande/equipe/created_at');
                 break;
@@ -304,6 +327,13 @@ class DemandeController extends Controller
                 $demande = Demande::whereId($id)->first();
                 $demande->statut_id = 6;
                 $demande->save();
+
+                $notification['title'] = "Votre demande a besoin de précision";
+                $notification['demande'] = $demande;
+                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+
+                Mail::to($demande->user->email)->send(new notification($notification));
+
                 Session::flash('alert-success', "Demande de précision envoyé au collaborateur");
                 return redirect('/listDemande/equipe/created_at');
                 break;
@@ -341,7 +371,8 @@ class DemandeController extends Controller
         }
     }
 
-    protected function addCommentaireDemande(Request $request,$idDemande,$info){
+    protected function addCommentaireDemande(Request $request, $idDemande, $info)
+    {
 
         switch ($info) {
             case 'one':
@@ -361,6 +392,18 @@ class DemandeController extends Controller
 
                 $demande->statut_id = 1;
                 $demande->save();
+
+                $notification['demande'] = $demande;
+                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+
+                if (Auth::user()->id == $demande->user_id) {
+                    $notification['title'] = "Une précision est arrivée sur une de vos demandes en cours de traitement";
+                    $process_user = User::whereId($demande->processor_id)->first();
+                    Mail::to($process_user->email)->send(new notification($notification));
+                } else {
+                    $notification['title'] = "Un commentaire a été ajouté a votre demande";
+                    Mail::to(Auth::user()->mail)->send(new notification($notification));
+                }
 
                 Session::flash('alert-success', "Commentaire ajouté à la demande" . $demande->title . "avec succès");
                 return redirect('/home');
@@ -383,6 +426,12 @@ class DemandeController extends Controller
                 $demande->statut_id = 6;
                 $demande->save();
 
+                $notification['title'] = "Votre demande à besoin de précision";
+                $notification['demande'] = $demande;
+                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+
+                Mail::to($demande->user->email)->send(new notification($notification));
+
                 Session::flash('alert-success', "Demande de précision envoyé au collaborateur avec commentaire");
                 return redirect('/listDemande/equipe/created_at');
                 break;
@@ -394,7 +443,8 @@ class DemandeController extends Controller
 
     }
 
-    protected function cloturerDemande(Request $request,$idDemande){
+    protected function cloturerDemande(Request $request, $idDemande)
+    {
 
         $demande = Demande::whereId($idDemande)->first();
         if ($demande == null) {
@@ -412,6 +462,13 @@ class DemandeController extends Controller
         $demande->closed = 1;
         $demande->processing_date = date("Y/m/d");
         $demande->save();
+
+        $notification['title'] = "Votre demande a été traitée et cloturée";
+        $notification['demande'] = $demande;
+        $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+
+        Mail::to($demande->user->email)->send(new notification($notification));
+
 
         Session::flash('alert-success', "Cloture de la demande " . $demande->title . " avec succès");
         return redirect('/dashboard');
