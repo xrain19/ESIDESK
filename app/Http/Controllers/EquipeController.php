@@ -113,8 +113,8 @@ class EquipeController extends Controller
      */
     public function homeEquipe()
     {
-       $equipes = Equipe::all()->where('actived',true);
-        return view('equipe',array('equipes' => $equipes));
+       $equipes = Equipe::where('actived',true)->orderby('name')->paginate(6);
+       return view('equipe',array('equipes' => $equipes));
     }
 
     public function showEditForm(int $id)

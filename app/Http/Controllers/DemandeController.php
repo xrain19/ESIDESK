@@ -148,7 +148,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Vous n'appartenez à aucune équipe");
                     return redirect('/home');
                 }
-                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->orderBy($tri)->get();
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes à traiter");
                     return redirect('/home');
@@ -162,7 +162,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
                     return redirect('/home');
                 }
-                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->whereStatutId(3)->orderBy($tri)->get();
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->whereStatutId(3)->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes refusées");
                     return redirect('/home');
@@ -176,7 +176,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
                     return redirect('/home');
                 }
-                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->whereStatutId(5)->orderBy($tri)->get();
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)->whereStatutId(5)->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes cloturées");
                     return redirect('/home');
@@ -198,7 +198,7 @@ class DemandeController extends Controller
                 break;
 
             case 'mine':
-                $demandes = Demande::whereUserId(Auth::user()->id)->orderByDesc($tri)->get();
+                $demandes = Demande::whereUserId(Auth::user()->id)->orderByDesc($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');
@@ -213,7 +213,7 @@ class DemandeController extends Controller
                 break;
 
             case 'inprogress':
-                $demandes = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->orderBy($tri)->get();
+                $demandes = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes en cours de traitement");
                     return redirect('/home');
@@ -222,7 +222,7 @@ class DemandeController extends Controller
                 break;
 
             case 'plus' :
-                $demandes = Demande::whereUserId(Auth::user()->id)->whereStatutId(6)->get();
+                $demandes = Demande::whereUserId(Auth::user()->id)->whereStatutId(6)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes");
                     return redirect('/home');
@@ -438,8 +438,6 @@ class DemandeController extends Controller
                 Session::flash('alert-danger', "Erreur");
                 return redirect('/listDemande/equipe/created_at');
         }
-
-
     }
 
     protected function cloturerDemande(Request $request, $idDemande)
