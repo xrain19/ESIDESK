@@ -8,6 +8,7 @@ use App\User;
 use App\Demande;
 use Session;
 Use Auth;
+use Illuminate\Http\Response;
 
 class isManager
 {
@@ -25,7 +26,7 @@ class isManager
         if (Auth::user() != null) {
             if(Auth::user()->actived != true){
                 Auth::logout();
-                return view('/deactivateUser');
+                return new Response(view('deactivateUser'));
             }
             $equipe = Equipe::whereManagerId(Auth::user()->id)->first();
             if ($equipe != null) {

@@ -11,7 +11,7 @@ use Session;
 
 class SearchController extends Controller
 {
-    protected function userSearch(Request $request)
+    protected function userSearch(Request $request, $actived)
     {
         if (Auth::user()->role->name != 'Administrateur') {
             Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
@@ -20,11 +20,24 @@ class SearchController extends Controller
 
         $search = $request->input('search');
 
-        $users = User::where('firstname', 'like', "%" . $search . "%")
-            ->orWhere('lastname', 'like', "%" . $search . "%"
-            )->orWhere('email', 'like', "%" . $search . "%")->orderBy('lastname')->paginate(5);
+        switch ($actived) {
+            case 'true':
+                $users = User::whereActived(1)->where('firstname', 'like', "%" . $search . "%")
+                    ->orWhere('lastname', 'like', "%" . $search . "%"
+                    )->orWhere('email', 'like', "%" . $search . "%")->orderBy('lastname')->paginate(5);
+                break;
+            case 'false':
+                $users = User::whereActived(0)->where('firstname', 'like', "%" . $search . "%")
+                    ->orWhere('lastname', 'like', "%" . $search . "%"
+                    )->orWhere('email', 'like', "%" . $search . "%")->orderBy('lastname')->paginate(5);
+                break;
+            default:
+                Session::flash('alert-danger', "Liste utilisateur introuvable");
+                return redirect('/home');
+        }
 
         $data['users'] = $users;
+        $data['from'] = $actived;
         return view('adminUsers', ['data' => $data]);
     }
 
@@ -86,7 +99,7 @@ class SearchController extends Controller
 
             case 'mine':
                 $demandes = Demande::whereUserId(Auth::user()->id)
-                ->Where('title', 'like', "%" . $search . "%")
+                    ->Where('title', 'like', "%" . $search . "%")
                     ->orWhere('id', $search)
                     ->orderBy('created_at')->paginate(6);
 
@@ -103,7 +116,7 @@ class SearchController extends Controller
                 $demandes = Demande::whereProcessorId(Auth::user()->id)
                     ->whereClosed(false)
                     ->Where('title', 'like', "%" . $search . "%")
-                    ->orWhere('id',  $search)
+                    ->orWhere('id', $search)
                     ->orderBy('created_at')->paginate(6);
 
                 $data['title'] = "Demandes en cours de traitement";

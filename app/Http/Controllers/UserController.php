@@ -32,14 +32,26 @@ class UserController extends Controller
         ]);
     }
 
-    public function showAdminUsers()
+    public function showAdminUsers($actived)
     {
         if (Auth::user()->role->name != 'Administrateur') {
             Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
             return redirect('/home');
         }
 
-        $data['users'] = User::orderBy('lastname')->paginate(5);
+        switch ($actived) {
+            case 'true':
+                $data['users'] = User::whereActived(true)->orderBy('lastname')->paginate(5);
+                break;
+            case 'false':
+                $data['users'] = User::whereActived(false)->orderBy('lastname')->paginate(5);
+                break;
+            default:
+                Session::flash('alert-danger', "Liste utilisateur introuvable");
+                return redirect('/home');
+        }
+
+        $data['from'] = $actived;
         return view('adminUsers', ['data' => $data]);
     }
 
@@ -187,11 +199,13 @@ class UserController extends Controller
             case 'activate':
                 $user->actived = true;
                 $msg = " activé";
+                $url = "/adminUsers/false";
                 break;
 
             case 'deactivate' :
                 $user->actived = false;
                 $msg = " désactivé";
+                $url = "/adminUsers/true";
                 break;
 
             default:
@@ -201,6 +215,6 @@ class UserController extends Controller
 
         $user->save();
         Session::flash('alert-success', "L'utilisateur " . $user->email . $msg . " avec succès");
-        return redirect('/adminUsers');
+        return redirect($url);
     }
 }

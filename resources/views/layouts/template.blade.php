@@ -73,12 +73,15 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu sidenav-second-level collapse" id="infoUser">
-                            <li>
-                                <a href="{{ url('/userDetails/' . Auth::user()->id) }}">Mon profil</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/editUserForm/' . Auth::user()->id) }}">Modifier mon mot de passe</a>
-                            </li>
+                            @if(Auth::user()->role_id == 1)
+                                <li>
+                                    <a href="{{ url('/editUserForm/' . Auth::user()->id) }}">Modifier mes informations</a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="{{ url('/editUserForm/' . Auth::user()->id) }}">Modifier mon mot de passe</a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title=""
@@ -169,7 +172,10 @@
                                     <a href="{{ url('/registerUserForm') }}">Ajouter un utilisateur</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('adminUsers') }}">Liste des utilisateurs</a>
+                                    <a href="{{ url('/adminUsers/true') }}">Liste des utilisateurs</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/adminUsers/false') }}">Liste des utilisateurs désactivés</a>
                                 </li>
                             </ul>
                         </li>
