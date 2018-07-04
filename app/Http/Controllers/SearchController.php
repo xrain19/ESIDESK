@@ -22,7 +22,7 @@ class SearchController extends Controller
 
         $users = User::where('firstname', 'like', "%" . $search . "%")
             ->orWhere('lastname', 'like', "%" . $search . "%"
-            )->orWhere('email', 'like', "%" . $search . "%")->orderBy('lastname')->get();
+            )->orWhere('email', 'like', "%" . $search . "%")->orderBy('lastname')->paginate(5);
 
         $data['users'] = $users;
         return view('adminUsers', ['data' => $data]);
@@ -34,7 +34,7 @@ class SearchController extends Controller
         $search = $request->input('search');
 
         $equipes = Equipe::where('name', 'like', "%" . $search . "%")
-            ->where('actived', true)->orderBy('name')->get();
+            ->where('actived', true)->orderBy('name')->paginate(6);
 
         return view('equipe', array('equipes' => $equipes));
     }
@@ -55,7 +55,7 @@ class SearchController extends Controller
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)
                     ->whereProcessorId(NULL)->where('title', 'like', "%" . $search . "%")
                     ->orWhere('id', $search)
-                    ->orderBy('created_at')->get();
+                    ->orderBy('created_at')->paginate(6);
                 $data['title'] = "Demande de l'équipe" . $equipe->name;
                 break;
 
@@ -68,7 +68,7 @@ class SearchController extends Controller
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)
                     ->where('title', 'like', "%" . $search . "%")
                     ->orWhere('id', $search)
-                    ->orderBy('created_at')->get();
+                    ->orderBy('created_at')->paginate(6);
 
                 $data['title'] = "Demande refusées";
                 break;
@@ -80,7 +80,7 @@ class SearchController extends Controller
                 }
                 $demandes = Demande::Where('title', 'like', "%" . $search . "%")
                     ->orWhere('id', $search)
-                    ->orderBy('created_at')->get();
+                    ->orderBy('created_at')->paginate(6);
                 $data['title'] = "Les demandes";
                 break;
 
@@ -88,7 +88,7 @@ class SearchController extends Controller
                 $demandes = Demande::whereUserId(Auth::user()->id)
                 ->Where('title', 'like', "%" . $search . "%")
                     ->orWhere('id', $search)
-                    ->orderBy('created_at')->get();
+                    ->orderBy('created_at')->paginate(6);
 
                 foreach ($demandes as $k => $demande) {
                     if ($demande->processor_id != NULL) {
@@ -104,7 +104,7 @@ class SearchController extends Controller
                     ->whereClosed(false)
                     ->Where('title', 'like', "%" . $search . "%")
                     ->orWhere('id',  $search)
-                    ->orderBy('created_at')->get();
+                    ->orderBy('created_at')->paginate(6);
 
                 $data['title'] = "Demandes en cours de traitement";
                 break;
