@@ -31,9 +31,13 @@ class isManager
             $equipeDem = Equipe::whereId(Auth::user()->equipe_id)->first();
             if($equipeDem != null){
                 $countDemEquipe = Demande::whereEquipeId($equipeDem->id)->whereClosed(false)->whereProcessorId(NULL)->count();
+                $countDemRefus = Demande::whereEquipeId($equipeDem->id)->whereClosed(true)->whereStatutId(3)->count();
                 Session::put('countDemEquipe', $countDemEquipe);
+                Session::put('countDemRefus', $countDemRefus);
+
             }else{
                 Session::put('countDemEquipe', 0);
+                Session::put('countDemRefus', 0);
             }
 
             $countDemMine = Demande::whereUserId(Auth::user()->id)->count();
@@ -41,6 +45,7 @@ class isManager
             Session::put('countDemMine', $countDemMine);
             Session::put('countDemInProg', $countDemInProg);
         }
+
         Session::put('manager', $manager);
 
         return $next($request);

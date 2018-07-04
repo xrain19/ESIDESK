@@ -274,6 +274,10 @@
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="{{ asset('public_vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<!-- Page level plugin JavaScript-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 @yield('script')
 <script>
     $('.collapse').collapse()
