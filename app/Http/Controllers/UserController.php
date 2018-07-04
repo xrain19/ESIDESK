@@ -39,7 +39,7 @@ class UserController extends Controller
             return redirect('/home');
         }
 
-        $data['users'] = User::all()->sortBy('lastname');
+        $data['users'] = User::orderBy('lastname')->paginate(5);
         return view('adminUsers', ['data' => $data]);
     }
 

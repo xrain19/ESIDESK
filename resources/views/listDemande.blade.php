@@ -117,6 +117,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                <div class="row">{{ $data['demandes']->links() }}</div>
                             </div>
                         </div>
                     </div>

@@ -88,6 +88,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                <div class="row">{{ $data['users']->links() }}</div>
                             </div>
                         </div>
                     </div>

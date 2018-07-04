@@ -19,7 +19,7 @@ class CategoriesController extends Controller
             return redirect('/home');
         }
 
-        $categories = $equipe->Categorie()->get();
+        $categories = $equipe->Categorie()->orderBy('name')->paginate(6);
 
         if ($categories->isEmpty()) {
             Session::flash('alert-danger', "Aucune catégorie créée dans l'équipe " . $equipe->name);

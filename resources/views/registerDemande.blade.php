@@ -8,6 +8,12 @@
                     <div class="card-header">{{ __("Faire une demande à l'équipe " . $data['equipe']->name . ", catégorie : " . $data['cat']->name  ) }}</div>
                     <div class="card-body">
 
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                            @if (Session::has('alert-' . $msg))
+                                <div class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</div>
+                            @endif
+                        @endforeach
+
                         <form method="POST" action="{{ url('/createDemande/' . $data['cat']->id) }}"
                               aria-label="{{ __('Créer une Demande') }}">
 
