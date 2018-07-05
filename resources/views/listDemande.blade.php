@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active">Liste des demandes</li>
+    <li class="breadcrumb-item active">{!! $data['title'] !!}</li>
 @endsection
 
 @section('content')

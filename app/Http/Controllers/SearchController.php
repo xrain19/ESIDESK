@@ -70,7 +70,7 @@ class SearchController extends Controller
                 }
 
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)
-                    ->whereProcessorId(NULL)->whereIn('statut_id', [1, 2])->where('title', 'like', "%" . $search . "%")
+                    ->whereProcessorId(NULL)->whereIn('statut_id', [1, 2,6])->where('title', 'like', "%" . $search . "%")
                     ->orderBy('created_at')->paginate(6);
                 $data['title'] = "Demande de l'équipe " . $equipe->name;
                 break;

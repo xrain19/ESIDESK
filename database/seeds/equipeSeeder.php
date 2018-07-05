@@ -48,12 +48,6 @@ class equipeSeeder extends Seeder
         ]);
 
         DB::table('equipes')->insert([
-            'name' => 'Windows',
-            'manager_id' => 7,
-            'actived' => true
-        ]);
-
-        DB::table('equipes')->insert([
             'name' => 'AIX',
             'manager_id' => 8,
             'actived' => true
@@ -64,5 +58,57 @@ class equipeSeeder extends Seeder
             'manager_id' => 9,
             'actived' => true
         ]);
+
+        DB::table('equipes')->insert([
+            'name' => 'Technicien/ne télécoms et réseaux',
+            'manager_id' => 24,
+            'actived' => true
+        ]);
+
+
+        DB::table('equipes')->insert([
+            'name' => 'Administrateur/trice de base de données',
+            'manager_id' => 11,
+            'actived' => true
+        ]);
+
+
+        DB::table('equipes')->insert([
+            'name' => 'Ingénieur/e télécoms et réseaux',
+            'manager_id' => 29,
+            'actived' => true
+        ]);
+
+        DB::table('equipes')->insert([
+            'name' => 'Ingénieur/e système',
+            'manager_id' => 27,
+            'actived' => true
+        ]);
+
+        DB::table('equipes')->insert([
+            'name' => 'Gestionnaire de parc micro-informatique',
+            'manager_id' => 30,
+            'actived' => true
+        ]);
+
+        DB::table('equipes')->insert([
+            'name' => 'Chef/fe de projet informatique',
+            'manager_id' => 23,
+            'actived' => true
+        ]);
+
+
+        DB::table('equipes')->insert([
+            'name' => 'Ingénieur/e en métrologie',
+            'manager_id' => 22,
+            'actived' => true
+        ]);
+
+        DB::table('equipes')->insert([
+            'name' => 'Administrateur/trice de réseau',
+            'manager_id' => 26,
+            'actived' => true
+        ]);
+
     }
 }

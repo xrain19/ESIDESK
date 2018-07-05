@@ -148,7 +148,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Vous n'appartenez à aucune équipe");
                     return redirect('/home');
                 }
-                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->whereIn('statut_id', [1,2])->orderBy($tri)->paginate(6);
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->whereIn('statut_id', [1,2,6])->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes à traiter");
                     return redirect('/home');
