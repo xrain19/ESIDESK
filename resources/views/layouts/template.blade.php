@@ -110,25 +110,26 @@
                                     <a href="{{ url('/listDemande/all/created_at') }}">Les demandes</a>
                                 </li>
                             @endif
-                            <li>
-                                <a href="{{ url('/listDemande/mine/created_at') }}">Mes demandes</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/listDemande/inprogress/desired_date')}}">Demande(s) en cours de
-                                    traitement</a>
-                            </li>
+
                             <li>
                                 <a href="{{url('/listDemande/equipe/created_at')}}">Demande(s) à traiter</a>
                             </li>
                             <li>
+                                <a href="{{url('/listDemande/inprogress/desired_date')}}">Demande(s) en cours de traitement</a>
+                            </li>
+                            <li>
                                 <a href="{{url('/listDemande/refus/created_at')}}">Demande(s) rejetée(s)</a>
                             </li>
-                            <li>
-                                <a href="{{url('/listDemande/plus/created_at')}}">Demande(s) en attente de
-                                    précision(s)</a>
-                            </li>
+
                             <li>
                                 <a href="{{url('/listDemande/cloturee/created_at')}}">Demande(s) cloturée(s)</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/listDemande/mine/created_at') }}">Mes demandes</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/listDemande/plus/created_at')}}">Mes demandes en attente de
+                                    précisions</a>
                             </li>
                         </ul>
                     </li>

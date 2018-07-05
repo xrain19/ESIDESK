@@ -1,5 +1,10 @@
 @extends('layouts.template')
 
+
+@section('breadcrumb')
+    <li class="breadcrumb-item active">Demande</li>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
