@@ -367,13 +367,18 @@ class DemandeController extends Controller
 
     protected function addMemberDemande(Request $request, $idDemande, $member)
     {
-
         switch ($member) {
             case 'me':
                 $demande = Demande::whereId($idDemande)->first();
                 $demande->processor_id = Auth::user()->id;
                 $demande->statut_id = 4;
                 $demande->save();
+
+                $notification['title'] = "Votre demande a été prise en charge par " . Auth::user()->firstname . " " . Auth::user()->lastname;
+                $notification['demande'] = $demande;
+                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+                Mail::to($demande->user->email)->send(new notification($notification));
+
                 Session::flash('alert-success', "Demande prise en charge par moi-même");
                 return redirect('/listDemande/inprogress/desired_date');
                 break;
@@ -383,6 +388,17 @@ class DemandeController extends Controller
                 $demande->processor_id = $request->input('member');
                 $demande->statut_id = 4;
                 $demande->save();
+
+                $notification['title'] = "une demande vous a été attibruée";
+                $notification['demande'] = $demande;
+                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+                Mail::to($user->email)->send(new notification($notification));
+
+                $notification['title'] = "Votre demande a été prise en charge par " . $user->firstname . " " . $user->lastname;
+                $notification['demande'] = $demande;
+                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+                Mail::to($demande->user->email)->send(new notification($notification));
+
                 Session::flash('alert-success', "Demande prise en charge par " . $user->firstname . " " . $user->lastname);
                 return redirect('/listDemande/equipe/created_at');
                 break;
