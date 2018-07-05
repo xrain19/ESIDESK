@@ -32,23 +32,6 @@
 
                         </div>
 
-{{--                        <div class="form-group row">
-                            <label for="nameTeam" class="col-md-4 col-form-label text-md-right">{{ __('Utilisateur') }}</label>
-                            <div class="col-md-6">
-                                <div class="-align-center">
-
-                                    <select class="custom-select" id="user" name="user" multiple="multiple">
-                                        @foreach ($users as $user)
-                                            @foreach($user as $item)
-                                                <option value="{{ $item->id }}" >{{ $item->lastname }}</option>
-                                            @endforeach
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>--}}
-
                         <div class="form-group row">
                             <label for="manager" class="col-md-4 col-form-label text-md-right">{{ __('Manager') }}</label>
                             <div class="col-md-6">
@@ -89,7 +72,13 @@
             templates: {
                 li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
             },
-            nonSelectedText: '-- Sélectionnez --'
+            nonSelectedText: '-- Sélectionnez --',
+            maxHeight: 200,
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            filterPlaceholder: 'Recherche',
+            buttonWidth: '100%',
+            nSelectedText: ' Sélectionnés'
         });
     </script>
 @endsection

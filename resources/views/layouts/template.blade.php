@@ -178,6 +178,9 @@
                                 <li>
                                     <a href="{{ url('/adminUsers/false') }}">Liste des utilisateurs désactivés</a>
                                 </li>
+                                <li>
+                                    <a href="{{ url('/registerFormEquipe') }}">Créer une équipe</a>
+                                </li>
                             </ul>
                         </li>
                     @endif

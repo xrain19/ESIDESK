@@ -92,8 +92,13 @@
             templates: {
                 li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
             },
-            nonSelectedText: '-- Sélectionnez --'
-
+            nonSelectedText: '-- Sélectionnez --',
+            maxHeight: 200,
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            filterPlaceholder: 'Recherche',
+            buttonWidth: '100%',
+            nSelectedText: ' Sélectionnés'
         });
     </script>
 @endsection

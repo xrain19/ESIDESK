@@ -10,18 +10,6 @@
         @endif
     @endforeach
     <div class="container">
-        <div class="card">
-            <div class="card-header">Equipes</div>
-            <div class="card-body">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-                <a href="{{ url('/registerFormEquipe') }}" class="btn btn-primary btn-lg" role="button"
-                   aria-disabled="true">Créer une équipe</a>
-            </div>
-        </div>
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fa fa-table"></i> Liste d'équipe
