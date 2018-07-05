@@ -9,16 +9,16 @@
 
 @section('content')
 
-    @if(Session::has('alert-danger'))
-        <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
-    @elseif(Session::has('alert-success'))
-        <p class="alert alert-danger">{{ Session::get('alert-success') }}</p>
-    @endif
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if (Session::has('alert-' . $msg))
+            <div class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</div>
+        @endif
+    @endforeach
 
     <div class="container">
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-table"></i> Liste des catégories
+                <i class="fa fa-table"></i> Liste des catégories de l'équipe {{$data['equipe']->name}}
             </div>
             <div class="card-body">
                 <div class="row">
@@ -38,7 +38,7 @@
                             <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                             </span>
                                         </a>
-                                    @elseif(Auth::user()->equipe_id != $category->equipe->id)
+                                    @elseif(Auth::user()->equipe_id != $category->equipe->id and $data['equipe']->manager_id != null)
                                         <a href='{!!url('/createDemandeForm/' .  $category->id) !!}'
                                            class="btn btn-primary">Faire
                                             une demande</a>

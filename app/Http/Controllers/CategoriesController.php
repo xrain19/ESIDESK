@@ -53,7 +53,7 @@ class CategoriesController extends Controller
         ]);
 
         Session::flash('alert-success', "Catégorie " . $request->input('name') . " créé avec succès");
-        return redirect('/home');
+        return redirect('/listCat/' . $id);
     }
 
     protected function showForm($id)
@@ -121,6 +121,6 @@ class CategoriesController extends Controller
         $cat->save();
 
         Session::flash('alert-success', "Catégorie " . $request->input('name') . " modifiée avec succès");
-        return redirect('/home');
+        return redirect('/listCat/' . $equipe->id);
     }
 }

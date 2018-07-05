@@ -6,11 +6,12 @@
 
 @section('content')
 
-    @if(Session::has('alert-danger'))
-        <p class="alert alert-danger">{{ Session::get('alert-danger') }}</p>
-    @elseif(Session::has('alert-success'))
-        <p class="alert alert-success">{{ Session::get('alert-success') }}</p>
-    @endif
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if (Session::has('alert-' . $msg))
+            <div class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</div>
+        @endif
+    @endforeach
+
     <div class="container">
         <div class="card mb-3">
             <div class="card-header">
@@ -70,22 +71,29 @@
                                             @endif
                                             <td>{{ $user->email }}</td>
                                             <td style="width: 20%;">
-                                                <a href={{url('/editUserForm/' . $user->id)}}  class="table-link">
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                                </a>
                                                 @if($user->actived == true)
-                                                    <a href="{{url("/actived/" . $user->id . "/" . "deactivate" )}}" class="table-link danger">
+                                                    <a href={{url('/editUserForm/' . $user->id)}}
+                                                        class="table-link"><span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="{{url("/actived/" . $user->id . "/" . "deactivate" )}}"
+                                                       class="table-link danger"><span class="fa-stack">
+                                                       <i class="fa fa-square fa-stack-2x"></i>
+                                                       <i class="fa fa-user-times fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </a>
                                                 @else
-                                                    <a href="{{url("/actived/" . $user->id . "/" . "activate" )}}" class="table-link danger">
+                                                    <a href="{{url("/actived/" . $user->id . "/" . "activate" )}}"
+                                                       class="table-link danger" style="color: green"><span
+                                                                class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </a>
                                                 @endif
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
