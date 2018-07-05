@@ -271,5 +271,48 @@ class UserTableSeeder extends Seeder
             'role_id' => 3,
             'equipe_id' => 13
         ]);
+
+        DB::table('users')->insert([
+            'lastname' => 'Martel',
+            'firstname' => 'Gaspar',
+            'password' => Hash::make('demo'),
+            'email' => 'manager@esidesk.fr',
+            'role_id' => 3,
+            'equipe_id' => 17
+        ]);
+
+        DB::table('users')->insert([
+            'lastname' => 'Guy',
+            'firstname' => 'hervé',
+            'password' => Hash::make('demo'),
+            'email' => 'member@esidesk.fr',
+            'role_id' => 2,
+            'equipe_id' => 17
+        ]);
+
+        DB::table('users')->insert([
+            'lastname' => 'Rivard',
+            'firstname' => 'Maurice',
+            'password' => Hash::make('demo'),
+            'email' => 'process@esidesk.fr',
+            'role_id' => 2,
+            'equipe_id' => 17
+        ]);
+
+        DB::table('users')->insert([
+            'lastname' => 'Sirois',
+            'firstname' => 'Marine',
+            'password' => Hash::make('demo'),
+            'email' => 'dem@esidesk.fr',
+            'role_id' => 2,
+            'equipe_id' => 15
+        ]);
     }
 }
+
+
+
+
+
+
+

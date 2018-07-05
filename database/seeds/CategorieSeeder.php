@@ -185,5 +185,11 @@ class CategorieSeeder extends Seeder
             'equipe_id' => 14
         ]);
 
+        DB::table('categories')->insert([
+            'description' => 'Catégorie de démo',
+            'name' => 'Démo mail',
+            'equipe_id' => 17
+        ]);
+
     }
 }

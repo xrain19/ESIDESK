@@ -28,6 +28,6 @@ class notification extends Mailable
      */
     public function build()
     {
-        return $this->from('notification@esidesk.fr')->view('email.notification');
+        return $this->from('administrateur@esidesk.fr')->view('email.notification');
     }
 }

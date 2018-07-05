@@ -110,5 +110,11 @@ class equipeSeeder extends Seeder
             'actived' => true
         ]);
 
+        DB::table('equipes')->insert([
+            'name' => 'demoMail',
+            'manager_id' => 31,
+            'actived' => true
+        ]);
+
     }
 }

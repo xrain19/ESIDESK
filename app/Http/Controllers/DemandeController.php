@@ -434,7 +434,7 @@ class DemandeController extends Controller
                 $notification['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
                 $notification['title'] = "Un commentaire a été ajouté à votre demande " . $demande->title;
 
-                Mail::to($demande->user->mail)->send(new notification($notification));
+                Mail::to($demande->user->email)->send(new notification($notification));
 
 
                 Session::flash('alert-success', "Commentaire ajouté à la demande" . $demande->title . "avec succès");
