@@ -148,7 +148,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Vous n'appartenez à aucune équipe");
                     return redirect('/home');
                 }
-                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->whereIn('statut_id', [1,2,6])->orderBy($tri)->paginate(6);
+                $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)->whereProcessorId(NULL)->whereIn('statut_id', [1, 2, 6])->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes à traiter");
                     return redirect('/home');
@@ -213,7 +213,7 @@ class DemandeController extends Controller
                 break;
 
             case 'inprogress':
-                $demandes = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->where('statut_id','=',4)->orderBy($tri)->paginate(6);
+                $demandes = Demande::whereProcessorId(Auth::user()->id)->whereClosed(false)->where('statut_id', '=', 4)->orderBy($tri)->paginate(6);
                 if ($demandes->isEmpty()) {
                     Session::flash('alert-danger', "Aucunes demandes en cours de traitement");
                     return redirect('/home');
@@ -250,7 +250,7 @@ class DemandeController extends Controller
 
         $equipe = Equipe::whereId($cat->equipe_id)->first();
 
-        if($equipe->manager_id == null){
+        if ($equipe->manager_id == null) {
             Session::flash('alert-danger', "L'équipe " . $equipe->name . " n'a pas de manager veuillez contacter l'administrateur");
             return redirect('/homeEquipe');
         }
@@ -296,7 +296,7 @@ class DemandeController extends Controller
 
         $equipe = Equipe::whereId($cat->equipe_id)->first();
 
-        if($equipe->manager_id == null){
+        if ($equipe->manager_id == null) {
             Session::flash('alert-danger', "L'équipe " . $equipe->name . " n'a pas de manager veuillez contacter l'administrateur");
             return redirect('/homeEquipe');
         }
@@ -322,7 +322,7 @@ class DemandeController extends Controller
 
                 $members = User::whereEquipeId($demande->equipe_id)->get();
 
-                foreach ($members as $member){
+                foreach ($members as $member) {
                     Mail::to($member->email)->send(new notification($notification));
                 }
 
@@ -434,7 +434,14 @@ class DemandeController extends Controller
                 $notification['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
                 $notification['title'] = "Un commentaire a été ajouté à votre demande " . $demande->title;
 
+                $users = User::whereEquipeId($demande->equipe_id)->get();
+
+                $notification['title'] = "Un commentaire a été ajouté à la demande" . $demande->title;
                 Mail::to($demande->user->email)->send(new notification($notification));
+
+                foreach ($users as $user) {
+                    Mail::to($user->email)->send(new notification($notification));
+                }
 
 
                 Session::flash('alert-success', "Commentaire ajouté à la demande" . $demande->title . "avec succès");
