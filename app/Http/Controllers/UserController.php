@@ -116,7 +116,7 @@ class UserController extends Controller
             }
             $user->save();
             Session::flash('alert-success', "L'utilisateur " . $request->input('email') . " modifié avec succès");
-            return redirect('/adminUsers');
+            return redirect('/adminUsers/true');
 
         } elseif ($id == Auth::user()->id) {
 
@@ -175,7 +175,7 @@ class UserController extends Controller
             ]);
 
             Session::flash('alert-success', "L'utilisateur " . $request->input('email') . " créé avec succès");
-            return redirect('/adminUsers');
+            return redirect('/adminUsers/true');
         } else {
             Session::flash('alert-danger', "Vous ne diposez pas des droits pour accéder à cette page");
             return redirect('/home');

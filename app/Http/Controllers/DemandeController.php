@@ -112,11 +112,11 @@ class DemandeController extends Controller
     protected function detailsDemande($id)
     {
         $demande = Demande::whereId($id)->first();
-        $user = User::whereEquipeId($demande->equipe_id)->get();
         if ($demande == null) {
             Session::flash('alert-danger', "Demande introuvable");
             return redirect('/home');
         }
+        $user = User::whereEquipeId($demande->equipe_id)->get();
         if ($user == NULL) {
             Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
             return redirect('/home');
@@ -242,9 +242,17 @@ class DemandeController extends Controller
     protected function createDemande(Request $request, $id)
     {
         $cat = Categorie::whereId($id)->first();
+
         if ($cat == null) {
             Session::flash('alert-danger', "Catégorie introuvable");
             return redirect('/home');
+        }
+
+        $equipe = Equipe::whereId($cat->equipe_id)->first();
+
+        if($equipe->manager_id == null){
+            Session::flash('alert-danger', "L'équipe " . $equipe->name . " n'a pas de manager veuillez contacter l'administrateur");
+            return redirect('/homeEquipe');
         }
 
         $this->validate($request, $this->rules, $this->messages);
@@ -265,15 +273,13 @@ class DemandeController extends Controller
             'statut_id' => 1,
         ]);
 
-        $members = User::whereEquipeId($cat->equipe_id)->get();
-
         $notification['title'] = "Une nouvelle demande faite à votre équipe par " . Auth::user()->email;
         $notification['demande'] = $demande;
         $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
 
-        foreach ($members as $member) {
-            Mail::to($member->email)->send(new notification($notification));
-        }
+        $user = User::whereId($equipe->manager_id)->first();
+
+        Mail::to($user->email)->send(new notification($notification));
 
         Session::flash('alert-success', "Demande \"" . $request->input('title') . "\" créé avec succès");
         return redirect('/listDemande/mine/created_at');
@@ -290,6 +296,11 @@ class DemandeController extends Controller
 
         $equipe = Equipe::whereId($cat->equipe_id)->first();
 
+        if($equipe->manager_id == null){
+            Session::flash('alert-danger', "L'équipe " . $equipe->name . " n'a pas de manager veuillez contacter l'administrateur");
+            return redirect('/homeEquipe');
+        }
+
         $data = array();
         $data['cat'] = $cat;
         $data['equipe'] = $equipe;
@@ -304,6 +315,17 @@ class DemandeController extends Controller
                 $demande->validated = true;
                 $demande->statut_id = 2;
                 $demande->save();
+
+                $notification['title'] = "Une nouvelle demande a été validée par votre manager";
+                $notification['demande'] = $demande;
+                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+
+                $members = User::whereEquipeId($demande->equipe_id)->get();
+
+                foreach ($members as $member){
+                    Mail::to($member->email)->send(new notification($notification));
+                }
+
                 Session::flash('alert-success', "Demande acceptée");
                 return redirect('/listDemande/equipe/created_at');
                 break;
@@ -313,7 +335,7 @@ class DemandeController extends Controller
                 $demande->closed = true;
                 $demande->save();
 
-                $notification['title'] = "Votre demande a été traitée et cloturée";
+                $notification['title'] = "Votre demande a été refusée";
                 $notification['demande'] = $demande;
                 $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
 
@@ -393,16 +415,11 @@ class DemandeController extends Controller
                 $demande->save();
 
                 $notification['demande'] = $demande;
-                $notification ['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+                $notification['link'] = config('app.url') . "/detailsDemande/" . $demande->id;
+                $notification['title'] = "Un commentaire a été ajouté à votre demande " . $demande->title;
 
-                if (Auth::user()->id == $demande->user_id) {
-                    $notification['title'] = "Une précision est arrivée sur une de vos demandes en cours de traitement";
-                    $process_user = User::whereId($demande->processor_id)->first();
-                    Mail::to($process_user->email)->send(new notification($notification));
-                } else {
-                    $notification['title'] = "Un commentaire a été ajouté a votre demande";
-                    Mail::to(Auth::user()->mail)->send(new notification($notification));
-                }
+                Mail::to($demande->user->mail)->send(new notification($notification));
+
 
                 Session::flash('alert-success', "Commentaire ajouté à la demande" . $demande->title . "avec succès");
                 return redirect('/home');
