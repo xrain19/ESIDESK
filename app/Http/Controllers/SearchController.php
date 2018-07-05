@@ -7,6 +7,7 @@ use App\Demande;
 use App\Equipe;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class SearchController extends Controller
@@ -22,20 +23,23 @@ class SearchController extends Controller
 
         switch ($actived) {
             case 'true':
-                $users = User::whereActived(1)->where('firstname', 'like', "%" . $search . "%")
-                    ->orWhere('lastname', 'like', "%" . $search . "%"
-                    )->orWhere('email', 'like', "%" . $search . "%")->orderBy('lastname')->paginate(5);
+
+                $users = User::where('email', 'like', "%" . $search . "%")
+                    ->where('actived', true)
+                    ->orderby('lastname')
+                    ->paginate(5);
+
                 break;
             case 'false':
-                $users = User::whereActived(0)->where('firstname', 'like', "%" . $search . "%")
-                    ->orWhere('lastname', 'like', "%" . $search . "%"
-                    )->orWhere('email', 'like', "%" . $search . "%")->orderBy('lastname')->paginate(5);
+                $users = User::where('email', 'like', "%" . $search . "%")
+                    ->where('actived', false)
+                    ->orderby('lastname')
+                    ->paginate(5);
                 break;
             default:
                 Session::flash('alert-danger', "Liste utilisateur introuvable");
                 return redirect('/home');
         }
-
         $data['users'] = $users;
         $data['from'] = $actived;
         return view('adminUsers', ['data' => $data]);
@@ -66,10 +70,9 @@ class SearchController extends Controller
                 }
 
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(false)
-                    ->whereProcessorId(NULL)->whereIn('statut_id', [1,2])->where('title', 'like', "%" . $search . "%")
-                    ->orWhere('id', $search)
+                    ->whereProcessorId(NULL)->whereIn('statut_id', [1, 2])->where('title', 'like', "%" . $search . "%")
                     ->orderBy('created_at')->paginate(6);
-                $data['title'] = "Demande de l'équipe" . $equipe->name;
+                $data['title'] = "Demande de l'équipe " . $equipe->name;
                 break;
 
             case 'refus':
@@ -79,8 +82,7 @@ class SearchController extends Controller
                     return redirect('/home');
                 }
                 $demandes = Demande::whereEquipeId($equipe->id)->whereClosed(true)
-                    ->where('title', 'like', "%" . $search . "%")
-                    ->orWhere('id', $search)
+                    ->whereStatutId(3)->where('title', 'like', "%" . $search . "%")
                     ->orderBy('created_at')->paginate(6);
 
                 $data['title'] = "Demande refusées";
@@ -92,7 +94,6 @@ class SearchController extends Controller
                     return redirect('/home');
                 }
                 $demandes = Demande::Where('title', 'like', "%" . $search . "%")
-                    ->orWhere('id', $search)
                     ->orderBy('created_at')->paginate(6);
                 $data['title'] = "Les demandes";
                 break;
@@ -100,7 +101,6 @@ class SearchController extends Controller
             case 'mine':
                 $demandes = Demande::whereUserId(Auth::user()->id)
                     ->Where('title', 'like', "%" . $search . "%")
-                    ->orWhere('id', $search)
                     ->orderBy('created_at')->paginate(6);
 
                 foreach ($demandes as $k => $demande) {
@@ -115,10 +115,9 @@ class SearchController extends Controller
             case 'inprogress':
                 $demandes = Demande::whereProcessorId(Auth::user()->id)
                     ->whereClosed(false)
-                    ->where('statut_id','=',4)
+                    ->where('statut_id', '=', 4)
                     ->where('title', 'like', "%" . $search . "%")
-                    ->orWhere('id',  $search)
-                    ->orderBy('created_at')->get();
+                    ->orderBy('created_at')->paginate(6);
 
                 $data['title'] = "Demandes en cours de traitement";
                 break;
@@ -127,10 +126,23 @@ class SearchController extends Controller
                     ->whereClosed(false)
                     ->whereStatutId(6)
                     ->Where('title', 'like', "%" . $search . "%")
-                    ->orWhere('id', $search)
                     ->orderBy('created_at')->paginate(6);
 
-                $data['title'] = "Demandes en cours de traitement";
+                $data['title'] = "Demandes en attente de précision";
+                break;
+
+            case 'cloturee':
+                $equipe = Equipe::whereId(Auth::user()->equipe_id)->first();
+                if ($equipe == NULL) {
+                    Session::flash('alert-danger', "L'utilisateur n'appartient à aucune équipe");
+                    return redirect('/home');
+                }
+                $demandes = Demande::whereEquipeId($equipe->id)
+                    ->whereClosed(true)->whereStatutId(5)
+                    ->Where('title', 'like', "%" . $search . "%")
+                    ->orderBy('created_at')->paginate(6);
+
+                $data['title'] = "Demande cloturée";
                 break;
 
             default:

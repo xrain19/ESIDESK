@@ -153,7 +153,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Aucunes demandes à traiter");
                     return redirect('/home');
                 }
-                $data['title'] = "Demande de l'équipe" . $equipe->name;
+                $data['title'] = "Demande de l'équipe " . $equipe->name;
                 break;
 
             case 'refus':
@@ -181,7 +181,7 @@ class DemandeController extends Controller
                     Session::flash('alert-danger', "Aucunes demandes cloturées");
                     return redirect('/home');
                 }
-                $data['title'] = "Demande refusées";
+                $data['title'] = "Demande cloturée";
                 break;
 
             case 'all':
