@@ -17,17 +17,17 @@ Auth::routes();
 
 Route::Get('/home', 'HomeController@index')->name('home');
 
-Route::Post('equipeSearch', [
+Route::Get('equipeSearch', [
     'middleware' => 'auth',
     'uses' => 'SearchController@equipeSearch'
 ]);
 
-Route::Post('demandeSearch/{list}', [
+Route::Get('demandeSearch/{list}', [
     'middleware' => 'auth',
     'uses' => 'SearchController@demandeSearch'
 ]);
 
-Route::Post('userSearch', [
+Route::Get('userSearch/{actived}', [
    'middleware' => 'auth',
    'uses' => 'SearchController@userSearch'
 ]);
@@ -123,10 +123,10 @@ Route::Post('/editUser/{id}', [
     'uses' => 'UserController@editUser',
 ]);
 
-Route::Get('/adminUsers', [
+Route::Get('/adminUsers/{actived}', [
     'middleware' => 'auth',
     'uses' => 'UserController@showAdminUsers',
-])->name('adminUsers');
+]);
 
 Route::Get('/editEquipeForm/{id}', [
     'middleware' => 'auth',
@@ -173,3 +173,8 @@ Route::Get('/dashboard', [
     'middleware' => 'auth',
     'uses' => 'HomeController@dashboard',
 ])->name('dashboard');
+
+Route::Get('/actived/{id}/{action}', [
+    'middleware' => 'auth',
+    'uses' => 'UserController@activedUser',
+]);

@@ -21,8 +21,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div id="dataTable_filter" class="dataTables_filter">
-                                    <form method="POST" action="{{ url('/demandeSearch/' . $data['from']) }}">
-                                        @csrf
+                                    <form method="GET" action="{{ url('/demandeSearch/' . $data['from']) }}">
                                         <label>Recherche:
                                             <input type="search" id="search" name="search"
                                                    class="form-control form-control-sm" placeholder=""

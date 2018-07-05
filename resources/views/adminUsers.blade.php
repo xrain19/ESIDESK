@@ -22,8 +22,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div id="dataTable_filter" class="dataTables_filter">
-                                    <form method="POST" action="{{ url('/userSearch') }}">
-                                        @csrf
+                                    <form method="GET" action="{{ url('/userSearch/' . $data['from']) }}">
                                         <label>Recherche:
                                             <input type="search" id="search" name="search"
                                                    class="form-control form-control-sm" placeholder=""
@@ -77,7 +76,11 @@
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                                             </span>
                                                 </a>
-                                                <a href="#" class="table-link danger">
+                                                @if($user->actived == true)
+                                                    <a href="{{url("/actived/" . $user->id . "/" . "deactivate" )}}" class="table-link danger">
+                                                @else
+                                                    <a href="{{url("/actived/" . $user->id . "/" . "activate" )}}" class="table-link danger">
+                                                @endif
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
